@@ -1,0 +1,34 @@
+# ==============================================================================
+# PERMANENT 301 REDIRECTS FOR LEGACY URLS
+# This section MUST be placed at the very top of the .htaccess file.
+# It preserves the SEO value of the old site by redirecting valuable pages
+# to their new equivalents on the directory website.
+# ==============================================================================
+
+Redirect 301 /services/sports-injuries         http://fixmyspine.com.au/directory/sports-injury-clinics/
+Redirect 301 /services/chiropractic-care      http://fixmyspine.com.au/directory/chiropractors/
+Redirect 301 /services/spinal-decompression   http://fixmyspine.com.au/directory/spinal-decompression-therapy/
+
+Redirect 301 /blog/5-exercises-for-lower-back-pain http://fixmyspine.com.au/blog/5-exercises-for-lower-back-pain/
+Redirect 301 /blog/what-is-sciatica           http://fixmyspine.com.au/blog/what-is-sciatica/
+
+Redirect 301 /about-us        http://fixmyspine.com.au/about/
+Redirect 301 /contact-us      http://fixmyspine.com.au/contact/
+Redirect 301 /testimonials    http://fixmyspine.com.au/reviews/
+Redirect 301 /new-patients    http://fixmyspine.com.au/
+
+# ==============================================================================
+# STANDARD REWRITE RULES FOR PHP FRAMEWORKS / CMS
+# This block ensures that all requests are routed through a single index.php
+# file, which is standard practice for most custom sites and content management systems.
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
