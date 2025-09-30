@@ -15,12 +15,18 @@ var authRouter = require('./routes/auth');
 var dashboardRouter = require('./routes/dashboard');
 var publicRouter = require('./routes/public');
 var paymentsRouter = require('./routes/payments');
+var subscriptionsRouter = require('./routes/subscriptions');
+var webhooksRouter = require('./routes/webhooks');
 // --- REDIRECT MIDDLEWARE ---
 const { handleRedirects, handleIndexFallback } = require('./middleware/redirects');
 // --- END REDIRECT MIDDLEWARE ---
 // --- AUTHENTICATION MIDDLEWARE ---
 const { userLocals } = require('./middleware/auth');
 // --- END AUTHENTICATION MIDDLEWARE ---
+
+// --- CRON SERVICE ---
+const cronService = require('./services/cronService');
+// --- END CRON SERVICE ---
 
 var app = express();
 
@@ -62,7 +68,13 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
 app.use('/dashboard', dashboardRouter);
+app.use('/dashboard/subscription', subscriptionsRouter);
 app.use('/payments', paymentsRouter);
+app.use('/', webhooksRouter);
+
+// --- START CRON JOBS ---
+cronService.start();
+// --- END CRON JOBS ---
 
 // --- FALLBACK HANDLER ---
 // Handle any unmatched routes (equivalent to the catch-all in .htaccess)

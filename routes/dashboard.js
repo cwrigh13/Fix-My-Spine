@@ -21,6 +21,8 @@ router.get('/', async (req, res) => {
                 b.listing_tier,
                 b.is_approved,
                 b.created_at,
+                b.subscription_status,
+                b.subscription_ends_at,
                 c.name as category_name,
                 l.suburb,
                 l.postcode,
@@ -329,6 +331,57 @@ router.post('/listings/:id/delete', async (req, res) => {
         console.error('Delete listing error:', error);
         res.status(500).render('error', {
             message: 'An error occurred while deleting your listing',
+            error: { status: 500 }
+        });
+    }
+});
+
+// GET /billing - Show billing management page
+router.get('/billing', async (req, res) => {
+    try {
+        // Get all businesses for the logged-in user with subscription info
+        const [listings] = await pool.execute(`
+            SELECT 
+                b.id,
+                b.business_name,
+                b.listing_tier,
+                b.subscription_status,
+                b.subscription_ends_at,
+                b.stripe_subscription_id,
+                c.name as category_name,
+                l.suburb,
+                l.state,
+                l.postcode
+            FROM businesses b
+            JOIN categories c ON b.category_id = c.id
+            JOIN locations l ON b.location_id = l.id
+            WHERE b.user_id = ?
+            ORDER BY b.created_at DESC
+        `, [req.session.userId]);
+
+        // Calculate subscription statistics
+        const stats = {
+            total_listings: listings.length,
+            premium_listings: listings.filter(l => l.listing_tier === 'premium').length,
+            active_subscriptions: listings.filter(l => l.subscription_status === 'active').length,
+            cancelled_subscriptions: listings.filter(l => l.subscription_status === 'cancelled').length,
+            past_due_subscriptions: listings.filter(l => l.subscription_status === 'past_due').length
+        };
+
+        res.render('dashboard/billing', {
+            title: 'Billing Management - Fix My Spine',
+            listings: listings,
+            stats: stats,
+            user: {
+                id: req.session.userId,
+                name: req.session.userName,
+                email: req.session.userEmail
+            }
+        });
+    } catch (error) {
+        console.error('Billing dashboard error:', error);
+        res.status(500).render('error', {
+            message: 'An error occurred while loading your billing information',
             error: { status: 500 }
         });
     }

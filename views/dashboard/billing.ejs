@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <style>
+        .billing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .billing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .billing-title {
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .back-btn {
+            background-color: #95a5a6;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .back-btn:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .listings-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .listings-table th {
+            background-color: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .listings-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .listings-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .status-active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-past-due {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .tier-badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .tier-premium {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-success {
+            background-color: #27ae60;
+            color: white;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-success:hover {
+            background-color: #229954;
+        }
+        
+        .btn-warning {
+            background-color: #f39c12;
+            color: white;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+        
+        .no-subscriptions {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .no-subscriptions h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .subscription-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .expiry-warning {
+            background-color: #fff3cd;
+            border-left-color: #f39c12;
+        }
+        
+        .expiry-critical {
+            background-color: #f8d7da;
+            border-left-color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="billing-container">
+        <div class="billing-header">
+            <h1 class="billing-title">Billing Management</h1>
+            <a href="/dashboard" class="back-btn">← Back to Dashboard</a>
+        </div>
+        
+        <!-- Statistics Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number"><%= stats.total_listings %></div>
+                <div class="stat-label">Total Listings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number"><%= stats.premium_listings %></div>
+                <div class="stat-label">Premium Listings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number"><%= stats.active_subscriptions %></div>
+                <div class="stat-label">Active Subscriptions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number"><%= stats.past_due_subscriptions %></div>
+                <div class="stat-label">Past Due</div>
+            </div>
+        </div>
+        
+        <% if (listings && listings.length > 0) { %>
+            <table class="listings-table">
+                <thead>
+                    <tr>
+                        <th>Business Name</th>
+                        <th>Location</th>
+                        <th>Tier</th>
+                        <th>Subscription Status</th>
+                        <th>Expires</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% listings.forEach(function(listing) { %>
+                        <tr>
+                            <td>
+                                <strong><%= listing.business_name %></strong>
+                                <br><small style="color: #7f8c8d;"><%= listing.category_name %></small>
+                            </td>
+                            <td><%= listing.suburb %>, <%= listing.state %> <%= listing.postcode %></td>
+                            <td>
+                                <span class="tier-badge <%= listing.listing_tier === 'premium' ? 'tier-premium' : '' %>">
+                                    <%= listing.listing_tier %>
+                                </span>
+                            </td>
+                            <td>
+                                <% if (listing.subscription_status) { %>
+                                    <span class="status-badge status-<%= listing.subscription_status.replace('_', '-') %>">
+                                        <%= listing.subscription_status.replace('_', ' ') %>
+                                    </span>
+                                <% } else { %>
+                                    <span class="status-badge" style="background-color: #ecf0f1; color: #2c3e50;">
+                                        No Subscription
+                                    </span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <% if (listing.subscription_ends_at) { %>
+                                    <%= new Date(listing.subscription_ends_at).toLocaleDateString() %>
+                                    <% 
+                                        const expiryDate = new Date(listing.subscription_ends_at);
+                                        const today = new Date();
+                                        const daysUntilExpiry = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+                                        
+                                        if (daysUntilExpiry <= 7 && daysUntilExpiry > 0) {
+                                    %>
+                                        <div class="subscription-info expiry-warning">
+                                            <small>⚠️ Expires in <%= daysUntilExpiry %> day<%= daysUntilExpiry !== 1 ? 's' : '' %></small>
+                                        </div>
+                                    <% } else if (daysUntilExpiry <= 0) { %>
+                                        <div class="subscription-info expiry-critical">
+                                            <small>🚨 Subscription expired</small>
+                                        </div>
+                                    <% } %>
+                                <% } else { %>
+                                    —
+                                <% } %>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <% if (listing.listing_tier === 'free' && listing.subscription_status !== 'active') { %>
+                                        <button class="btn-success" onclick="upgradeToPremium(<%= listing.id %>)">
+                                            Upgrade to Premium
+                                        </button>
+                                    <% } else if (listing.subscription_status === 'active') { %>
+                                        <a href="/dashboard/subscription/portal" class="btn-primary">
+                                            Manage Subscription
+                                        </a>
+                                        <button class="btn-warning" onclick="checkSubscriptionStatus(<%= listing.id %>)">
+                                            Check Status
+                                        </button>
+                                    <% } else if (listing.subscription_status === 'past_due') { %>
+                                        <a href="/dashboard/subscription/portal" class="btn-warning">
+                                            Update Payment
+                                        </a>
+                                    <% } else if (listing.subscription_status === 'cancelled') { %>
+                                        <button class="btn-success" onclick="reactivateSubscription(<%= listing.id %>)">
+                                            Reactivate
+                                        </button>
+                                    <% } %>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <div class="no-subscriptions">
+                <h3>No Business Listings</h3>
+                <p>You haven't created any business listings yet.</p>
+                <p><a href="/dashboard/submit" class="btn-primary" style="display: inline-block; margin-top: 15px;">Create Your First Listing</a></p>
+            </div>
+        <% } %>
+    </div>
+    
+    <script>
+        function upgradeToPremium(businessId) {
+            if (confirm('Upgrade this listing to premium? This will create an annual subscription.')) {
+                fetch('/dashboard/subscription/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        business_id: businessId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.sessionId) {
+                        // Redirect to Stripe Checkout
+                        window.location.href = data.url;
+                    } else {
+                        alert('Error: ' + (data.error || 'Failed to create subscription'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while creating the subscription');
+                });
+            }
+        }
+        
+        function checkSubscriptionStatus(businessId) {
+            fetch(`/dashboard/subscription/status/${businessId}`)
+                .then(response => response.json())
+                .then(data => {
+                    let message = `Business ID: ${data.business_id}\n`;
+                    message += `Listing Tier: ${data.listing_tier}\n`;
+                    message += `Subscription Status: ${data.subscription_status || 'None'}\n`;
+                    if (data.subscription_ends_at) {
+                        message += `Expires: ${new Date(data.subscription_ends_at).toLocaleDateString()}\n`;
+                    }
+                    message += `Has Subscription: ${data.has_subscription ? 'Yes' : 'No'}`;
+                    alert(message);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to get subscription status');
+                });
+        }
+        
+        function reactivateSubscription(businessId) {
+            if (confirm('Reactivate premium subscription for this listing?')) {
+                // Redirect to subscription creation
+                upgradeToPremium(businessId);
+            }
+        }
+    </script>
+</body>
+</html>
