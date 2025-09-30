@@ -6,7 +6,7 @@
     <title><%= title %></title>
     <meta name="description" content="Find trusted chiropractors and allied health professionals across Australia. Search by location, specialty, and read verified patient reviews.">
     <meta name="keywords" content="chiropractor, physiotherapist, allied health, Australia, healthcare, spine care">
-    <link rel="stylesheet" href="/stylesheets/dist.css">
+    <link rel="stylesheet" href="/stylesheets/dist.css?v=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -54,21 +54,21 @@
                 </p>
                 
                 <!-- Search Form -->
-                <div class="max-w-4xl mx-auto">
-                    <form action="/search" method="GET" class="bg-white rounded-lg shadow-xl p-8">
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                            <div class="md:col-span-2">
-                                <label for="keyword" class="block text-sm font-medium text-text mb-2">What are you looking for?</label>
+                <div class="max-w-5xl mx-auto">
+                    <form action="/search" method="GET" class="search-form-container">
+                        <div class="search-form-grid">
+                            <div class="search-form-field">
+                                <label for="keyword" class="search-label">What are you looking for?</label>
                                 <input 
                                     type="text" 
                                     id="keyword" 
                                     name="keyword" 
-                                    placeholder="e.g., back pain, sports injury, general checkup"
+                                    placeholder="e.g., back pain, sports injury"
                                     class="search-input"
                                 >
                             </div>
-                            <div>
-                                <label for="category" class="block text-sm font-medium text-text mb-2">Specialty</label>
+                            <div class="search-form-field">
+                                <label for="category" class="search-label">Specialty</label>
                                 <select id="category" name="category" class="search-input">
                                     <option value="">All Specialties</option>
                                     <% categories.forEach(category => { %>
@@ -76,8 +76,8 @@
                                     <% }); %>
                                 </select>
                             </div>
-                            <div>
-                                <label for="location" class="block text-sm font-medium text-text mb-2">Location</label>
+                            <div class="search-form-field">
+                                <label for="location" class="search-label">Location</label>
                                 <select id="location" name="location" class="search-input">
                                     <option value="">All Locations</option>
                                     <% locations.forEach(location => { %>
@@ -85,11 +85,11 @@
                                     <% }); %>
                                 </select>
                             </div>
-                        </div>
-                        <div class="mt-6">
-                            <button type="submit" class="btn-primary w-full md:w-auto">
-                                Search Practitioners
-                            </button>
+                            <div class="search-form-button">
+                                <button type="submit" class="btn-primary w-full">
+                                    Search
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>

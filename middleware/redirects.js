@@ -103,7 +103,7 @@ function handleIndexFallback(req, res, next) {
     // 3. Handle it as a custom route
     
     // For now, let's redirect to home page (similar to the /new-patients redirect)
-    if (req.path !== '/' && !req.path.startsWith('/admin') && !req.path.startsWith('/users')) {
+    if (req.path !== '/' && !req.path.startsWith('/admin') && !req.path.startsWith('/users') && !req.path.startsWith('/dashboard') && req.path !== '/login' && req.path !== '/register' && req.path !== '/logout') {
         return res.redirect(301, '/');
     }
     

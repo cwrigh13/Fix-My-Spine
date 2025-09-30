@@ -157,21 +157,21 @@ async function setupTestData() {
         const locationQuery = 'SELECT id, suburb FROM locations ORDER BY suburb';
         const userQuery = 'SELECT id, name FROM users WHERE is_admin = FALSE ORDER BY id';
         
-        const [categories] = await new Promise((resolve, reject) => {
+        const [categoryResults] = await new Promise((resolve, reject) => {
             connection.execute(categoryQuery, (err, results) => {
                 if (err) reject(err);
                 else resolve([results]);
             });
         });
 
-        const [locations] = await new Promise((resolve, reject) => {
+        const [locationResults] = await new Promise((resolve, reject) => {
             connection.execute(locationQuery, (err, results) => {
                 if (err) reject(err);
                 else resolve([results]);
             });
         });
 
-        const [users] = await new Promise((resolve, reject) => {
+        const [userResults] = await new Promise((resolve, reject) => {
             connection.execute(userQuery, (err, results) => {
                 if (err) reject(err);
                 else resolve([results]);
@@ -243,9 +243,9 @@ async function setupTestData() {
 
         for (const business of businessListings) {
             // Find matching category and location
-            const category = categories.find(c => c.name === business.category_name);
-            const location = locations.find(l => l.suburb === business.location_suburb);
-            const user = users.find(u => u.name === business.user_name);
+            const category = categoryResults.find(c => c.name === business.category_name);
+            const location = locationResults.find(l => l.suburb === business.location_suburb);
+            const user = userResults.find(u => u.name === business.user_name);
 
             if (category && location && user) {
                 const query = `INSERT IGNORE INTO businesses 

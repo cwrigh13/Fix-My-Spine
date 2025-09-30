@@ -10,6 +10,9 @@ const requireAuth = (req, res, next) => {
     }
 };
 
+// Alias for requireAuth - this is the requireLogin function requested
+const requireLogin = requireAuth;
+
 // Middleware to check if user is an admin
 const requireAdmin = (req, res, next) => {
     if (req.session && req.session.userId && req.session.isAdmin) {
@@ -56,6 +59,7 @@ const userLocals = (req, res, next) => {
 
 module.exports = {
     requireAuth,
+    requireLogin,
     requireAdmin,
     redirectIfLoggedIn,
     userLocals
