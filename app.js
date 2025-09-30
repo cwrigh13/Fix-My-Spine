@@ -11,9 +11,13 @@ const pool = require('./config/database');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
+var authRouter = require('./routes/auth');
 // --- REDIRECT MIDDLEWARE ---
 const { handleRedirects, handleIndexFallback } = require('./middleware/redirects');
 // --- END REDIRECT MIDDLEWARE ---
+// --- AUTHENTICATION MIDDLEWARE ---
+const { userLocals } = require('./middleware/auth');
+// --- END AUTHENTICATION MIDDLEWARE ---
 
 var app = express();
 
@@ -39,11 +43,17 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// --- AUTHENTICATION MIDDLEWARE ---
+// Make user data available to all views
+app.use(userLocals);
+// --- END AUTHENTICATION MIDDLEWARE ---
+
 // --- REDIRECT MIDDLEWARE ---
 // Handle all redirects from the original .htaccess file
 app.use(handleRedirects);
 // --- END REDIRECT MIDDLEWARE ---
 
+app.use('/', authRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);

@@ -3,9 +3,94 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      .nav {
+        background: #2c3e50;
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+      }
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+      .nav-brand {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .nav-links {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+      .nav-links a:hover {
+        background: rgba(255,255,255,0.1);
+      }
+      .nav-links .btn {
+        background: #3498db;
+      }
+      .nav-links .btn:hover {
+        background: #2980b9;
+      }
+      .alert {
+        padding: 12px;
+        margin: 20px;
+        border-radius: 4px;
+        text-align: center;
+      }
+      .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+    </style>
   </head>
   <body>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="/" class="nav-brand">Fix My Spine</a>
+        <ul class="nav-links">
+          <% if (user) { %>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <% if (user.isAdmin) { %>
+              <li><a href="/admin/dashboard">Admin</a></li>
+            <% } %>
+            <li><a href="/logout">Logout</a></li>
+          <% } else { %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register" class="btn">Register</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+
+    <% if (typeof req !== 'undefined' && req.query.loggedOut) { %>
+      <div class="alert alert-success">
+        You have been successfully logged out.
+      </div>
+    <% } %>
+
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    
+    <% if (user) { %>
+      <p>Hello, <%= user.name %>! You are logged in as a <%= user.isAdmin ? 'Administrator' : 'Business Owner' %>.</p>
+    <% } else { %>
+      <p>Please <a href="/login">log in</a> or <a href="/register">register</a> to manage your business listings.</p>
+    <% } %>
   </body>
 </html>
