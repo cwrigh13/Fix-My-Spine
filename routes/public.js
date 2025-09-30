@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../config/database');
+const pool = require('../config/database').promise();
 
 // Homepage route - GET /
 router.get('/', async (req, res) => {
@@ -310,8 +310,10 @@ router.get('/listing/:id/:slug', async (req, res) => {
     try {
         const { id, slug } = req.params;
         
+        console.log(`Fetching listing details for ID: ${id}, slug: ${slug}`);
+        
         // Get business details with category and location info
-        const [businessRows] = await pool.execute(`
+        const businessResult = await pool.execute(`
             SELECT b.*, c.name as category_name, c.slug as category_slug,
                    l.suburb, l.state, l.postcode,
                    AVG(r.rating) as avg_rating,
@@ -324,6 +326,13 @@ router.get('/listing/:id/:slug', async (req, res) => {
             GROUP BY b.id
         `, [id]);
         
+        let businessRows = [];
+        if (businessResult && Array.isArray(businessResult) && businessResult.length > 0) {
+            businessRows = businessResult[0] || [];
+        }
+        
+        console.log(`Business rows found: ${businessRows.length}`);
+        
         if (businessRows.length === 0) {
             return res.status(404).render('error', { 
                 message: 'Listing not found',
@@ -332,13 +341,21 @@ router.get('/listing/:id/:slug', async (req, res) => {
         }
         
         const business = businessRows[0];
+        console.log(`Found business: ${business.business_name}`);
         
         // Get all approved reviews for this business
-        const [reviews] = await pool.execute(`
+        const reviewsResult = await pool.execute(`
             SELECT * FROM reviews 
             WHERE business_id = ? 
             ORDER BY created_at DESC
         `, [id]);
+        
+        let reviews = [];
+        if (reviewsResult && Array.isArray(reviewsResult) && reviewsResult.length > 0) {
+            reviews = reviewsResult[0] || [];
+        }
+        
+        console.log(`Reviews found: ${reviews.length}`);
         
         res.render('public/listing-detail', {
             title: `${business.business_name} - ${business.category_name} in ${business.suburb}, ${business.state} | FixMySpine`,
