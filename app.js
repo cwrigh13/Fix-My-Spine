@@ -6,33 +6,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 // --- DATABASE CONNECTION ---
-const mysql = require('mysql2');
-
-// Create a connection pool to the database
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-});
-
-// Test the connection
-pool.getConnection((err, connection) => {
-  if (err) {
-    console.error('Error connecting to the database:', err);
-    // Common errors: incorrect credentials, database not running.
-    return;
-  }
-  console.log('Successfully connected to the MySQL database.');
-  connection.release(); // Important: release the connection back to the pool
-});
+const pool = require('./config/database');
 // --- END DATABASE CONNECTION ---
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
+// --- REDIRECT MIDDLEWARE ---
+const { handleRedirects, handleIndexFallback } = require('./middleware/redirects');
+// --- END REDIRECT MIDDLEWARE ---
 
 var app = express();
 
@@ -58,9 +39,19 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// --- REDIRECT MIDDLEWARE ---
+// Handle all redirects from the original .htaccess file
+app.use(handleRedirects);
+// --- END REDIRECT MIDDLEWARE ---
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
+
+// --- FALLBACK HANDLER ---
+// Handle any unmatched routes (equivalent to the catch-all in .htaccess)
+app.use(handleIndexFallback);
+// --- END FALLBACK HANDLER ---
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
