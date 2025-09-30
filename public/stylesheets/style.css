@@ -1,8 +1,61 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Custom component styles */
+@layer components {
+  .btn-primary {
+    @apply bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary hover:bg-secondary/90 text-text font-semibold py-3 px-6 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-accent {
+    @apply bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md border border-border p-6;
+  }
+  
+  .search-input {
+    @apply w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent;
+  }
+  
+  .rating-stars {
+    @apply flex items-center space-x-1;
+  }
+  
+  .star {
+    @apply w-4 h-4 text-accent;
+  }
+  
+  .star-empty {
+    @apply w-4 h-4 text-gray-300;
+  }
 }
 
-a {
-  color: #00B7FF;
+/* Base styles */
+body {
+  font-family: 'Inter', sans-serif;
+  color: #212529;
+  background-color: #F8F9FA;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+}
+
+/* Hero section styles */
+.hero-bg {
+  background-image: linear-gradient(rgba(45, 139, 139, 0.8), rgba(45, 139, 139, 0.8)), 
+                    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f9ff" width="1200" height="600"/><path fill="%23e0f2f1" d="M0 300L50 320C100 340 200 380 300 380C400 380 500 340 600 320C700 300 800 280 900 280C1000 280 1100 300 1150 310L1200 320V600H1150C1100 600 1000 600 900 600C800 600 700 600 600 600C500 600 400 600 300 600C200 600 100 600 50 600H0V300Z"/></svg>');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

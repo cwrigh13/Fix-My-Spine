@@ -198,23 +198,5 @@ router.get('/logout', (req, res) => {
     });
 });
 
-// GET /dashboard - Business owner dashboard (placeholder for now)
-router.get('/dashboard', (req, res) => {
-    // Check if user is logged in
-    if (!req.session.userId) {
-        req.session.loginError = 'Please log in to access the dashboard';
-        return res.redirect('/login');
-    }
-
-    res.render('auth/dashboard', {
-        title: 'Dashboard - Fix My Spine',
-        user: {
-            id: req.session.userId,
-            name: req.session.userName,
-            email: req.session.userEmail,
-            isAdmin: req.session.isAdmin
-        }
-    });
-});
 
 module.exports = router;

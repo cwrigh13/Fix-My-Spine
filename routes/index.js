@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+/* This router no longer handles the root route - handled by public router */
 
 module.exports = router;

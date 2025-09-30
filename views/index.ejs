@@ -64,7 +64,7 @@
       <div class="nav-container">
         <a href="/" class="nav-brand">Fix My Spine</a>
         <ul class="nav-links">
-          <% if (user) { %>
+          <% if (typeof user !== 'undefined' && user) { %>
             <li><a href="/dashboard">Dashboard</a></li>
             <% if (user.isAdmin) { %>
               <li><a href="/admin/dashboard">Admin</a></li>
@@ -87,7 +87,7 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     
-    <% if (user) { %>
+    <% if (typeof user !== 'undefined' && user) { %>
       <p>Hello, <%= user.name %>! You are logged in as a <%= user.isAdmin ? 'Administrator' : 'Business Owner' %>.</p>
     <% } else { %>
       <p>Please <a href="/login">log in</a> or <a href="/register">register</a> to manage your business listings.</p>
