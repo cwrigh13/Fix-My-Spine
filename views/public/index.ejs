@@ -6,10 +6,11 @@
     <title><%= title %></title>
     <meta name="description" content="Find trusted chiropractors and allied health professionals across Australia. Search by location, specialty, and read verified patient reviews.">
     <meta name="keywords" content="chiropractor, physiotherapist, allied health, Australia, healthcare, spine care">
-    <link rel="stylesheet" href="/stylesheets/dist.css?v=3">
+    <link rel="stylesheet" href="/stylesheets/dist.css?v=4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="/javascripts/search-bar.js" defer></script>
 </head>
 <body class="bg-background">
     <!-- Navigation -->
@@ -44,52 +45,60 @@
 
     <!-- Hero Section -->
     <section class="hero-bg min-h-screen flex items-center pt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="text-center">
                 <h1 class="text-4xl md:text-6xl font-heading font-bold text-white mb-6">
                     Find Trusted Chiropractors & Allied Health Professionals Across Australia
                 </h1>
-                <p class="text-xl text-white mb-12 max-w-3xl mx-auto">
+                <p class="text-xl text-white mb-8 max-w-3xl mx-auto">
                     Connect with verified healthcare professionals in your area. Read real patient reviews and find the perfect practitioner for your needs.
                 </p>
                 
-                <!-- Search Form -->
-                <div class="max-w-5xl mx-auto">
-                    <form action="/search" method="GET" class="search-form-container">
-                        <div class="search-form-grid">
-                            <div class="search-form-field">
-                                <label for="keyword" class="search-label">What are you looking for?</label>
+                <!-- Modern Search Bar -->
+                <div class="max-w-6xl mx-auto">
+                    <form action="/search" method="GET" class="modern-search-container">
+                        <div class="modern-search-wrapper">
+                            <!-- Search Field -->
+                            <div class="modern-search-field">
+                                <label for="keyword" class="modern-search-label">Search</label>
                                 <input 
                                     type="text" 
                                     id="keyword" 
                                     name="keyword" 
-                                    placeholder="e.g., back pain, sports injury"
-                                    class="search-input"
+                                    placeholder="Condition, procedure or doctor name"
+                                    class="modern-search-input"
                                 >
                             </div>
-                            <div class="search-form-field">
-                                <label for="category" class="search-label">Specialty</label>
-                                <select id="category" name="category" class="search-input">
-                                    <option value="">All Specialties</option>
-                                    <% categories.forEach(category => { %>
-                                        <option value="<%= category.id %>"><%= category.name %></option>
-                                    <% }); %>
-                                </select>
-                            </div>
-                            <div class="search-form-field">
-                                <label for="location" class="search-label">Location</label>
-                                <select id="location" name="location" class="search-input">
-                                    <option value="">All Locations</option>
+                            
+                            <!-- Location Field -->
+                            <div class="modern-search-field modern-search-divider">
+                                <label for="location" class="modern-search-label">Location</label>
+                                <select id="location" name="location" class="modern-search-input modern-select">
+                                    <option value="">Select location...</option>
                                     <% locations.forEach(location => { %>
-                                        <option value="<%= location.id %>"><%= location.suburb %>, <%= location.state %></option>
+                                        <option value="<%= location.id %>">&nbsp;&nbsp;<%= location.suburb %>, <%= location.state %></option>
                                     <% }); %>
                                 </select>
                             </div>
-                            <div class="search-form-button">
-                                <button type="submit" class="btn-primary w-full">
-                                    Search
-                                </button>
+                            
+                            <!-- Specialty Field -->
+                            <div class="modern-search-field modern-search-divider">
+                                <label for="category" class="modern-search-label">Specialty</label>
+                                <select id="category" name="category" class="modern-search-input modern-select">
+                                    <option value="">Select specialty...</option>
+                                    <% categories.forEach(category => { %>
+                                        <option value="<%= category.id %>">&nbsp;&nbsp;<%= category.name %></option>
+                                    <% }); %>
+                                </select>
                             </div>
+                            
+                            <!-- Search Button -->
+                            <button type="submit" class="modern-search-button">
+                                <svg class="modern-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                                Find care
+                            </button>
                         </div>
                     </form>
                 </div>
