@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
                 LEFT JOIN reviews r ON b.id = r.business_id
                 WHERE b.is_approved = TRUE
                 GROUP BY b.id
-                ORDER BY b.created_at DESC
+                ORDER BY (b.listing_tier = 'premium') DESC, b.business_name ASC
                 LIMIT 6
             `);
             
@@ -140,7 +140,7 @@ router.get('/search', async (req, res) => {
             params.push(location);
         }
         
-        sql += ` GROUP BY b.id ORDER BY b.listing_tier DESC, b.created_at DESC`;
+        sql += ` GROUP BY b.id ORDER BY (b.listing_tier = 'premium') DESC, b.business_name ASC`;
         
         const [listings] = await pool.execute(sql, params);
         
@@ -206,7 +206,7 @@ router.get('/category/:slug', async (req, res) => {
             LEFT JOIN reviews r ON b.id = r.business_id
             WHERE b.is_approved = TRUE AND b.category_id = ?
             GROUP BY b.id
-            ORDER BY b.listing_tier DESC, b.created_at DESC
+            ORDER BY (b.listing_tier = 'premium') DESC, b.business_name ASC
         `, [category.id]);
         
         // Get search form data
@@ -272,7 +272,7 @@ router.get('/location/:suburb', async (req, res) => {
             LEFT JOIN reviews r ON b.id = r.business_id
             WHERE b.is_approved = TRUE AND b.location_id = ?
             GROUP BY b.id
-            ORDER BY b.listing_tier DESC, b.created_at DESC
+            ORDER BY (b.listing_tier = 'premium') DESC, b.business_name ASC
         `, [location.id]);
         
         // Get search form data

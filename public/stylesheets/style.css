@@ -48,6 +48,24 @@
   .star-empty {
     @apply w-4 h-4 text-gray-300;
   }
+  
+  /* Premium listing styles */
+  .is-premium {
+    @apply relative;
+    box-shadow: 0 4px 12px rgba(249, 168, 38, 0.15);
+  }
+  
+  .is-premium::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #F9A826, #FFD700);
+    border-radius: 8px;
+    z-index: -1;
+  }
 }
 
 /* Base styles */

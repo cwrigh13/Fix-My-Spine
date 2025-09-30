@@ -115,7 +115,7 @@
         <% if (listings && listings.length > 0) { %>
             <div class="space-y-6">
                 <% listings.forEach(listing => { %>
-                    <div class="card hover:shadow-lg transition-shadow duration-300">
+                    <div class="card hover:shadow-lg transition-shadow duration-300 <%= listing.listing_tier === 'premium' ? 'is-premium border-accent border-2' : '' %>">
                         <div class="flex flex-col md:flex-row md:items-start gap-6">
                             <!-- Practitioner Photo/Initial -->
                             <div class="flex-shrink-0">

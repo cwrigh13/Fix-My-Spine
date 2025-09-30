@@ -14,6 +14,7 @@ var adminRouter = require('./routes/admin');
 var authRouter = require('./routes/auth');
 var dashboardRouter = require('./routes/dashboard');
 var publicRouter = require('./routes/public');
+var paymentsRouter = require('./routes/payments');
 // --- REDIRECT MIDDLEWARE ---
 const { handleRedirects, handleIndexFallback } = require('./middleware/redirects');
 // --- END REDIRECT MIDDLEWARE ---
@@ -61,6 +62,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
 app.use('/dashboard', dashboardRouter);
+app.use('/payments', paymentsRouter);
 
 // --- FALLBACK HANDLER ---
 // Handle any unmatched routes (equivalent to the catch-all in .htaccess)
