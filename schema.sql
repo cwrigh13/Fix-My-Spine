@@ -48,9 +48,13 @@ CREATE TABLE businesses (
     listing_tier ENUM('free', 'premium') DEFAULT 'free',
     is_approved BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    subscription_status ENUM('active', 'inactive', 'cancelled', 'past_due') DEFAULT 'inactive',
+    subscription_ends_at DATETIME DEFAULT NULL,
+    stripe_subscription_id VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (category_id) REFERENCES categories(id),
-    FOREIGN KEY (location_id) REFERENCES locations(id)
+    FOREIGN KEY (location_id) REFERENCES locations(id),
+    INDEX idx_stripe_subscription_id (stripe_subscription_id)
 );
 
 -- Table for patient reviews
