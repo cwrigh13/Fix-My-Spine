@@ -71,15 +71,19 @@
                                 >
                             </div>
                             
-                            <!-- Location Field -->
+                            <!-- Postcode Field -->
                             <div class="modern-search-field modern-search-divider">
-                                <label for="location" class="modern-search-label">Location</label>
-                                <select id="location" name="location" class="modern-search-input modern-select">
-                                    <option value="">Select location...</option>
-                                    <% locations.forEach(location => { %>
-                                        <option value="<%= location.id %>">&nbsp;&nbsp;<%= location.suburb %>, <%= location.state %></option>
-                                    <% }); %>
-                                </select>
+                                <label for="postcode" class="modern-search-label">Postcode</label>
+                                <input 
+                                    type="text" 
+                                    id="postcode" 
+                                    name="postcode" 
+                                    placeholder="Enter your postcode"
+                                    pattern="[0-9]{4}"
+                                    maxlength="4"
+                                    class="modern-search-input"
+                                    title="Please enter a valid 4-digit Australian postcode"
+                                >
                             </div>
                             
                             <!-- Specialty Field -->

@@ -71,15 +71,18 @@
                         </select>
                     </div>
                     <div>
-                        <label for="location" class="block text-sm font-medium text-text mb-2">Location</label>
-                        <select id="location" name="location" class="search-input">
-                            <option value="">All Locations</option>
-                            <% locations.forEach(location => { %>
-                                <option value="<%= location.id %>" <%= searchParams.location == location.id ? 'selected' : '' %>>
-                                    <%= location.suburb %>, <%= location.state %>
-                                </option>
-                            <% }); %>
-                        </select>
+                        <label for="postcode" class="block text-sm font-medium text-text mb-2">Postcode</label>
+                        <input 
+                            type="text" 
+                            id="postcode" 
+                            name="postcode" 
+                            value="<%= searchParams.postcode || '' %>"
+                            placeholder="Enter postcode (e.g., 2000)"
+                            pattern="[0-9]{4}"
+                            maxlength="4"
+                            class="search-input"
+                            title="Please enter a valid 4-digit Australian postcode"
+                        >
                     </div>
                 </div>
                 <div class="mt-4">
@@ -171,6 +174,11 @@
                                         <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
                                     </svg>
                                     <%= listing.suburb %>, <%= listing.state %> <%= listing.postcode %>
+                                    <% if (typeof listing.distance_km !== 'undefined' && listing.distance_km !== null) { %>
+                                        <span class="ml-2 px-2 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
+                                            <%= listing.distance_km < 1 ? '< 1' : Math.round(listing.distance_km) %> km away
+                                        </span>
+                                    <% } %>
                                 </div>
 
                                 <!-- Description -->

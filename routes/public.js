@@ -62,36 +62,12 @@ router.get('/', async (req, res) => {
             ];
         }
 
-        // Try to fetch locations
-        try {
-            console.log('Fetching locations...');
-            const result = await pool.execute(`
-                SELECT id, suburb, state, postcode 
-                FROM locations 
-                ORDER BY state ASC, suburb ASC
-            `);
-            
-            if (result && Array.isArray(result) && result.length > 0) {
-                locations = result[0] || [];
-            }
-            console.log('Locations found:', locations.length);
-        } catch (locationError) {
-            console.log('Error fetching locations:', locationError.message);
-            locations = [
-                { id: 1, suburb: 'Sydney', state: 'NSW', postcode: '2000' },
-                { id: 2, suburb: 'Melbourne', state: 'VIC', postcode: '3000' },
-                { id: 3, suburb: 'Brisbane', state: 'QLD', postcode: '4000' },
-                { id: 4, suburb: 'Perth', state: 'WA', postcode: '6000' }
-            ];
-        }
-
         console.log('Rendering homepage with data...');
         res.render('public/index', {
             title: 'Find Trusted Chiropractors & Allied Health Professionals | Fix My Spine',
             description: 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia. Search by location, specialty, and read verified patient reviews.',
             featuredListings,
-            categories,
-            locations
+            categories
         });
     } catch (error) {
         console.error('Critical error in homepage route:', error);
@@ -105,22 +81,61 @@ router.get('/', async (req, res) => {
 // Search functionality - GET /search
 router.get('/search', async (req, res) => {
     try {
-        const { keyword, category, location } = req.query;
+        const { keyword, category, postcode } = req.query;
         
-        // Build dynamic SQL query
+        // Initialize variables for proximity search
+        let searchLat = null;
+        let searchLng = null;
+        let locationName = null;
+        
+        // If postcode is provided, look up its coordinates
+        if (postcode && postcode.trim() && /^\d{4}$/.test(postcode.trim())) {
+            const [locationResult] = await pool.execute(
+                `SELECT suburb, state, latitude, longitude 
+                 FROM locations 
+                 WHERE postcode = ? AND latitude IS NOT NULL AND longitude IS NOT NULL
+                 LIMIT 1`,
+                [postcode.trim()]
+            );
+            
+            if (locationResult.length > 0) {
+                searchLat = locationResult[0].latitude;
+                searchLng = locationResult[0].longitude;
+                locationName = `${locationResult[0].suburb}, ${locationResult[0].state}`;
+            }
+        }
+        
+        // Build dynamic SQL query with distance calculation
         let sql = `
             SELECT b.*, c.name as category_name, c.slug as category_slug,
                    l.suburb, l.state, l.postcode,
+                   l.latitude, l.longitude,
                    AVG(r.rating) as avg_rating,
-                   COUNT(r.id) as review_count
+                   COUNT(r.id) as review_count`;
+        
+        // Add distance calculation if we have search coordinates
+        if (searchLat !== null && searchLng !== null) {
+            sql += `,
+                   (6371 * acos(
+                       cos(radians(?)) * cos(radians(l.latitude)) * 
+                       cos(radians(l.longitude) - radians(?)) + 
+                       sin(radians(?)) * sin(radians(l.latitude))
+                   )) AS distance_km`;
+        }
+        
+        sql += `
             FROM businesses b
             LEFT JOIN categories c ON b.category_id = c.id
             LEFT JOIN locations l ON b.location_id = l.id
             LEFT JOIN reviews r ON b.id = r.business_id
-            WHERE b.is_approved = TRUE
-        `;
+            WHERE b.is_approved = TRUE`;
         
         const params = [];
+        
+        // Add distance parameters if applicable
+        if (searchLat !== null && searchLng !== null) {
+            params.push(searchLat, searchLng, searchLat);
+        }
         
         // Add keyword search
         if (keyword && keyword.trim()) {
@@ -135,13 +150,15 @@ router.get('/search', async (req, res) => {
             params.push(category);
         }
         
-        // Add location filter
-        if (location && location !== '') {
-            sql += ` AND b.location_id = ?`;
-            params.push(location);
-        }
+        // Group by business
+        sql += ` GROUP BY b.id`;
         
-        sql += ` GROUP BY b.id ORDER BY (b.listing_tier = 'premium') DESC, b.business_name ASC`;
+        // Order by proximity if we have coordinates, otherwise by premium tier and name
+        if (searchLat !== null && searchLng !== null) {
+            sql += ` ORDER BY (b.listing_tier = 'premium') DESC, distance_km ASC`;
+        } else {
+            sql += ` ORDER BY (b.listing_tier = 'premium') DESC, b.business_name ASC`;
+        }
         
         const [listings] = await pool.execute(sql, params);
         
@@ -150,12 +167,6 @@ router.get('/search', async (req, res) => {
             SELECT id, name, slug 
             FROM categories 
             ORDER BY name ASC
-        `);
-        
-        const [locations] = await pool.execute(`
-            SELECT id, suburb, state, postcode 
-            FROM locations 
-            ORDER BY state ASC, suburb ASC
         `);
         
         // Get category name if category filter is applied
@@ -170,20 +181,15 @@ router.get('/search', async (req, res) => {
             }
         }
 
-        // Get location name if location filter is applied
-        let locationName = null;
-        if (location && location !== '') {
-            const [locationResult] = await pool.execute(
-                'SELECT suburb, state FROM locations WHERE id = ?',
-                [location]
-            );
-            if (locationResult.length > 0) {
-                locationName = `${locationResult[0].suburb}, ${locationResult[0].state}`;
-            }
-        }
-
         // Construct SEO-optimized title and description for search results
-        const searchTitle = `Search Results${keyword ? ` for "${keyword}"` : ''} | Fix My Spine`;
+        let searchTitle = 'Search Results';
+        if (postcode && locationName) {
+            searchTitle = `Practitioners near ${locationName} (${postcode})`;
+        } else if (keyword) {
+            searchTitle = `Search Results for "${keyword}"`;
+        }
+        searchTitle += ' | Fix My Spine';
+        
         const searchDescription = keyword 
             ? `Find trusted healthcare professionals for "${keyword}". Read reviews, compare practitioners, and book appointments with verified specialists.`
             : 'Search our comprehensive directory of healthcare professionals. Find trusted practitioners by specialty, location, and read patient reviews.';
@@ -193,10 +199,9 @@ router.get('/search', async (req, res) => {
             description: searchDescription,
             listings,
             categories,
-            locations,
             categoryName,
             locationName,
-            searchParams: { keyword, category, location }
+            searchParams: { keyword, category, postcode }
         });
     } catch (error) {
         console.error('Error performing search:', error);
@@ -250,12 +255,6 @@ router.get('/category/:slug', async (req, res) => {
             ORDER BY name ASC
         `);
         
-        const [locations] = await pool.execute(`
-            SELECT id, suburb, state, postcode 
-            FROM locations 
-            ORDER BY state ASC, suburb ASC
-        `);
-        
         // Construct SEO-optimized title and description
         const seoTitle = `Find the Best ${category.name}s in Australia | Fix My Spine`;
         const seoDescription = `Browse our comprehensive directory of verified ${category.name}s. Read reviews, compare practitioners, and find the right specialist for your needs.`;
@@ -265,7 +264,6 @@ router.get('/category/:slug', async (req, res) => {
             description: seoDescription,
             listings,
             categories,
-            locations,
             categoryName: category.name,
             searchParams: { category: category.id }
         });
@@ -285,9 +283,9 @@ router.get('/location/:suburb', async (req, res) => {
         
         // Get location details
         const [locationRows] = await pool.execute(`
-            SELECT id, suburb, state, postcode 
+            SELECT id, suburb, state, postcode, population 
             FROM locations 
-            WHERE suburb = ?
+            WHERE suburb = ? AND population > 75000
         `, [suburb]);
         
         if (locationRows.length === 0) {
@@ -321,12 +319,6 @@ router.get('/location/:suburb', async (req, res) => {
             ORDER BY name ASC
         `);
         
-        const [locations] = await pool.execute(`
-            SELECT id, suburb, state, postcode 
-            FROM locations 
-            ORDER BY state ASC, suburb ASC
-        `);
-        
         // Construct SEO-optimized title and description
         const seoTitle = `Top Chiropractors & Physios in ${location.suburb} | Fix My Spine`;
         const seoDescription = `Discover the top-rated allied health professionals in ${location.suburb}. Search our directory to find trusted practitioners near you.`;
@@ -336,9 +328,8 @@ router.get('/location/:suburb', async (req, res) => {
             description: seoDescription,
             listings,
             categories,
-            locations,
             locationName: `${location.suburb}, ${location.state}`,
-            searchParams: { location: location.id }
+            searchParams: { postcode: location.postcode }
         });
     } catch (error) {
         console.error('Error fetching location page:', error);

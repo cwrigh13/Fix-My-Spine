@@ -18,6 +18,9 @@ CREATE TABLE locations (
     suburb VARCHAR(255) NOT NULL,
     postcode VARCHAR(10) NOT NULL,
     state VARCHAR(50) NOT NULL,
+    population INT DEFAULT NULL,
+    latitude DECIMAL(10, 8) DEFAULT NULL,
+    longitude DECIMAL(11, 8) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
