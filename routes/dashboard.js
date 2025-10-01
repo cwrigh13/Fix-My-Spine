@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../config/database');
 const { requireLogin } = require('../middleware/auth');
+const sitemapService = require('../services/sitemapService');
 const router = express.Router();
 
 // Apply requireLogin middleware to all routes in this router
@@ -134,6 +135,9 @@ router.post('/submit', async (req, res) => {
             listing_tier || 'free',
             false // New listings are not approved by default
         ]);
+
+        // Schedule sitemap update for new listing
+        sitemapService.scheduleUpdate(`New business listing added: ${business_name}`, 5000);
 
         // Redirect to dashboard with success message
         req.session.successMessage = 'Your listing has been submitted successfully! It will be reviewed before being published.';

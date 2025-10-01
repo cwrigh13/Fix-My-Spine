@@ -1,0 +1,43 @@
+# robots.txt for fixmyspine
+
+# Allow all search engines
+User-agent: *
+
+# Disallow private/admin areas
+Disallow: /admin/
+Disallow: /admin
+Disallow: /dashboard/
+Disallow: /dashboard
+Disallow: /auth/
+Disallow: /auth
+
+# Disallow sensitive routes
+Disallow: /payments/
+Disallow: /subscriptions/
+Disallow: /webhooks/
+Disallow: /api/
+
+# Disallow search result pages (to avoid duplicate content issues)
+Disallow: /search?
+Disallow: /search-results?
+
+# Allow public pages
+Allow: /
+Allow: /about
+Allow: /contact
+Allow: /pricing
+Allow: /blog/
+Allow: /listings/
+Allow: /public/
+
+# Disallow common technical files
+Disallow: /*.json$
+Disallow: /*.sql$
+Disallow: /*.env$
+
+# Crawl delay (optional - uncomment if needed to reduce server load)
+# Crawl-delay: 1
+
+# Sitemap location (uncomment and update when you create a sitemap)
+# Sitemap: https://www.yoursite.com/sitemap.xml
+

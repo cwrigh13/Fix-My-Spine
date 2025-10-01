@@ -12,7 +12,9 @@
     "test:setup": "node scripts/setup-test-db.js && npm test",
     "test:db": "node scripts/setup-test-db.js",
     "seed": "node seed.js",
-    "seed:honest": "node seed_honest.js"
+    "seed:honest": "node seed_honest.js",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "sitemap:verbose": "node scripts/generate-sitemap.js --verbose"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",

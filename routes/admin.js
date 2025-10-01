@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const { requireAdmin } = require('../middleware/auth');
 const pool = require('../config/database');
+const sitemapService = require('../services/sitemapService');
 
 const router = express.Router();
 
@@ -161,6 +162,8 @@ router.post('/listings/:id/approve', requireAdmin, (req, res) => {
             req.session.error = 'Listing not found';
         } else {
             req.session.success = 'Listing approved successfully';
+            // Schedule sitemap update when listing is approved
+            sitemapService.scheduleUpdate(`Business listing approved: ID ${businessId}`, 5000);
         }
         
         res.redirect('/admin/listings');

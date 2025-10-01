@@ -28,6 +28,10 @@ const { userLocals } = require('./middleware/auth');
 const cronService = require('./services/cronService');
 // --- END CRON SERVICE ---
 
+// --- SITEMAP SERVICE ---
+const sitemapService = require('./services/sitemapService');
+// --- END SITEMAP SERVICE ---
+
 var app = express();
 
 // view engine setup
@@ -75,6 +79,12 @@ app.use('/', webhooksRouter);
 // --- START CRON JOBS ---
 cronService.start();
 // --- END CRON JOBS ---
+
+// --- INITIALIZE SITEMAP SERVICE ---
+sitemapService.initialize().catch(error => {
+    console.error('Failed to initialize sitemap service:', error);
+});
+// --- END INITIALIZE SITEMAP SERVICE ---
 
 // --- FALLBACK HANDLER ---
 // Handle any unmatched routes (equivalent to the catch-all in .htaccess)

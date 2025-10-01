@@ -510,4 +510,33 @@ router.get('/blog', (req, res) => {
     });
 });
 
+// Sitemap route - GET /sitemap.xml
+router.get('/sitemap.xml', (req, res) => {
+    const fs = require('fs');
+    const path = require('path');
+    const sitemapPath = path.join(__dirname, '..', 'public', 'sitemap.xml');
+    
+    // Check if sitemap exists
+    if (fs.existsSync(sitemapPath)) {
+        res.set('Content-Type', 'application/xml');
+        res.sendFile(sitemapPath);
+    } else {
+        // If sitemap doesn't exist, generate it on-the-fly
+        console.log('Sitemap not found, generating...');
+        const generateSitemap = require('../scripts/generate-sitemap');
+        
+        generateSitemap.generateSitemap().then(result => {
+            if (result.success) {
+                res.set('Content-Type', 'application/xml');
+                res.sendFile(sitemapPath);
+            } else {
+                res.status(500).send('Error generating sitemap');
+            }
+        }).catch(error => {
+            console.error('Error generating sitemap:', error);
+            res.status(500).send('Error generating sitemap');
+        });
+    }
+});
+
 module.exports = router;
