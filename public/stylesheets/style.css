@@ -82,11 +82,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero section styles */
 .hero-bg {
-  background-image: linear-gradient(rgba(45, 139, 139, 0.8), rgba(45, 139, 139, 0.8)), 
-                    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f9ff" width="1200" height="600"/><path fill="%23e0f2f1" d="M0 300L50 320C100 340 200 380 300 380C400 380 500 340 600 320C700 300 800 280 900 280C1000 280 1100 300 1150 310L1200 320V600H1150C1100 600 1000 600 900 600C800 600 700 600 600 600C500 600 400 600 300 600C200 600 100 600 50 600H0V300Z"/></svg>');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(135deg, #2D8B8B 0%, #1a6b6b 100%);
+  min-height: 300px;
+  display: flex;
+  align-items: center;
 }
 
 /* Modern Segmented Search Bar */
