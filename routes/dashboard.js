@@ -63,7 +63,7 @@ router.get('/submit', async (req, res) => {
     try {
         // Fetch all categories and locations for the form dropdowns
         const [categories] = await pool.execute('SELECT id, name FROM categories ORDER BY name');
-        const [locations] = await pool.execute('SELECT id, suburb, postcode, state, population FROM locations WHERE population > 75000 ORDER BY population DESC, suburb, state');
+        const [locations] = await pool.execute('SELECT id, suburb, postcode, state FROM locations ORDER BY suburb, state');
 
         res.render('dashboard/submit', {
             title: 'Submit New Listing - Fix My Spine',
@@ -102,7 +102,7 @@ router.post('/submit', async (req, res) => {
         if (!business_name || !category_id || !location_id) {
             // Re-fetch categories and locations for form re-rendering
             const [categories] = await pool.execute('SELECT id, name FROM categories ORDER BY name');
-            const [locations] = await pool.execute('SELECT id, suburb, postcode, state, population FROM locations WHERE population > 75000 ORDER BY population DESC, suburb, state');
+            const [locations] = await pool.execute('SELECT id, suburb, postcode, state FROM locations ORDER BY suburb, state');
             
             return res.render('dashboard/submit', {
                 title: 'Submit New Listing - Fix My Spine',
@@ -148,7 +148,7 @@ router.post('/submit', async (req, res) => {
         
         // Re-fetch categories and locations for form re-rendering
         const [categories] = await pool.execute('SELECT id, name FROM categories ORDER BY name');
-        const [locations] = await pool.execute('SELECT id, suburb, postcode, state, population FROM locations WHERE population > 75000 ORDER BY population DESC, suburb, state');
+        const [locations] = await pool.execute('SELECT id, suburb, postcode, state FROM locations ORDER BY suburb, state');
         
         res.render('dashboard/submit', {
             title: 'Submit New Listing - Fix My Spine',
@@ -187,7 +187,7 @@ router.get('/listings/:id/edit', async (req, res) => {
 
         // Fetch all categories and locations for the form dropdowns
         const [categories] = await pool.execute('SELECT id, name FROM categories ORDER BY name');
-        const [locations] = await pool.execute('SELECT id, suburb, postcode, state, population FROM locations WHERE population > 75000 ORDER BY population DESC, suburb, state');
+        const [locations] = await pool.execute('SELECT id, suburb, postcode, state FROM locations ORDER BY suburb, state');
 
         res.render('dashboard/edit', {
             title: 'Edit Listing - Fix My Spine',
@@ -242,7 +242,7 @@ router.post('/listings/:id/edit', async (req, res) => {
         if (!business_name || !category_id || !location_id) {
             // Re-fetch data for form re-rendering
             const [categories] = await pool.execute('SELECT id, name FROM categories ORDER BY name');
-            const [locations] = await pool.execute('SELECT id, suburb, postcode, state, population FROM locations WHERE population > 75000 ORDER BY population DESC, suburb, state');
+            const [locations] = await pool.execute('SELECT id, suburb, postcode, state FROM locations ORDER BY suburb, state');
             
             return res.render('dashboard/edit', {
                 title: 'Edit Listing - Fix My Spine',
@@ -286,7 +286,7 @@ router.post('/listings/:id/edit', async (req, res) => {
         
         // Re-fetch data for form re-rendering
         const [categories] = await pool.execute('SELECT id, name FROM categories ORDER BY name');
-        const [locations] = await pool.execute('SELECT id, suburb, postcode, state, population FROM locations WHERE population > 75000 ORDER BY population DESC, suburb, state');
+        const [locations] = await pool.execute('SELECT id, suburb, postcode, state FROM locations ORDER BY suburb, state');
         
         res.render('dashboard/edit', {
             title: 'Edit Listing - Fix My Spine',
