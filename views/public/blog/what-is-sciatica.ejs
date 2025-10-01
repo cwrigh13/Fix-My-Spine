@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %></title>
     <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
+    <link rel="canonical" href="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/blog/what-is-sciatica' %>">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/blog/what-is-sciatica' %>">
+    <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %>">
+    <meta property="og:description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
+    <meta property="og:site_name" content="Fix My Spine">
+    <meta property="article:published_time" content="2025-10-01T00:00:00Z">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/blog/what-is-sciatica' %>">
+    <meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %>">
+    <meta name="twitter:description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
+    
     <link rel="stylesheet" href="/stylesheets/dist.css?v=7">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

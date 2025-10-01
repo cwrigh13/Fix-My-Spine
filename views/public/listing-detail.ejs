@@ -6,6 +6,21 @@
     <title><%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %></title>
     <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
     <meta name="keywords" content="<%= business.category_name %>, <%= business.suburb %>, <%= business.state %>, healthcare, medical, practitioner">
+    <link rel="canonical" href="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/' %>">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="business.business">
+    <meta property="og:url" content="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/' %>">
+    <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %>">
+    <meta property="og:description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
+    <meta property="og:site_name" content="Fix My Spine">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/' %>">
+    <meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %>">
+    <meta name="twitter:description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
+    
     <link rel="stylesheet" href="/stylesheets/dist.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

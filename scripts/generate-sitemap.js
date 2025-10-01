@@ -185,12 +185,18 @@ async function getLocationPages() {
             ORDER BY suburb, state ASC
         `);
 
-        return locations.map(location => ({
-            loc: `${SITE_URL}/location/${location.id}`,
-            lastmod: new Date(location.created_at).toISOString().split('T')[0],
-            changefreq: 'weekly',
-            priority: '0.7'
-        }));
+        return locations.map(location => {
+            // Create URL-friendly slug from suburb name (matching the route pattern)
+            // The route uses suburb name directly, so we just use the suburb value
+            const suburbSlug = location.suburb;
+            
+            return {
+                loc: `${SITE_URL}/location/${escapeXml(suburbSlug)}`,
+                lastmod: new Date(location.created_at).toISOString().split('T')[0],
+                changefreq: 'weekly',
+                priority: '0.7'
+            };
+        });
     } catch (error) {
         console.error('Error fetching locations:', error);
         return [];
@@ -203,7 +209,7 @@ async function getLocationPages() {
 async function getBusinessListingPages() {
     try {
         const [businesses] = await pool.execute(`
-            SELECT b.id, b.business_name, b.created_at, b.updated_at,
+            SELECT b.id, b.business_name, b.created_at,
                    c.slug as category_slug
             FROM businesses b
             LEFT JOIN categories c ON b.category_id = c.id
@@ -220,12 +226,9 @@ async function getBusinessListingPages() {
                 .replace(/-+/g, '-')
                 .trim('-');
 
-            // Use updated_at if available, otherwise use created_at
-            const lastmod = business.updated_at || business.created_at;
-
             return {
                 loc: `${SITE_URL}/listing/${business.id}/${businessSlug}`,
-                lastmod: new Date(lastmod).toISOString().split('T')[0],
+                lastmod: new Date(business.created_at).toISOString().split('T')[0],
                 changefreq: 'monthly',
                 priority: '0.6'
             };

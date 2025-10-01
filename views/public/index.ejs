@@ -6,6 +6,21 @@
     <title><%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %></title>
     <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
     <meta name="keywords" content="chiropractor, physiotherapist, allied health, Australia, healthcare, spine care">
+    <link rel="canonical" href="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/' %>">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/' %>">
+    <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %>">
+    <meta property="og:description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
+    <meta property="og:site_name" content="Fix My Spine">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/' %>">
+    <meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %>">
+    <meta name="twitter:description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
+    
     <link rel="stylesheet" href="/stylesheets/dist.css?v=7">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,75 +123,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Featured Practitioners Section -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-heading font-bold text-text mb-4">
-                    Featured Practitioners
-                </h2>
-                <p class="text-lg text-muted max-w-2xl mx-auto">
-                    Discover our top-rated healthcare professionals who have been verified and recommended by patients.
-                </p>
-            </div>
-
-            <% if (featuredListings && featuredListings.length > 0) { %>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <% featuredListings.forEach(listing => { %>
-                        <div class="card hover:shadow-lg transition-shadow duration-300 <%= listing.listing_tier === 'premium' ? 'is-premium border-accent border-2' : '' %>">
-                            <% if (listing.listing_tier === 'premium') { %>
-                                <!-- Premium Crown Icon -->
-                                <svg class="premium-crown" fill="currentColor" viewBox="0 0 24 24" aria-label="Premium listing">
-                                    <path d="M5 16L3 8l5.5 5L12 4l3.5 9L21 8l-2 8H5zm2.7-2h8.6l.9-4.4-3.4 2.9L12 7.5 9.2 12.5l-3.4-2.9L7.7 14z"/>
-                                </svg>
-                            <% } %>
-                            <div class="flex items-center mb-4">
-                                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
-                                    <%= listing.business_name.charAt(0) %>
-                                </div>
-                                <div class="ml-4">
-                                    <h3 class="text-lg font-semibold text-text"><%= listing.business_name %></h3>
-                                    <p class="text-muted"><%= listing.category_name %></p>
-                                </div>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <div class="rating-stars mb-2">
-                                    <% for (let i = 1; i <= 5; i++) { %>
-                                        <% if (i <= Math.round(listing.avg_rating || 0)) { %>
-                                            <svg class="star" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                        <% } else { %>
-                                            <svg class="star-empty" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                            </svg>
-                                        <% } %>
-                                    <% } %>
-                                    <span class="ml-2 text-sm text-muted">(<%= listing.review_count || 0 %> reviews)</span>
-                                </div>
-                                <p class="text-sm text-muted"><%= listing.suburb %>, <%= listing.state %></p>
-                            </div>
-                            
-                            <p class="text-sm text-text mb-4 line-clamp-3">
-                                <%= listing.description ? listing.description.substring(0, 120) + '...' : 'Professional healthcare services in your area.' %>
-                            </p>
-                            
-                            <a href="/listing/<%= listing.id %>/<%= listing.business_name.toLowerCase().replace(/[^a-z0-9]+/g, '-') %>" 
-                               class="btn-primary w-full text-center block">
-                                View Profile
-                            </a>
-                        </div>
-                    <% }); %>
-                </div>
-            <% } else { %>
-                <div class="text-center py-12">
-                    <p class="text-muted text-lg">No featured practitioners available at the moment.</p>
-                </div>
-            <% } %>
         </div>
     </section>
 

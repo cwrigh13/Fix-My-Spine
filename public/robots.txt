@@ -38,6 +38,6 @@ Disallow: /*.env$
 # Crawl delay (optional - uncomment if needed to reduce server load)
 # Crawl-delay: 1
 
-# Sitemap location (uncomment and update when you create a sitemap)
-# Sitemap: https://www.yoursite.com/sitemap.xml
+# Sitemap location
+Sitemap: https://fixmyspine.com.au/sitemap.xml
 
