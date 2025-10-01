@@ -121,11 +121,13 @@
                         FixMySpine
                     </a>
                 </div>
+                
+                <!-- Desktop Navigation -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="/" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Home</a>
                         <a href="/about" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">About</a>
-                        <a href="/blog" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                        <a href="/blog/" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Blog</a>
                         <a href="/contact" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Contact</a>
                         <% if (typeof user !== 'undefined' && user) { %>
                             <a href="/dashboard" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
@@ -139,9 +141,57 @@
                         <% } %>
                     </div>
                 </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" type="button" class="text-text hover:text-primary p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary" aria-label="Toggle menu">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-3 space-y-1">
+                <a href="/" class="block text-text hover:text-primary hover:bg-secondary px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="/about" class="block text-text hover:text-primary hover:bg-secondary px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="/blog/" class="block text-text hover:text-primary hover:bg-secondary px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="/contact" class="block text-text hover:text-primary hover:bg-secondary px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <a href="/dashboard" class="block text-text hover:text-primary hover:bg-secondary px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+                    <% if (user.isAdmin) { %>
+                        <a href="/admin/dashboard" class="block text-text hover:text-primary hover:bg-secondary px-3 py-2 rounded-md text-base font-medium">Admin</a>
+                    <% } %>
+                    <a href="/logout" class="block text-text hover:text-primary hover:bg-secondary px-3 py-2 rounded-md text-base font-medium">Logout</a>
+                <% } else { %>
+                    <a href="/login" class="block text-text hover:text-primary hover:bg-secondary px-3 py-2 rounded-md text-base font-medium">Login</a>
+                    <a href="/register" class="block bg-primary text-white hover:bg-primary/90 px-3 py-2 rounded-md text-base font-medium text-center">List Your Practice</a>
+                <% } %>
             </div>
         </div>
     </nav>
+    
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    menuIcon.classList.toggle('hidden');
+                    closeIcon.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
 
     <!-- Breadcrumb -->
     <div class="bg-white border-b border-border pt-16">

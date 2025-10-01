@@ -540,9 +540,18 @@ router.get('/blog/what-is-sciatica', (req, res) => {
     });
 });
 
-// Blog index page - GET /blog
+// Blog index page - GET /blog and /blog/
 // NOTE: This general route must come AFTER specific blog post routes
 router.get('/blog', (req, res) => {
+    res.render('public/blog/index', {
+        title: 'Health & Wellness Blog | Fix My Spine',
+        description: 'Expert advice on spinal health, back pain relief, and wellness from Australian healthcare professionals. Evidence-based articles on conditions and treatments.',
+        canonicalUrl: 'https://fixmyspine.com.au/blog'
+    });
+});
+
+// Handle /blog/ with trailing slash
+router.get('/blog/', (req, res) => {
     res.render('public/blog/index', {
         title: 'Health & Wellness Blog | Fix My Spine',
         description: 'Expert advice on spinal health, back pain relief, and wellness from Australian healthcare professionals. Evidence-based articles on conditions and treatments.',
