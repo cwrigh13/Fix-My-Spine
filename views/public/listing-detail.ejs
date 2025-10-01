@@ -280,7 +280,7 @@
                                                 <%= review.reviewer_name.charAt(0) %>
                                             </div>
                                             <div>
-                                                <h4 class="font-semibold text-text"><%= review.reviewer_name %></h4>
+                                                <p class="font-semibold text-text"><%= review.reviewer_name %></p>
                                                 <div class="rating-stars">
                                                     <% for (let i = 1; i <= 5; i++) { %>
                                                         <% if (i <= review.rating) { %>
@@ -314,7 +314,7 @@
             <div class="space-y-6">
                 <!-- Map -->
                 <div class="card">
-                    <h3 class="text-lg font-heading font-bold text-text mb-4">Location</h3>
+                    <h2 class="text-lg font-heading font-bold text-text mb-4">Location</h2>
                     <div class="bg-muted/20 rounded-lg h-48 flex items-center justify-center">
                         <div class="text-center">
                             <svg class="w-12 h-12 text-muted mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
@@ -328,7 +328,7 @@
 
                 <!-- Opening Hours -->
                 <div class="card">
-                    <h3 class="text-lg font-heading font-bold text-text mb-4">Opening Hours</h3>
+                    <h2 class="text-lg font-heading font-bold text-text mb-4">Opening Hours</h2>
                     <div class="space-y-2">
                         <div class="flex justify-between">
                             <span class="text-muted">Monday - Friday</span>
@@ -347,7 +347,7 @@
 
                 <!-- Contact Actions -->
                 <div class="card">
-                    <h3 class="text-lg font-heading font-bold text-text mb-4">Contact</h3>
+                    <h2 class="text-lg font-heading font-bold text-text mb-4">Contact</h2>
                     <div class="space-y-3">
                         <% if (business.phone) { %>
                             <a href="tel:<%= business.phone %>" class="btn-primary w-full text-center block">
@@ -367,7 +367,7 @@
 
                 <!-- Accreditations -->
                 <div class="card">
-                    <h3 class="text-lg font-heading font-bold text-text mb-4">Accreditations</h3>
+                    <h2 class="text-lg font-heading font-bold text-text mb-4">Accreditations</h2>
                     <div class="space-y-3">
                         <div class="flex items-center">
                             <div class="w-8 h-8 bg-primary/10 rounded flex items-center justify-center mr-3">
@@ -392,20 +392,20 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-heading font-bold mb-4">FixMySpine</h3>
+                    <p class="text-xl font-heading font-bold mb-4">FixMySpine</p>
                     <p class="text-white/80">
                         Connecting Australians with trusted healthcare professionals.
                     </p>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Company</h4>
+                    <p class="font-semibold mb-4">Company</p>
                     <ul class="space-y-2">
                         <li><a href="/about" class="text-white/80 hover:text-white">About Us</a></li>
                         <li><a href="/contact" class="text-white/80 hover:text-white">Contact</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">For Practitioners</h4>
+                    <p class="font-semibold mb-4">For Practitioners</p>
                     <ul class="space-y-2">
                         <li><a href="/register" class="text-white/80 hover:text-white">Register</a></li>
                         <li><a href="/login" class="text-white/80 hover:text-white">Login</a></li>
@@ -413,7 +413,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <p class="font-semibold mb-4">Legal</p>
                     <ul class="space-y-2">
                         <li><a href="/terms-of-service" class="text-white/80 hover:text-white">Terms of Service</a></li>
                         <li><a href="/privacy-policy" class="text-white/80 hover:text-white">Privacy Policy</a></li>
