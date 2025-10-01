@@ -339,6 +339,7 @@ router.get('/location/:suburb', async (req, res) => {
             canonicalUrl: `https://fixmyspine.com.au/location/${suburb}`,
             listings,
             categories,
+            categoryName: null,
             locationName: `${location.suburb}, ${location.state}`,
             searchParams: { postcode: location.postcode }
         });
