@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const pool = require('../config/database').promise();
+const pool = require('../config/database');
 
 class NotificationService {
     constructor() {

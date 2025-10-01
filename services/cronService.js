@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const pool = require('../config/database').promise();
+const pool = require('../config/database');
 const notificationService = require('./notificationService');
 
 class CronService {

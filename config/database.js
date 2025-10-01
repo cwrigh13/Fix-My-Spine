@@ -29,6 +29,9 @@ const getDatabaseConfig = () => {
 // Create connection pool
 const pool = mysql.createPool(getDatabaseConfig());
 
+// Get promise-based pool
+const promisePool = pool.promise();
+
 // Test the connection
 pool.getConnection((err, connection) => {
   if (err) {
@@ -41,4 +44,4 @@ pool.getConnection((err, connection) => {
   connection.release();
 });
 
-module.exports = pool;
+module.exports = promisePool;

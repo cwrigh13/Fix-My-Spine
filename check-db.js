@@ -5,7 +5,7 @@ async function checkDatabase() {
     try {
         console.log('Checking database...');
         
-        const [businesses] = await pool.promise().execute('SELECT * FROM businesses');
+        const [businesses] = await pool.execute('SELECT * FROM businesses');
         console.log(`\n📊 Businesses found: ${businesses.length}`);
         
         if (businesses.length > 0) {
@@ -15,10 +15,10 @@ async function checkDatabase() {
             });
         }
         
-        const [categories] = await pool.promise().execute('SELECT * FROM categories');
+        const [categories] = await pool.execute('SELECT * FROM categories');
         console.log(`\n📋 Categories found: ${categories.length}`);
         
-        const [locations] = await pool.promise().execute('SELECT * FROM locations');
+        const [locations] = await pool.execute('SELECT * FROM locations');
         console.log(`📍 Locations found: ${locations.length}`);
         
         process.exit(0);

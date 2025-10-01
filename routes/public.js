@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../config/database').promise();
+const pool = require('../config/database');
 
 // Homepage route - GET /
 router.get('/', async (req, res) => {

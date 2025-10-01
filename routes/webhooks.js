@@ -1,5 +1,5 @@
 const express = require('express');
-const pool = require('../config/database').promise();
+const pool = require('../config/database');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const router = express.Router();
 
