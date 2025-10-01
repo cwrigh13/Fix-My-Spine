@@ -9,7 +9,8 @@ router.get('/register', redirectIfLoggedIn, (req, res) => {
     res.render('auth/register', { 
         title: 'Register - Fix My Spine',
         error: null,
-        success: null
+        success: null,
+        formData: null
     });
 });
 
