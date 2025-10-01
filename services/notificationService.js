@@ -4,28 +4,38 @@ const pool = require('../config/database').promise();
 class NotificationService {
     constructor() {
         // Initialize email transporter
-        this.transporter = nodemailer.createTransporter({
-            host: process.env.SMTP_HOST || 'smtp.gmail.com',
-            port: process.env.SMTP_PORT || 587,
-            secure: false, // true for 465, false for other ports
-            auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS
-            }
-        });
+        try {
+            this.transporter = nodemailer.createTransporter({
+                host: process.env.SMTP_HOST || 'smtp.gmail.com',
+                port: process.env.SMTP_PORT || 587,
+                secure: false, // true for 465, false for other ports
+                auth: {
+                    user: process.env.SMTP_USER,
+                    pass: process.env.SMTP_PASS
+                }
+            });
 
-        // Verify transporter configuration
-        this.transporter.verify((error, success) => {
-            if (error) {
-                console.error('Email transporter verification failed:', error);
-            } else {
-                console.log('Email transporter is ready to send messages');
-            }
-        });
+            // Verify transporter configuration
+            this.transporter.verify((error, success) => {
+                if (error) {
+                    console.error('Email transporter verification failed:', error);
+                } else {
+                    console.log('Email transporter is ready to send messages');
+                }
+            });
+        } catch (error) {
+            console.warn('Email service not initialized:', error.message);
+            console.warn('Email notifications will be disabled. Configure SMTP settings to enable.');
+            this.transporter = null;
+        }
     }
 
     // Send renewal reminder email
     async sendRenewalReminder(business, user, daysUntilExpiry) {
+        if (!this.transporter) {
+            console.warn('Email service not available. Skipping renewal reminder email.');
+            return;
+        }
         try {
             const mailOptions = {
                 from: `"Fix My Spine" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
@@ -54,6 +64,10 @@ class NotificationService {
 
     // Send payment failure notification
     async sendPaymentFailureNotification(business, user, failureReason) {
+        if (!this.transporter) {
+            console.warn('Email service not available. Skipping payment failure notification email.');
+            return;
+        }
         try {
             const mailOptions = {
                 from: `"Fix My Spine" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
@@ -82,6 +96,10 @@ class NotificationService {
 
     // Send subscription cancelled notification
     async sendSubscriptionCancelledNotification(business, user) {
+        if (!this.transporter) {
+            console.warn('Email service not available. Skipping subscription cancelled notification email.');
+            return;
+        }
         try {
             const mailOptions = {
                 from: `"Fix My Spine" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,

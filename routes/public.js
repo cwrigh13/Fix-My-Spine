@@ -371,4 +371,39 @@ router.get('/listing/:id/:slug', async (req, res) => {
     }
 });
 
+// About page - GET /about
+router.get('/about', (req, res) => {
+    res.render('public/about', {
+        title: 'About Us - Our Mission | FixMySpine'
+    });
+});
+
+// Contact page - GET /contact
+router.get('/contact', (req, res) => {
+    res.render('public/contact', {
+        title: 'Contact Us | FixMySpine'
+    });
+});
+
+// Pricing page - GET /pricing
+router.get('/pricing', (req, res) => {
+    res.render('public/pricing', {
+        title: 'Pricing - List Your Practice | FixMySpine'
+    });
+});
+
+// Terms of Service page - GET /terms-of-service
+router.get('/terms-of-service', (req, res) => {
+    res.render('public/terms-of-service', {
+        title: 'Terms of Service | FixMySpine'
+    });
+});
+
+// Privacy Policy page - GET /privacy-policy
+router.get('/privacy-policy', (req, res) => {
+    res.render('public/privacy-policy', {
+        title: 'Privacy Policy | FixMySpine'
+    });
+});
+
 module.exports = router;
