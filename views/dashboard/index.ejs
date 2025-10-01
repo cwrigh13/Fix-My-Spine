@@ -193,6 +193,74 @@
             </div>
         <% } %>
         
+        <% if (listings && listings.length > 0) { %>
+            <table class="listings-table">
+                <thead>
+                    <tr>
+                        <th>Business Name</th>
+                        <th>Category</th>
+                        <th>Location</th>
+                        <th>Tier</th>
+                        <th>Subscription</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% listings.forEach(function(listing) { %>
+                        <tr>
+                            <td>
+                                <strong><%= listing.business_name %></strong>
+                                <% if (listing.address) { %>
+                                    <br><small style="color: #7f8c8d;"><%= listing.address %></small>
+                                <% } %>
+                            </td>
+                            <td><%= listing.category_name %></td>
+                            <td><%= listing.suburb %>, <%= listing.state %> <%= listing.postcode %></td>
+                            <td>
+                                <span class="listing-tier <%= listing.listing_tier === 'premium' ? 'tier-premium' : '' %>">
+                                    <%= listing.listing_tier %>
+                                </span>
+                            </td>
+                            <td>
+                                <% if (listing.subscription_status) { %>
+                                    <span class="status-badge <%= listing.subscription_status === 'active' ? 'status-approved' : (listing.subscription_status === 'past_due' ? 'status-pending' : 'status-cancelled') %>">
+                                        <%= listing.subscription_status.replace('_', ' ') %>
+                                    </span>
+                                    <% if (listing.subscription_ends_at) { %>
+                                        <br><small style="color: #7f8c8d;">
+                                            Expires: <%= new Date(listing.subscription_ends_at).toLocaleDateString() %>
+                                        </small>
+                                    <% } %>
+                                <% } else { %>
+                                    <span style="color: #7f8c8d; font-size: 12px;">No subscription</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <span class="status-badge <%= listing.is_approved ? 'status-approved' : 'status-pending' %>">
+                                    <%= listing.is_approved ? 'Approved' : 'Pending' %>
+                                </span>
+                            </td>
+                            <td><%= new Date(listing.created_at).toLocaleDateString() %></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="/dashboard/listings/<%= listing.id %>/edit" class="btn-edit">Edit</a>
+                                    <button class="btn-delete" onclick="confirmDelete(<%= listing.id %>, '<%= listing.business_name %>')">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <div class="no-listings">
+                <h2 class="h3">No Listings Yet</h2>
+                <p>You haven't submitted any business listings yet.</p>
+                <p><a href="/dashboard/submit" class="submit-btn" style="display: inline-block; margin-top: 15px;">Submit Your First Listing</a></p>
+            </div>
+        <% } %>
+        
         <!-- Pricing Information Section -->
         <div style="margin-bottom: 30px;">
             <h2 class="h3" style="color: #2c3e50; margin-bottom: 20px;">Listing Plans & Pricing</h2>
@@ -323,7 +391,7 @@
                     </div>
                     <div style="margin-left: 20px;">
                         <a href="/dashboard/billing" style="display: inline-block; background-color: white; color: #27ae60; padding: 12px 24px; border-radius: 5px; text-decoration: none; font-weight: bold; white-space: nowrap;">
-                            View Billing Options
+                            Upgrade to Premium
                         </a>
                     </div>
                 </div>
@@ -352,74 +420,6 @@
                 </div>
             </div>
         </div>
-        
-        <% if (listings && listings.length > 0) { %>
-            <table class="listings-table">
-                <thead>
-                    <tr>
-                        <th>Business Name</th>
-                        <th>Category</th>
-                        <th>Location</th>
-                        <th>Tier</th>
-                        <th>Subscription</th>
-                        <th>Status</th>
-                        <th>Created</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% listings.forEach(function(listing) { %>
-                        <tr>
-                            <td>
-                                <strong><%= listing.business_name %></strong>
-                                <% if (listing.address) { %>
-                                    <br><small style="color: #7f8c8d;"><%= listing.address %></small>
-                                <% } %>
-                            </td>
-                            <td><%= listing.category_name %></td>
-                            <td><%= listing.suburb %>, <%= listing.state %> <%= listing.postcode %></td>
-                            <td>
-                                <span class="listing-tier <%= listing.listing_tier === 'premium' ? 'tier-premium' : '' %>">
-                                    <%= listing.listing_tier %>
-                                </span>
-                            </td>
-                            <td>
-                                <% if (listing.subscription_status) { %>
-                                    <span class="status-badge <%= listing.subscription_status === 'active' ? 'status-approved' : (listing.subscription_status === 'past_due' ? 'status-pending' : 'status-cancelled') %>">
-                                        <%= listing.subscription_status.replace('_', ' ') %>
-                                    </span>
-                                    <% if (listing.subscription_ends_at) { %>
-                                        <br><small style="color: #7f8c8d;">
-                                            Expires: <%= new Date(listing.subscription_ends_at).toLocaleDateString() %>
-                                        </small>
-                                    <% } %>
-                                <% } else { %>
-                                    <span style="color: #7f8c8d; font-size: 12px;">No subscription</span>
-                                <% } %>
-                            </td>
-                            <td>
-                                <span class="status-badge <%= listing.is_approved ? 'status-approved' : 'status-pending' %>">
-                                    <%= listing.is_approved ? 'Approved' : 'Pending' %>
-                                </span>
-                            </td>
-                            <td><%= new Date(listing.created_at).toLocaleDateString() %></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <a href="/dashboard/listings/<%= listing.id %>/edit" class="btn-edit">Edit</a>
-                                    <button class="btn-delete" onclick="confirmDelete(<%= listing.id %>, '<%= listing.business_name %>')">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-        <% } else { %>
-            <div class="no-listings">
-                <h2 class="h3">No Listings Yet</h2>
-                <p>You haven't submitted any business listings yet.</p>
-                <p><a href="/dashboard/submit" class="submit-btn" style="display: inline-block; margin-top: 15px;">Submit Your First Listing</a></p>
-            </div>
-        <% } %>
     </div>
     
     <script>
