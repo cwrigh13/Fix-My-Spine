@@ -31,9 +31,10 @@ Allow: /listings/
 Allow: /public/
 
 # Disallow common technical files
-Disallow: /*.json$
-Disallow: /*.sql$
-Disallow: /*.env$
+Disallow: /*.json
+Disallow: /*.sql
+Disallow: /*.env
+Disallow: /.git/
 
 # Crawl delay (optional - uncomment if needed to reduce server load)
 # Crawl-delay: 1

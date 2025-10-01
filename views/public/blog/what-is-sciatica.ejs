@@ -6,6 +6,8 @@
     <title><%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %></title>
     <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
     <link rel="canonical" href="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/blog/what-is-sciatica' %>">
+    <link rel="alternate" hreflang="en-au" href="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/blog/what-is-sciatica' %>">
+    <link rel="alternate" hreflang="x-default" href="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/blog/what-is-sciatica' %>">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
@@ -38,11 +40,15 @@
             "@type": "WebPage",
             "@id": "<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/blog/what-is-sciatica' %>"
         },
-        "author": {
+        "author": [{
             "@type": "Organization",
             "name": "FixMySpine Editorial Team",
             "url": "https://fixmyspine.com.au"
-        },
+        }, {
+            "@type": "Person",
+            "name": "FixMySpine Editorial Team",
+            "url": "https://fixmyspine.com.au/about"
+        }],
         "publisher": {
             "@type": "Organization",
             "name": "Fix My Spine",
