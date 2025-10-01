@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %></title>
     <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
-    <meta name="keywords" content="chiropractor, physiotherapist, allied health, Australia, healthcare, spine care">
     <link rel="canonical" href="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://fixmyspine.com.au/' %>">
     
     <!-- Open Graph / Facebook -->
@@ -26,6 +25,45 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="/javascripts/search-bar.js" defer></script>
+    
+    <!-- Organization Schema for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Fix My Spine",
+        "alternateName": "FixMySpine",
+        "url": "https://fixmyspine.com.au",
+        "logo": "https://fixmyspine.com.au/images/logo.png",
+        "description": "Australia's trusted directory for finding chiropractors, physiotherapists, and allied health professionals. Search by location, specialty, and read verified patient reviews.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "AU"
+        },
+        "sameAs": [
+            "https://www.facebook.com/fixmyspine",
+            "https://twitter.com/fixmyspine"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "url": "https://fixmyspine.com.au/contact"
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "Australia"
+        },
+        "knowsAbout": [
+            "Chiropractic",
+            "Physiotherapy",
+            "Osteopathy",
+            "Massage Therapy",
+            "Sports Medicine",
+            "Pain Management",
+            "Allied Health"
+        ]
+    }
+    </script>
 </head>
 <body class="bg-background">
     <!-- Navigation -->
