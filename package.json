@@ -10,7 +10,9 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:setup": "node scripts/setup-test-db.js && npm test",
-    "test:db": "node scripts/setup-test-db.js"
+    "test:db": "node scripts/setup-test-db.js",
+    "seed": "node seed.js",
+    "seed:honest": "node seed_honest.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
