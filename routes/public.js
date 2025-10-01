@@ -387,8 +387,51 @@ router.get('/contact', (req, res) => {
 
 // Pricing page - GET /pricing
 router.get('/pricing', (req, res) => {
+    // Check if user has already provided email (stored in session)
+    const hasEmailAccess = req.session.pricingEmailAccess || false;
+    
     res.render('public/pricing', {
-        title: 'Pricing - List Your Practice | FixMySpine'
+        title: 'Pricing - List Your Practice | FixMySpine',
+        hasEmailAccess: hasEmailAccess,
+        email: req.session.pricingEmail || ''
+    });
+});
+
+// Pricing page - POST /pricing (email submission)
+router.post('/pricing', (req, res) => {
+    const { email, reset_access } = req.body;
+    
+    // Handle reset access request
+    if (reset_access) {
+        req.session.pricingEmailAccess = false;
+        req.session.pricingEmail = '';
+        return res.render('public/pricing', {
+            title: 'Pricing - List Your Practice | FixMySpine',
+            hasEmailAccess: false,
+            email: ''
+        });
+    }
+    
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!email || !emailRegex.test(email)) {
+        return res.render('public/pricing', {
+            title: 'Pricing - List Your Practice | FixMySpine',
+            hasEmailAccess: false,
+            email: email || '',
+            error: 'Please enter a valid email address'
+        });
+    }
+    
+    // Store email in session to grant access
+    req.session.pricingEmailAccess = true;
+    req.session.pricingEmail = email;
+    
+    res.render('public/pricing', {
+        title: 'Pricing - List Your Practice | FixMySpine',
+        hasEmailAccess: true,
+        email: email
     });
 });
 
