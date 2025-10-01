@@ -1242,6 +1242,28 @@
     border-radius: 8px;
     z-index: -1;
   }
+  .premium-crown {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-accent);
+    filter: drop-shadow(0 2px 4px rgba(249, 168, 38, 0.3));
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+  .premium-crown:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 6px rgba(249, 168, 38, 0.4));
+  }
+  @media (max-width: 640px) {
+    .premium-crown {
+      width: 1.25rem;
+      height: 1.25rem;
+      top: 0.5rem;
+      right: 0.5rem;
+    }
+  }
 }
 body {
   font-family: 'Inter', sans-serif;

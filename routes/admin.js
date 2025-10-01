@@ -201,7 +201,7 @@ router.get('/listings/:id/edit', requireAdmin, (req, res) => {
         
         // Get all categories and locations for dropdowns
         const categoriesQuery = 'SELECT id, name FROM categories ORDER BY name';
-        const locationsQuery = 'SELECT id, suburb FROM locations ORDER BY suburb';
+        const locationsQuery = 'SELECT id, suburb FROM locations WHERE population > 75000 ORDER BY population DESC, suburb';
         
         pool.execute(categoriesQuery, (err, categories) => {
             if (err) {
@@ -287,7 +287,7 @@ router.post('/listings/:id/delete', requireAdmin, (req, res) => {
 router.get('/taxonomy', requireAdmin, (req, res) => {
     // Perform parallel database queries for categories and locations
     const categoriesQuery = 'SELECT id, name, slug, created_at FROM categories ORDER BY name';
-    const locationsQuery = 'SELECT id, suburb, postcode, state, created_at FROM locations ORDER BY suburb, state';
+    const locationsQuery = 'SELECT id, suburb, postcode, state, created_at, population FROM locations WHERE population > 75000 ORDER BY population DESC, suburb, state';
     
     // Execute both queries in parallel
     pool.execute(categoriesQuery, (err, categories) => {

@@ -126,7 +126,13 @@
             <% if (featuredListings && featuredListings.length > 0) { %>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <% featuredListings.forEach(listing => { %>
-                        <div class="card hover:shadow-lg transition-shadow duration-300">
+                        <div class="card hover:shadow-lg transition-shadow duration-300 <%= listing.listing_tier === 'premium' ? 'is-premium border-accent border-2' : '' %>">
+                            <% if (listing.listing_tier === 'premium') { %>
+                                <!-- Premium Crown Icon -->
+                                <svg class="premium-crown" fill="currentColor" viewBox="0 0 24 24" aria-label="Premium listing">
+                                    <path d="M5 16L3 8l5.5 5L12 4l3.5 9L21 8l-2 8H5zm2.7-2h8.6l.9-4.4-3.4 2.9L12 7.5 9.2 12.5l-3.4-2.9L7.7 14z"/>
+                                </svg>
+                            <% } %>
                             <div class="flex items-center mb-4">
                                 <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
                                     <%= listing.business_name.charAt(0) %>

@@ -120,7 +120,13 @@
             <!-- Left Column - Main Content -->
             <div class="lg:col-span-2 space-y-8">
                 <!-- Header Section -->
-                <div class="card">
+                <div class="card <%= business.listing_tier === 'premium' ? 'is-premium border-accent border-2' : '' %>">
+                    <% if (business.listing_tier === 'premium') { %>
+                        <!-- Premium Crown Icon -->
+                        <svg class="premium-crown" fill="currentColor" viewBox="0 0 24 24" aria-label="Premium listing">
+                            <path d="M5 16L3 8l5.5 5L12 4l3.5 9L21 8l-2 8H5zm2.7-2h8.6l.9-4.4-3.4 2.9L12 7.5 9.2 12.5l-3.4-2.9L7.7 14z"/>
+                        </svg>
+                    <% } %>
                     <div class="flex flex-col md:flex-row md:items-start gap-6">
                         <!-- Practitioner Photo/Initial -->
                         <div class="flex-shrink-0">

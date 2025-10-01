@@ -66,6 +66,25 @@
     border-radius: 8px;
     z-index: -1;
   }
+
+  /* Crown icon for premium listings */
+  .premium-crown {
+    @apply absolute top-3 right-3 w-6 h-6 text-accent;
+    filter: drop-shadow(0 2px 4px rgba(249, 168, 38, 0.3));
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .premium-crown:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 6px rgba(249, 168, 38, 0.4));
+  }
+
+  /* Responsive crown sizing */
+  @media (max-width: 640px) {
+    .premium-crown {
+      @apply w-5 h-5 top-2 right-2;
+    }
+  }
 }
 
 /* Base styles */
