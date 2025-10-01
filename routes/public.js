@@ -65,7 +65,7 @@ router.get('/', async (req, res) => {
         console.log('Rendering homepage with data...');
         res.render('public/index', {
             title: 'Find Trusted Chiropractors & Allied Health Professionals | Fix My Spine',
-            description: 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia. Search by location, specialty, and read verified patient reviews.',
+            description: 'Find trusted Chiropractors, Physiotherapists & allied health professionals across Australia. Search by location, read reviews, and book appointments.',
             canonicalUrl: 'https://fixmyspine.com.au/',
             featuredListings,
             categories
@@ -427,7 +427,7 @@ router.get('/listing/:id/:slug', async (req, res) => {
 router.get('/about', (req, res) => {
     res.render('public/about', {
         title: 'About Us - Our Mission | Fix My Spine',
-        description: 'Learn about FixMySpine\'s mission to connect Australians with trusted allied health professionals. Discover our story from a North Sydney clinic to a nationwide directory.',
+        description: 'Learn about FixMySpine\'s mission to connect Australians with trusted healthcare professionals. From a North Sydney clinic to Australia\'s leading directory.',
         canonicalUrl: 'https://fixmyspine.com.au/about'
     });
 });
@@ -436,7 +436,7 @@ router.get('/about', (req, res) => {
 router.get('/contact', (req, res) => {
     res.render('public/contact', {
         title: 'Contact Us | Fix My Spine',
-        description: 'Get in touch with FixMySpine. Contact us for support, inquiries, or to learn more about listing your practice on Australia\'s trusted allied health directory.',
+        description: 'Get in touch with FixMySpine for support, inquiries, or to learn more about listing your allied health practice on Australia\'s trusted directory.',
         canonicalUrl: 'https://fixmyspine.com.au/contact'
     });
 });
@@ -448,7 +448,7 @@ router.get('/pricing', (req, res) => {
     
     res.render('public/pricing', {
         title: 'Pricing - List Your Practice | Fix My Spine',
-        description: 'List your allied health practice on FixMySpine. Choose from free basic listings or premium features to grow your practice and connect with more patients across Australia.',
+        description: 'List your allied health practice on FixMySpine. Choose from free basic or premium listings to grow your practice and connect with patients across Australia.',
         canonicalUrl: 'https://fixmyspine.com.au/pricing',
         hasEmailAccess: hasEmailAccess,
         email: req.session.pricingEmail || ''
@@ -465,7 +465,7 @@ router.post('/pricing', (req, res) => {
         req.session.pricingEmail = '';
         return res.render('public/pricing', {
             title: 'Pricing - List Your Practice | Fix My Spine',
-            description: 'List your allied health practice on FixMySpine. Choose from free basic listings or premium features to grow your practice and connect with more patients across Australia.',
+            description: 'List your allied health practice on FixMySpine. Choose from free basic or premium listings to grow your practice and connect with patients across Australia.',
             canonicalUrl: 'https://fixmyspine.com.au/pricing',
             hasEmailAccess: false,
             email: ''
@@ -478,7 +478,7 @@ router.post('/pricing', (req, res) => {
     if (!email || !emailRegex.test(email)) {
         return res.render('public/pricing', {
             title: 'Pricing - List Your Practice | Fix My Spine',
-            description: 'List your allied health practice on FixMySpine. Choose from free basic listings or premium features to grow your practice and connect with more patients across Australia.',
+            description: 'List your allied health practice on FixMySpine. Choose from free basic or premium listings to grow your practice and connect with patients across Australia.',
             canonicalUrl: 'https://fixmyspine.com.au/pricing',
             hasEmailAccess: false,
             email: email || '',
@@ -492,7 +492,7 @@ router.post('/pricing', (req, res) => {
     
     res.render('public/pricing', {
         title: 'Pricing - List Your Practice | Fix My Spine',
-        description: 'List your allied health practice on FixMySpine. Choose from free basic listings or premium features to grow your practice and connect with more patients across Australia.',
+        description: 'List your allied health practice on FixMySpine. Choose from free basic or premium listings to grow your practice and connect with patients across Australia.',
         canonicalUrl: 'https://fixmyspine.com.au/pricing',
         hasEmailAccess: true,
         email: email
@@ -545,7 +545,7 @@ router.get('/blog/what-is-sciatica', (req, res) => {
 router.get('/blog', (req, res) => {
     res.render('public/blog/index', {
         title: 'Health & Wellness Blog | Fix My Spine',
-        description: 'Expert advice on spinal health, back pain relief, and wellness. Read evidence-based articles from healthcare professionals.',
+        description: 'Expert advice on spinal health, back pain relief, and wellness from Australian healthcare professionals. Evidence-based articles on conditions and treatments.',
         canonicalUrl: 'https://fixmyspine.com.au/blog'
     });
 });

@@ -64,6 +64,48 @@
         ]
     }
     </script>
+    
+    <!-- FAQ Schema for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How do I find a chiropractor or physiotherapist near me?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Use our search tool on the homepage to find healthcare professionals by postcode, suburb, or specialty. You can filter by category (chiropractor, physiotherapist, etc.) and read verified patient reviews to help you make an informed decision."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are the practitioners on FixMySpine verified?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, all practitioners listed on FixMySpine are verified healthcare professionals. We work only with licensed, registered practitioners who meet professional standards in their respective fields."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is it free to search for healthcare professionals?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, searching for healthcare professionals on FixMySpine is completely free. You can browse listings, read reviews, and contact practitioners at no cost."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How can I list my practice on FixMySpine?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Healthcare practitioners can list their practice by clicking 'List Your Practice' in the navigation menu. We offer both free basic listings and premium listings with enhanced visibility and features. Visit our pricing page to learn more."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body class="bg-background">
     <!-- Navigation -->
@@ -180,7 +222,7 @@
                 <% categories.slice(0, 12).forEach(category => { %>
                     <a href="/category/<%= category.slug %>" 
                        class="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow duration-300 group">
-                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/90 transition-colors">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/90 transition-colors" role="img" aria-label="<%= category.name %> category icon">
                             <span class="text-white font-bold text-lg">
                                 <%= category.name.charAt(0) %>
                             </span>

@@ -124,15 +124,18 @@ function getStaticPages() {
         {
             loc: `${SITE_URL}/blog`,
             changefreq: 'weekly',
-            priority: '0.7'
+            priority: '0.7',
+            lastmod: new Date().toISOString().split('T')[0]
         },
         {
             loc: `${SITE_URL}/blog/5-exercises-for-lower-back-pain`,
+            lastmod: '2025-10-01',
             changefreq: 'monthly',
             priority: '0.6'
         },
         {
             loc: `${SITE_URL}/blog/what-is-sciatica`,
+            lastmod: '2025-10-01',
             changefreq: 'monthly',
             priority: '0.6'
         },
