@@ -22,17 +22,8 @@ const redirects = [
         status: 301
     },
     
-    // Blog redirects
-    {
-        from: '/blog/5-exercises-for-lower-back-pain',
-        to: 'http://fixmyspine.com.au/blog/5-exercises-for-lower-back-pain/',
-        status: 301
-    },
-    {
-        from: '/blog/what-is-sciatica',
-        to: 'http://fixmyspine.com.au/blog/what-is-sciatica/',
-        status: 301
-    },
+    // Blog redirects - these are now internal routes handled by the blog router
+    // The old URLs will redirect to the new blog post pages
     
     // General page redirects
     {
@@ -103,7 +94,25 @@ function handleIndexFallback(req, res, next) {
     // 3. Handle it as a custom route
     
     // For now, let's redirect to home page (similar to the /new-patients redirect)
-    if (req.path !== '/' && !req.path.startsWith('/admin') && !req.path.startsWith('/users') && !req.path.startsWith('/dashboard') && req.path !== '/login' && req.path !== '/register' && req.path !== '/logout') {
+    // Exclude known routes from the catch-all redirect
+    if (req.path !== '/' && 
+        !req.path.startsWith('/admin') && 
+        !req.path.startsWith('/users') && 
+        !req.path.startsWith('/dashboard') && 
+        !req.path.startsWith('/blog') && 
+        !req.path.startsWith('/search') && 
+        !req.path.startsWith('/category') && 
+        !req.path.startsWith('/location') && 
+        !req.path.startsWith('/listing') && 
+        !req.path.startsWith('/about') && 
+        !req.path.startsWith('/contact') && 
+        !req.path.startsWith('/pricing') && 
+        !req.path.startsWith('/terms') && 
+        !req.path.startsWith('/privacy') && 
+        !req.path.startsWith('/payments') && 
+        req.path !== '/login' && 
+        req.path !== '/register' && 
+        req.path !== '/logout') {
         return res.redirect(301, '/');
     }
     

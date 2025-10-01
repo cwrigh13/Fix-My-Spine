@@ -449,4 +449,34 @@ router.get('/privacy-policy', (req, res) => {
     });
 });
 
+// Blog post: 5 Exercises for Lower Back Pain - GET /blog/5-exercises-for-lower-back-pain
+// NOTE: Specific routes must come BEFORE general routes in Express
+router.get('/blog/5-exercises-for-lower-back-pain', (req, res) => {
+    res.render('public/blog/5-exercises-for-lower-back-pain', {
+        title: '5 Effective Exercises for Lower Back Pain Relief | FixMySpine',
+        metaDescription: 'Discover 5 evidence-based exercises to relieve lower back pain. Expert-recommended stretches and strengthening exercises for lasting relief.',
+        publishDate: 'October 1, 2025',
+        author: 'FixMySpine Editorial Team'
+    });
+});
+
+// Blog post: What is Sciatica - GET /blog/what-is-sciatica
+router.get('/blog/what-is-sciatica', (req, res) => {
+    res.render('public/blog/what-is-sciatica', {
+        title: 'What is Sciatica? Symptoms, Causes & Treatment Options | FixMySpine',
+        metaDescription: 'Learn about sciatica symptoms, causes, and effective treatment options. Expert insights on managing sciatic nerve pain and finding relief.',
+        publishDate: 'October 1, 2025',
+        author: 'FixMySpine Editorial Team'
+    });
+});
+
+// Blog index page - GET /blog
+// NOTE: This general route must come AFTER specific blog post routes
+router.get('/blog', (req, res) => {
+    res.render('public/blog/index', {
+        title: 'Health & Wellness Blog | FixMySpine',
+        metaDescription: 'Expert advice on spinal health, back pain relief, and wellness. Read evidence-based articles from healthcare professionals.'
+    });
+});
+
 module.exports = router;

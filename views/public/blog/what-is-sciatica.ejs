@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <meta name="description" content="<%= metaDescription %>">
+    <link rel="stylesheet" href="/stylesheets/dist.css?v=7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org structured data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MedicalWebPage",
+        "headline": "What is Sciatica? Symptoms, Causes & Treatment Options",
+        "description": "<%= metaDescription %>",
+        "author": {
+            "@type": "Organization",
+            "name": "FixMySpine"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "FixMySpine",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://fixmyspine.com.au/images/logo.png"
+            }
+        },
+        "datePublished": "2025-10-01",
+        "dateModified": "2025-10-01",
+        "specialty": "https://schema.org/Physiotherapy"
+    }
+    </script>
+</head>
+<body class="bg-background">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-heading font-bold text-primary">
+                        FixMySpine
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/about" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="/blog" class="text-primary px-3 py-2 rounded-md text-sm font-medium border-b-2 border-primary">Blog</a>
+                        <a href="/contact" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <a href="/register" class="btn-primary">List Your Practice</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <article class="pt-24 pb-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Breadcrumbs -->
+            <nav class="mb-8">
+                <ol class="flex items-center space-x-2 text-sm text-text/60">
+                    <li><a href="/" class="hover:text-primary">Home</a></li>
+                    <li>/</li>
+                    <li><a href="/blog" class="hover:text-primary">Blog</a></li>
+                    <li>/</li>
+                    <li class="text-primary">What is Sciatica</li>
+                </ol>
+            </nav>
+
+            <!-- Article Title and Meta -->
+            <header class="mb-12">
+                <h1 class="text-4xl md:text-5xl font-heading font-bold text-text mb-6">
+                    What is Sciatica? Understanding Symptoms, Causes & Treatment Options
+                </h1>
+                <div class="flex items-center space-x-4 text-text/60">
+                    <span>By <%= author %></span>
+                    <span>•</span>
+                    <time datetime="2025-10-01"><%= publishDate %></time>
+                    <span>•</span>
+                    <span>12 min read</span>
+                </div>
+            </header>
+
+            <!-- Featured Notice -->
+            <div class="bg-accent/10 border-l-4 border-accent p-6 mb-10 rounded-r-lg">
+                <p class="text-text">
+                    <strong>Medical Disclaimer:</strong> This article provides general information about sciatica and should not replace professional medical diagnosis or treatment. Always consult with a qualified healthcare professional for proper assessment and personalized treatment recommendations.
+                </p>
+            </div>
+
+            <!-- Article Content -->
+            <div class="prose prose-lg max-w-none">
+                
+                <!-- Introduction -->
+                <section class="mb-12">
+                    <p class="text-xl text-text/80 leading-relaxed mb-6">
+                        If you've ever experienced a sharp, shooting pain that travels from your lower back down through your buttock and leg, you may have encountered <strong>sciatica</strong>—one of the most common and often misunderstood spinal conditions affecting Australians today.
+                    </p>
+                    <p class="text-lg text-text mb-6">
+                        Sciatica affects approximately <strong>40% of people</strong> at some point during their lifetime, making it a significant public health concern. Despite its prevalence, many people struggle to understand what sciatica actually is, what causes it, and most importantly, what they can do about it.
+                    </p>
+                    <p class="text-lg text-text mb-6">
+                        In this comprehensive guide, we'll demystify sciatica by exploring its anatomy, symptoms, causes, diagnosis, and the full spectrum of treatment options available. Whether you're currently experiencing sciatic pain or want to understand how to prevent it, this article will provide you with evidence-based information to make informed decisions about your health.
+                    </p>
+                </section>
+
+                <!-- What is Sciatica -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-text mb-6">What is Sciatica? Understanding the Basics</h2>
+                    
+                    <p class="text-lg text-text mb-6">
+                        Sciatica is not actually a diagnosis in itself, but rather a <strong>set of symptoms</strong> caused by irritation or compression of the sciatic nerve—the largest and longest nerve in the human body.
+                    </p>
+
+                    <div class="card mb-6">
+                        <h3 class="text-xl font-semibold text-text mb-4">The Sciatic Nerve: A Closer Look</h3>
+                        <p class="text-text mb-4">
+                            The sciatic nerve is formed by nerve roots that exit the spinal cord at the L4, L5, S1, S2, and S3 vertebral levels in your lower back. These nerve roots come together to form the sciatic nerve, which is approximately as thick as your thumb at its widest point.
+                        </p>
+                        <p class="text-text mb-4">
+                            From the lower spine, the sciatic nerve travels through the buttock, down the back of the thigh, and branches at the knee into the tibial and common peroneal nerves, which continue down to your feet. This extensive pathway explains why sciatic pain can be felt anywhere along this route.
+                        </p>
+                    </div>
+
+                    <p class="text-lg text-text mb-6">
+                        When something irritates, inflames, or compresses the sciatic nerve, it can cause pain and other neurological symptoms that radiate along the nerve's pathway. This is what we call <em>sciatica</em> or <em>sciatic neuralgia</em>.
+                    </p>
+
+                    <div class="bg-primary/5 border-l-4 border-primary p-6 mb-6 rounded-r-lg">
+                        <p class="text-text">
+                            <strong>Key Point:</strong> Sciatica is a symptom, not a disease. The underlying cause of sciatic nerve irritation needs to be identified and addressed for effective treatment.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Recognizing Sciatica Symptoms -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-text mb-6">Recognizing Sciatica: Common Symptoms and Presentations</h2>
+                    
+                    <p class="text-lg text-text mb-6">
+                        Sciatica symptoms can vary significantly from person to person, both in terms of severity and the specific sensations experienced. Understanding the typical symptom patterns can help you identify whether your pain might be sciatic in nature.
+                    </p>
+
+                    <div class="card mb-6">
+                        <h3 class="text-xl font-semibold text-text mb-4">Classic Sciatica Symptoms Include:</h3>
+                        <ul class="space-y-3 text-text">
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">•</span>
+                                <div>
+                                    <strong>Radiating Pain:</strong> Pain that originates in the lower back or buttock and travels down the back of the thigh and calf, sometimes reaching the foot and toes. This is the hallmark symptom of sciatica.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">•</span>
+                                <div>
+                                    <strong>Unilateral Symptoms:</strong> Sciatica typically affects only one side of the body, though in rare cases both legs can be affected simultaneously (bilateral sciatica).
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">•</span>
+                                <div>
+                                    <strong>Sharp or Burning Pain:</strong> Often described as a sharp, shooting, burning, or electric-shock-like sensation rather than a dull ache.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">•</span>
+                                <div>
+                                    <strong>Numbness and Tingling:</strong> "Pins and needles" sensations or areas of numbness in the leg or foot, particularly on the outer side of the calf or top of the foot.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">•</span>
+                                <div>
+                                    <strong>Muscle Weakness:</strong> Difficulty moving the leg, foot, or toes, or a feeling of heaviness in the affected leg.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">•</span>
+                                <div>
+                                    <strong>Pain Worsened by Movement:</strong> Symptoms often intensify with prolonged sitting, standing, coughing, sneezing, or sudden movements.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">•</span>
+                                <div>
+                                    <strong>Relief with Position Changes:</strong> Some people find relief by walking, lying down, or changing positions, while others find certain positions aggravate their symptoms.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-text mb-4 mt-8">Pain Patterns and Severity</h3>
+                    
+                    <p class="text-lg text-text mb-6">
+                        Sciatic pain can range from mild and annoying to severe and debilitating. Some people describe it as:
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="card">
+                            <h4 class="font-semibold text-text mb-2">Mild Sciatica</h4>
+                            <p class="text-sm text-text">Occasional discomfort or achiness that doesn't significantly interfere with daily activities.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="font-semibold text-text mb-2">Moderate Sciatica</h4>
+                            <p class="text-sm text-text">Regular pain that affects some activities and may require medication for relief.</p>
+                        </div>
+                        <div class="card">
+                            <h4 class="font-semibold text-text mb-2">Severe Sciatica</h4>
+                            <p class="text-sm text-text">Intense, constant pain that significantly limits mobility and daily functioning.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 mb-6 rounded-r-lg">
+                        <h4 class="text-lg font-semibold text-text mb-3">Red Flag Symptoms—Seek Immediate Medical Attention:</h4>
+                        <ul class="space-y-2 text-text">
+                            <li>• Progressive leg weakness or foot drop (inability to lift the front of your foot)</li>
+                            <li>• Loss of bladder or bowel control (cauda equina syndrome)</li>
+                            <li>• Saddle anesthesia (numbness in the groin, buttocks, or inner thighs)</li>
+                            <li>• Severe pain that doesn't respond to over-the-counter medications</li>
+                            <li>• Symptoms in both legs simultaneously</li>
+                            <li>• Pain following significant trauma or injury</li>
+                        </ul>
+                        <p class="text-text mt-4 font-semibold">
+                            These symptoms may indicate a serious condition requiring urgent medical evaluation.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Causes of Sciatica -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-text mb-6">What Causes Sciatica? Understanding the Underlying Conditions</h2>
+                    
+                    <p class="text-lg text-text mb-6">
+                        Sciatica occurs when the sciatic nerve becomes compressed, irritated, or inflamed. While there are numerous potential causes, some conditions are more common than others. Understanding the underlying cause is crucial for effective treatment.
+                    </p>
+
+                    <h3 class="text-2xl font-heading font-bold text-primary mb-4">1. Herniated or Bulging Disc (Most Common Cause)</h3>
+                    
+                    <div class="card mb-6">
+                        <p class="text-text mb-4">
+                            A herniated disc—also called a slipped disc, ruptured disc, or prolapsed disc—is the most frequent cause of sciatica, accounting for approximately <strong>90% of cases</strong>.
+                        </p>
+                        <p class="text-text mb-4">
+                            Your spinal discs are cushion-like structures between vertebrae that act as shock absorbers. Each disc has a tough outer layer (annulus fibrosus) and a gel-like center (nucleus pulposus). When the outer layer weakens or tears, the inner material can bulge out or herniate, potentially pressing on nearby nerve roots.
+                        </p>
+                        <p class="text-text mb-4">
+                            Disc herniations most commonly occur at the L4-L5 or L5-S1 levels (the lowest two discs in your lumbar spine), directly affecting the nerve roots that form the sciatic nerve.
+                        </p>
+                        <div class="bg-primary/5 p-4 rounded-lg mt-4">
+                            <p class="text-sm text-text"><strong>Risk Factors:</strong> Age-related degeneration, improper lifting technique, repetitive strain, obesity, smoking, and genetic predisposition.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-primary mb-4">2. Spinal Stenosis</h3>
+                    
+                    <div class="card mb-6">
+                        <p class="text-text mb-4">
+                            Spinal stenosis is a narrowing of the spinal canal—the hollow tube through which your spinal cord and nerve roots travel. This narrowing can compress the nerve roots that form the sciatic nerve.
+                        </p>
+                        <p class="text-text mb-4">
+                            Lumbar spinal stenosis is particularly common in people over 50 and typically develops gradually over years due to age-related changes such as bone spurs, thickened ligaments, or enlarged facet joints.
+                        </p>
+                        <div class="bg-primary/5 p-4 rounded-lg mt-4">
+                            <p class="text-sm text-text"><strong>Typical Presentation:</strong> Pain that worsens with standing or walking and improves with sitting or leaning forward.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-primary mb-4">3. Piriformis Syndrome</h3>
+                    
+                    <div class="card mb-6">
+                        <p class="text-text mb-4">
+                            The piriformis is a small muscle deep in the buttock that helps rotate the hip. In most people, the sciatic nerve runs beneath this muscle, but in about 15% of people, the nerve actually passes through the muscle.
+                        </p>
+                        <p class="text-text mb-4">
+                            When the piriformis muscle becomes tight, inflamed, or spasms, it can compress the sciatic nerve, causing sciatica-like symptoms. This condition is called piriformis syndrome and is more common in athletes and people who sit for extended periods.
+                        </p>
+                        <div class="bg-primary/5 p-4 rounded-lg mt-4">
+                            <p class="text-sm text-text"><strong>Distinguishing Feature:</strong> Pain often centers in the buttock and may worsen with sitting, climbing stairs, or running.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-primary mb-4">4. Spondylolisthesis</h3>
+                    
+                    <div class="card mb-6">
+                        <p class="text-text mb-4">
+                            Spondylolisthesis occurs when one vertebra slips forward over the vertebra below it, potentially compressing nerve roots. This condition can be caused by degenerative changes, stress fractures, or congenital abnormalities.
+                        </p>
+                        <p class="text-text mb-4">
+                            The L5-S1 level is most commonly affected, which can directly impact the sciatic nerve roots.
+                        </p>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-primary mb-4">5. Degenerative Disc Disease</h3>
+                    
+                    <div class="card mb-6">
+                        <p class="text-text mb-4">
+                            Despite its name, degenerative disc disease is a natural age-related process rather than a true "disease." As discs lose water content and height over time, they become less effective at cushioning the spine, potentially leading to nerve irritation.
+                        </p>
+                        <p class="text-text mb-4">
+                            Disc degeneration can also contribute to spinal instability and lead to other conditions like herniated discs or bone spurs that compress nerves.
+                        </p>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-primary mb-4">Other Less Common Causes</h3>
+                    
+                    <div class="card mb-6">
+                        <ul class="space-y-2 text-text">
+                            <li>• <strong>Spinal tumors or cysts:</strong> Rare growths that can compress nerve roots</li>
+                            <li>• <strong>Pregnancy:</strong> Weight gain and hormonal changes can lead to temporary sciatic symptoms</li>
+                            <li>• <strong>Trauma or injury:</strong> Fractures, dislocations, or severe bruising affecting the spine</li>
+                            <li>• <strong>Infection:</strong> Rare infections affecting the spine or spinal cord</li>
+                            <li>• <strong>Cauda equina syndrome:</strong> A serious condition requiring emergency treatment</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Risk Factors -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-text mb-6">Risk Factors: Who is More Likely to Develop Sciatica?</h2>
+                    
+                    <p class="text-lg text-text mb-6">
+                        While sciatica can affect anyone, certain factors increase your likelihood of experiencing this condition:
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="card">
+                            <h4 class="font-semibold text-text mb-3">Non-Modifiable Risk Factors</h4>
+                            <ul class="space-y-2 text-text">
+                                <li>• <strong>Age:</strong> Most common between ages 30-50</li>
+                                <li>• <strong>Height:</strong> People over 180cm (5'11") have increased risk</li>
+                                <li>• <strong>Genetics:</strong> Family history of back problems</li>
+                                <li>• <strong>Previous back injury:</strong> History of lower back problems</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="font-semibold text-text mb-3">Modifiable Risk Factors</h4>
+                            <ul class="space-y-2 text-text">
+                                <li>• <strong>Occupation:</strong> Jobs involving heavy lifting, twisting, or prolonged sitting/driving</li>
+                                <li>• <strong>Sedentary lifestyle:</strong> Lack of regular physical activity</li>
+                                <li>• <strong>Obesity:</strong> Excess weight increases spinal stress</li>
+                                <li>• <strong>Poor posture:</strong> Chronic postural problems</li>
+                                <li>• <strong>Smoking:</strong> Reduces disc nutrition and healing capacity</li>
+                                <li>• <strong>Diabetes:</strong> Increases nerve damage risk</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Diagnosis -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-text mb-6">Diagnosing Sciatica: What to Expect</h2>
+                    
+                    <p class="text-lg text-text mb-6">
+                        Proper diagnosis is essential for effective treatment. Healthcare professionals use a combination of clinical assessment and diagnostic imaging to identify sciatica and its underlying cause.
+                    </p>
+
+                    <h3 class="text-2xl font-heading font-bold text-text mb-4">Clinical Examination</h3>
+                    
+                    <div class="card mb-6">
+                        <h4 class="font-semibold text-text mb-3">Your healthcare provider will typically perform:</h4>
+                        <ul class="space-y-3 text-text">
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">1.</span>
+                                <div>
+                                    <strong>Medical History:</strong> Detailed questions about your symptoms, their onset, duration, aggravating and relieving factors, and any previous episodes.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">2.</span>
+                                <div>
+                                    <strong>Physical Examination:</strong> Assessment of posture, spinal mobility, muscle strength, reflexes, and sensation in your legs and feet.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">3.</span>
+                                <div>
+                                    <strong>Straight Leg Raise Test:</strong> A classic test where the practitioner raises your extended leg while you're lying down. If this reproduces your leg pain, it suggests sciatic nerve involvement.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">4.</span>
+                                <div>
+                                    <strong>Neurological Tests:</strong> Checking reflexes (such as knee and ankle jerks), muscle strength, and sensory function to identify specific nerve root involvement.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-text mb-4 mt-8">Diagnostic Imaging</h3>
+                    
+                    <p class="text-lg text-text mb-4">
+                        Imaging is not always necessary, especially if symptoms are mild and recent. However, your doctor may order imaging if:
+                    </p>
+
+                    <ul class="space-y-2 text-text mb-6 list-disc list-inside">
+                        <li>Symptoms persist beyond 6 weeks despite conservative treatment</li>
+                        <li>There's suspicion of a serious underlying condition</li>
+                        <li>You have red flag symptoms</li>
+                        <li>Surgery is being considered</li>
+                    </ul>
+
+                    <div class="card mb-6">
+                        <h4 class="font-semibold text-text mb-4">Common Imaging Modalities:</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-semibold text-text mb-1">X-rays</p>
+                                <p class="text-sm text-text">Can show bone abnormalities, alignment issues, and degenerative changes but don't visualize soft tissues like discs or nerves.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-text mb-1">MRI (Magnetic Resonance Imaging)</p>
+                                <p class="text-sm text-text">The gold standard for visualizing soft tissues, including discs, nerves, and spinal cord. Excellent for identifying herniated discs, stenosis, and tumors.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-text mb-1">CT Scan (Computed Tomography)</p>
+                                <p class="text-sm text-text">Provides detailed images of bone structures and can be combined with contrast dye (CT myelogram) to visualize nerve compression.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-text mb-1">Electromyography (EMG) and Nerve Conduction Studies</p>
+                                <p class="text-sm text-text">Measure electrical activity in muscles and nerve transmission to identify specific nerve damage and rule out other neurological conditions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Treatment Options -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-text mb-6">Treatment Options: From Conservative Care to Surgical Intervention</h2>
+                    
+                    <p class="text-lg text-text mb-6">
+                        The good news is that <strong>most cases of sciatica (80-90%) improve with conservative treatment</strong> within 4-6 weeks. Treatment approaches range from self-care strategies to professional interventions, with surgery reserved for severe or persistent cases.
+                    </p>
+
+                    <h3 class="text-2xl font-heading font-bold text-primary mb-4">Conservative Treatments (First-Line Approach)</h3>
+
+                    <div class="card mb-6">
+                        <h4 class="text-lg font-semibold text-text mb-4">1. Active Recovery and Modified Activity</h4>
+                        <p class="text-text mb-4">
+                            Contrary to old advice about bed rest, <strong>staying active is crucial</strong> for recovery. While you should avoid activities that significantly worsen pain, complete rest can actually delay healing and lead to muscle weakening.
+                        </p>
+                        <ul class="space-y-2 text-text list-disc list-inside">
+                            <li>Continue normal daily activities as much as pain allows</li>
+                            <li>Take short walks several times daily</li>
+                            <li>Modify activities that cause severe pain but don't stop moving entirely</li>
+                            <li>Gradually increase activity levels as symptoms improve</li>
+                        </ul>
+                    </div>
+
+                    <div class="card mb-6">
+                        <h4 class="text-lg font-semibold text-text mb-4">2. Therapeutic Exercise and Stretching</h4>
+                        <p class="text-text mb-4">
+                            Specific exercises can help reduce nerve compression, improve flexibility, and strengthen supporting muscles. A physiotherapist can design a personalized program, but common beneficial exercises include:
+                        </p>
+                        <ul class="space-y-2 text-text list-disc list-inside">
+                            <li>Gentle stretching of the piriformis muscle and hamstrings</li>
+                            <li>Core strengthening exercises</li>
+                            <li>Nerve gliding (neural mobilization) exercises</li>
+                            <li>McKenzie extension exercises (for certain types of disc herniation)</li>
+                            <li>Pelvic tilts and gentle yoga poses</li>
+                        </ul>
+                        <div class="bg-primary/5 p-4 rounded-lg mt-4">
+                            <p class="text-sm text-text">
+                                <strong>Note:</strong> Always consult with a healthcare professional before starting exercises to ensure they're appropriate for your specific condition. For more information, see our article on <a href="/blog/5-exercises-for-lower-back-pain" class="text-primary hover:underline">5 Exercises for Lower Back Pain</a>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-6">
+                        <h4 class="text-lg font-semibold text-text mb-4">3. Pain Management</h4>
+                        <div class="space-y-3 text-text">
+                            <div>
+                                <p class="font-semibold mb-1">Over-the-Counter Medications:</p>
+                                <ul class="list-disc list-inside text-sm ml-4">
+                                    <li>NSAIDs (non-steroidal anti-inflammatory drugs) like ibuprofen or naproxen can reduce inflammation and pain</li>
+                                    <li>Paracetamol for mild to moderate pain relief</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="font-semibold mb-1">Prescription Medications (if needed):</p>
+                                <ul class="list-disc list-inside text-sm ml-4">
+                                    <li>Muscle relaxants for severe muscle spasms</li>
+                                    <li>Neuropathic pain medications (like gabapentin or pregabalin) for nerve pain</li>
+                                    <li>Short-term use of stronger pain relievers in severe cases</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="font-semibold mb-1">Topical Treatments:</p>
+                                <ul class="list-disc list-inside text-sm ml-4">
+                                    <li>Heat or ice therapy (ice for acute inflammation, heat for muscle tension)</li>
+                                    <li>Topical NSAIDs or capsaicin creams</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-6">
+                        <h4 class="text-lg font-semibold text-text mb-4">4. Manual Therapy and Allied Health Treatment</h4>
+                        <p class="text-text mb-4">
+                            Various healthcare professionals can provide hands-on treatment and guidance:
+                        </p>
+                        <div class="space-y-3 text-text">
+                            <div>
+                                <p class="font-semibold mb-1">Physiotherapy:</p>
+                                <p class="text-sm">Manual therapy techniques, exercise prescription, education, and modalities like ultrasound or electrical stimulation.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold mb-1">Chiropractic Care:</p>
+                                <p class="text-sm">Spinal manipulation, mobilization, soft tissue therapy, and exercise rehabilitation.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold mb-1">Osteopathy:</p>
+                                <p class="text-sm">Holistic manual treatment including manipulation, stretching, and massage techniques.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold mb-1">Massage Therapy:</p>
+                                <p class="text-sm">Deep tissue massage, trigger point release, and myofascial techniques to reduce muscle tension.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold mb-1">Acupuncture:</p>
+                                <p class="text-sm">May help reduce pain and muscle tension in some individuals.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-primary mb-4 mt-8">Advanced Interventional Treatments</h3>
+
+                    <div class="card mb-6">
+                        <p class="text-text mb-4">
+                            If conservative treatments don't provide sufficient relief after several weeks or months, your doctor may recommend more advanced interventions:
+                        </p>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-semibold text-text mb-1">Epidural Steroid Injections</p>
+                                <p class="text-sm text-text mb-2">Corticosteroids injected into the epidural space around the nerve roots to reduce inflammation and pain. These can provide temporary relief (weeks to months) and may be repeated if effective.</p>
+                                <p class="text-sm text-text/70">Success rate: 40-80% experience at least short-term improvement</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-text mb-1">Nerve Root Blocks</p>
+                                <p class="text-sm text-text mb-2">Targeted injections of local anesthetic and steroid around a specific nerve root, both for diagnosis and treatment.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-text mb-1">Radiofrequency Ablation</p>
+                                <p class="text-sm text-text mb-2">Uses heat to reduce nerve signal transmission, potentially providing longer-lasting relief than injections.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-heading font-bold text-primary mb-4 mt-8">Surgical Treatment</h3>
+
+                    <div class="card mb-6">
+                        <p class="text-text mb-4">
+                            Surgery is typically considered only when:
+                        </p>
+                        <ul class="space-y-2 text-text list-disc list-inside mb-4">
+                            <li>Conservative treatment fails after 6-12 weeks</li>
+                            <li>There's progressive neurological deterioration (increasing weakness)</li>
+                            <li>Pain is severe and significantly impairs quality of life</li>
+                            <li>Cauda equina syndrome is present (emergency)</li>
+                        </ul>
+                        
+                        <div class="space-y-4 mt-6">
+                            <div>
+                                <p class="font-semibold text-text mb-2">Common Surgical Procedures:</p>
+                                <div class="space-y-3">
+                                    <div class="bg-gray-50 p-4 rounded">
+                                        <p class="font-semibold text-sm text-text mb-1">Microdiscectomy/Discectomy</p>
+                                        <p class="text-sm text-text">Removal of the portion of a herniated disc compressing the nerve. This is the most common surgery for sciatica with excellent success rates (80-95%).</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded">
+                                        <p class="font-semibold text-sm text-text mb-1">Laminectomy</p>
+                                        <p class="text-sm text-text">Removal of part of the lamina (back part of the vertebra) to create more space for nerves, often used for spinal stenosis.</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded">
+                                        <p class="font-semibold text-sm text-text mb-1">Spinal Fusion</p>
+                                        <p class="text-sm text-text">Joining two or more vertebrae together to provide stability, typically used for spondylolisthesis or severe instability.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-accent/10 border-l-4 border-accent p-4 mt-6 rounded-r">
+                            <p class="text-sm text-text">
+                                <strong>Important:</strong> Surgical outcomes are generally better when there's a clear structural problem (like a herniated disc) visible on imaging that correlates with symptoms. Success rates vary based on the specific procedure and underlying condition.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recovery and Prognosis -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-text mb-6">Recovery Timeline and Prognosis</h2>
+                    
+                    <p class="text-lg text-text mb-6">
+                        Understanding what to expect during recovery can help you stay patient and committed to your treatment plan.
+                    </p>
+
+                    <div class="card mb-6">
+                        <h4 class="font-semibold text-text mb-4">Typical Recovery Timeline:</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <span class="text-primary font-bold mr-4">Week 1-2:</span>
+                                <p class="text-text">Acute phase with potentially severe pain. Focus on pain management, gentle movement, and avoiding aggravating activities.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-primary font-bold mr-4">Week 2-4:</span>
+                                <p class="text-text">Gradual pain reduction for most people. Begin incorporating more therapeutic exercises and gradually increasing activity.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-primary font-bold mr-4">Week 4-6:</span>
+                                <p class="text-text">Significant improvement for 50-75% of people. Continue strengthening exercises and return to more normal activities.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-primary font-bold mr-4">Week 6-12:</span>
+                                <p class="text-text">Most people (80-90%) experience substantial improvement or complete resolution. Focus on prevention strategies.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-primary font-bold mr-4">Beyond 12 weeks:</span>
+                                <p class="text-text">If symptoms persist, additional interventions or specialist consultation may be needed.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-primary/5 border-l-4 border-primary p-6 mb-6 rounded-r-lg">
+                        <p class="text-text">
+                            <strong>Key Point:</strong> While most people recover within weeks, some residual symptoms or occasional flare-ups are common. The goal is functional improvement and pain management rather than necessarily achieving 100% pain-free status.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Prevention -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-text mb-6">Preventing Sciatica: Long-Term Strategies</h2>
+                    
+                    <p class="text-lg text-text mb-6">
+                        Whether you've recovered from sciatica or want to prevent your first episode, these evidence-based strategies can help protect your spine:
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="card">
+                            <h4 class="font-semibold text-text mb-3">Exercise and Movement</h4>
+                            <ul class="space-y-2 text-sm text-text">
+                                <li>• Maintain regular physical activity (aim for 150 minutes weekly)</li>
+                                <li>• Focus on core strengthening exercises</li>
+                                <li>• Include flexibility work, especially for hamstrings and hip flexors</li>
+                                <li>• Try low-impact activities like swimming, walking, or cycling</li>
+                                <li>• Practice proper warm-up before exercise or sports</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="font-semibold text-text mb-3">Posture and Ergonomics</h4>
+                            <ul class="space-y-2 text-sm text-text">
+                                <li>• Use proper posture when sitting and standing</li>
+                                <li>• Set up an ergonomic workspace with appropriate chair height and monitor position</li>
+                                <li>• Take regular breaks from sitting (every 30-60 minutes)</li>
+                                <li>• Sleep on a supportive mattress (replace every 7-10 years)</li>
+                                <li>• Avoid prolonged sitting or standing in one position</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="font-semibold text-text mb-3">Lifestyle Factors</h4>
+                            <ul class="space-y-2 text-sm text-text">
+                                <li>• Maintain a healthy body weight</li>
+                                <li>• Quit smoking (reduces disc nutrition and healing)</li>
+                                <li>• Manage stress through relaxation techniques</li>
+                                <li>• Stay well-hydrated to support disc health</li>
+                                <li>• Get adequate sleep for tissue recovery</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="font-semibold text-text mb-3">Proper Body Mechanics</h4>
+                            <ul class="space-y-2 text-sm text-text">
+                                <li>• Lift with your legs, not your back</li>
+                                <li>• Hold objects close to your body when carrying</li>
+                                <li>• Avoid twisting while lifting</li>
+                                <li>• Use assistive devices for heavy lifting when available</li>
+                                <li>• Ask for help with heavy or awkward items</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Living with Sciatica -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-text mb-6">Living with Sciatica: Practical Tips for Daily Life</h2>
+                    
+                    <p class="text-lg text-text mb-6">
+                        If you're currently managing sciatica, these strategies can help you navigate daily activities more comfortably:
+                    </p>
+
+                    <div class="card mb-6">
+                        <h4 class="font-semibold text-text mb-4">Sitting Strategies:</h4>
+                        <ul class="space-y-2 text-text list-disc list-inside">
+                            <li>Use a lumbar support cushion to maintain spine curvature</li>
+                            <li>Sit with your feet flat on the floor and knees at hip level</li>
+                            <li>Avoid soft, low couches that cause you to slouch</li>
+                            <li>Try sitting on a slightly firm cushion or rolled towel under one buttock (on the painful side) to reduce nerve compression</li>
+                            <li>Stand up and walk briefly every 20-30 minutes</li>
+                        </ul>
+                    </div>
+
+                    <div class="card mb-6">
+                        <h4 class="font-semibold text-text mb-4">Sleeping Positions:</h4>
+                        <ul class="space-y-2 text-text list-disc list-inside">
+                            <li><strong>Side sleepers:</strong> Place a pillow between your knees to keep your spine aligned</li>
+                            <li><strong>Back sleepers:</strong> Put a pillow under your knees to reduce lower back stress</li>
+                            <li><strong>Stomach sleeping:</strong> Generally not recommended, but if you must, place a small pillow under your lower abdomen</li>
+                            <li>Use a supportive pillow that keeps your neck in neutral alignment</li>
+                        </ul>
+                    </div>
+
+                    <div class="card mb-6">
+                        <h4 class="font-semibold text-text mb-4">Driving:</h4>
+                        <ul class="space-y-2 text-text list-disc list-inside">
+                            <li>Position your seat so you can reach pedals without stretching</li>
+                            <li>Use lumbar support (built-in or add a cushion)</li>
+                            <li>Take breaks on long drives to walk and stretch</li>
+                            <li>Consider using cruise control to change leg positions</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Conclusion -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-text mb-6">Final Thoughts: Taking Control of Your Sciatica</h2>
+                    
+                    <p class="text-lg text-text mb-6">
+                        Sciatica can be a painful and frustrating condition, but understanding what's happening in your body empowers you to make informed decisions about your treatment and recovery. The key takeaways to remember are:
+                    </p>
+
+                    <div class="card mb-6">
+                        <ul class="space-y-3 text-text">
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">✓</span>
+                                <span>Sciatica is a symptom, not a disease—identifying and addressing the underlying cause is crucial</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">✓</span>
+                                <span>Most cases improve significantly with conservative treatment within 4-6 weeks</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">✓</span>
+                                <span>Staying active is generally better than prolonged rest</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">✓</span>
+                                <span>A multimodal approach combining exercise, pain management, and lifestyle modifications typically yields the best results</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">✓</span>
+                                <span>Professional guidance from physiotherapists, chiropractors, or other healthcare providers can significantly improve outcomes</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary mr-3 mt-1">✓</span>
+                                <span>Prevention strategies focusing on core strength, flexibility, and proper body mechanics can reduce recurrence risk</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p class="text-lg text-text mb-6">
+                        If you're experiencing symptoms of sciatica, don't suffer in silence. Early intervention and appropriate treatment can prevent acute pain from becoming a chronic condition. A qualified healthcare professional can provide personalized assessment and develop a treatment plan tailored to your specific situation.
+                    </p>
+
+                    <p class="text-lg text-text mb-6">
+                        Remember that while the internet provides valuable information (like this article), it cannot replace professional medical advice. Your body is unique, and what works for one person may not be appropriate for another. Use this information as a foundation for informed discussions with your healthcare provider.
+                    </p>
+                </section>
+
+                <!-- CTA Section -->
+                <div class="bg-primary rounded-lg p-8 text-center mb-12">
+                    <h2 class="text-3xl font-heading font-bold text-white mb-4">
+                        Find Expert Help for Your Sciatica
+                    </h2>
+                    <p class="text-white/90 text-lg mb-6">
+                        Connect with experienced physiotherapists, chiropractors, and osteopaths who specialize in treating sciatica and nerve-related conditions.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="/search" class="btn-accent">
+                            Find a Specialist Near You
+                        </a>
+                        <a href="/blog/5-exercises-for-lower-back-pain" class="btn-secondary">
+                            Read About Back Exercises
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sources and References -->
+                <section class="bg-gray-50 p-6 rounded-lg mb-12">
+                    <h3 class="text-xl font-semibold text-text mb-4">References and Further Reading:</h3>
+                    <ol class="space-y-2 text-sm text-text/70 list-decimal list-inside">
+                        <li>Jensen, R. K., et al. (2019). "Diagnosis and treatment of sciatica." BMJ, 367.</li>
+                        <li>Koes, B. W., et al. (2007). "Diagnosis and treatment of sciatica." BMJ, 334(7607), 1313-1317.</li>
+                        <li>Konstantinou, K., & Dunn, K. M. (2008). "Sciatica: review of epidemiological studies and prevalence estimates." Spine, 33(22), 2464-2472.</li>
+                        <li>Lewis, R. A., et al. (2011). "Comparative clinical effectiveness of management strategies for sciatica: systematic review and network meta-analyses." The Spine Journal, 15(6), 1461-1477.</li>
+                        <li>Ropper, A. H., & Zafonte, R. D. (2015). "Sciatica." New England Journal of Medicine, 372(13), 1240-1248.</li>
+                        <li>Australian Acute Musculoskeletal Pain Guidelines Group (2019). "Evidence-based management of acute musculoskeletal pain."</li>
+                        <li>Luijsterburg, P. A., et al. (2007). "Physical therapy plus general practitioners' care versus general practitioners' care alone for sciatica: a randomised clinical trial." European Spine Journal, 17(4), 509-517.</li>
+                    </ol>
+                </section>
+
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="bg-text text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-heading font-bold mb-4">FixMySpine</h3>
+                    <p class="text-white/80">
+                        Connecting Australians with trusted healthcare professionals.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/about" class="text-white/80 hover:text-white">About Us</a></li>
+                        <li><a href="/contact" class="text-white/80 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">For Practitioners</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/register" class="text-white/80 hover:text-white">Register</a></li>
+                        <li><a href="/login" class="text-white/80 hover:text-white">Login</a></li>
+                        <li><a href="/dashboard" class="text-white/80 hover:text-white">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/terms-of-service" class="text-white/80 hover:text-white">Terms of Service</a></li>
+                        <li><a href="/privacy-policy" class="text-white/80 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/20 mt-8 pt-8 text-center">
+                <p class="text-white/80">&copy; 2025 FixMySpine. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

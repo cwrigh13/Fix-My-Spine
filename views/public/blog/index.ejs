@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <meta name="description" content="<%= metaDescription %>">
+    <link rel="stylesheet" href="/stylesheets/dist.css?v=7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-background">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-heading font-bold text-primary">
+                        FixMySpine
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/about" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="/blog" class="text-primary px-3 py-2 rounded-md text-sm font-medium border-b-2 border-primary">Blog</a>
+                        <a href="/contact" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <a href="/register" class="btn-primary">List Your Practice</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg pt-32 pb-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
+                Health & Wellness Blog
+            </h1>
+            <p class="text-xl text-white/90 mb-4">
+                Evidence-based advice for spinal health, pain management, and overall wellness
+            </p>
+            <p class="text-lg text-white/80">
+                Expert insights from healthcare professionals to help you live pain-free
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Featured Article Badge -->
+            <div class="mb-12">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="bg-accent text-white px-4 py-2 rounded-full text-sm font-semibold">Featured Articles</span>
+                    <span class="text-text/60">Essential reading for back pain relief</span>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                
+                <!-- Article 1: 5 Exercises for Lower Back Pain -->
+                <article class="card hover:shadow-xl transition-shadow duration-300">
+                    <div class="mb-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold">EXERCISE GUIDE</span>
+                            <span class="text-text/60 text-xs">8 min read</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-heading font-bold text-text mb-4 hover:text-primary transition-colors">
+                            <a href="/blog/5-exercises-for-lower-back-pain">
+                                5 Effective Exercises for Lower Back Pain Relief
+                            </a>
+                        </h2>
+                        <p class="text-text/80 mb-6 leading-relaxed">
+                            Discover evidence-based exercises recommended by physiotherapists and chiropractors to strengthen your back, improve flexibility, and reduce pain. Complete with step-by-step instructions and expert tips.
+                        </p>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 pt-4">
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-text/60">
+                                <span>October 1, 2025</span>
+                            </div>
+                            <a href="/blog/5-exercises-for-lower-back-pain" class="text-primary font-semibold hover:text-accent transition-colors flex items-center gap-2">
+                                Read Article
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Key Topics -->
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-xs text-text/60 mb-2">Key Topics:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-text/70 px-2 py-1 rounded text-xs">Cat-Cow Stretch</span>
+                            <span class="bg-gray-100 text-text/70 px-2 py-1 rounded text-xs">Bird Dog</span>
+                            <span class="bg-gray-100 text-text/70 px-2 py-1 rounded text-xs">Pelvic Tilts</span>
+                            <span class="bg-gray-100 text-text/70 px-2 py-1 rounded text-xs">Core Strength</span>
+                            <span class="bg-gray-100 text-text/70 px-2 py-1 rounded text-xs">Flexibility</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 2: What is Sciatica -->
+                <article class="card hover:shadow-xl transition-shadow duration-300">
+                    <div class="mb-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-semibold">CONDITION GUIDE</span>
+                            <span class="text-text/60 text-xs">12 min read</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-heading font-bold text-text mb-4 hover:text-primary transition-colors">
+                            <a href="/blog/what-is-sciatica">
+                                What is Sciatica? Symptoms, Causes & Treatment Options
+                            </a>
+                        </h2>
+                        <p class="text-text/80 mb-6 leading-relaxed">
+                            A comprehensive guide to understanding sciatica—from recognizing symptoms and identifying causes to exploring effective treatment options. Learn about conservative therapies, interventional procedures, and prevention strategies.
+                        </p>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 pt-4">
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-text/60">
+                                <span>October 1, 2025</span>
+                            </div>
+                            <a href="/blog/what-is-sciatica" class="text-primary font-semibold hover:text-accent transition-colors flex items-center gap-2">
+                                Read Article
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Key Topics -->
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-xs text-text/60 mb-2">Key Topics:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-text/70 px-2 py-1 rounded text-xs">Sciatic Nerve</span>
+                            <span class="bg-gray-100 text-text/70 px-2 py-1 rounded text-xs">Herniated Disc</span>
+                            <span class="bg-gray-100 text-text/70 px-2 py-1 rounded text-xs">Pain Relief</span>
+                            <span class="bg-gray-100 text-text/70 px-2 py-1 rounded text-xs">Treatment Options</span>
+                            <span class="bg-gray-100 text-text/70 px-2 py-1 rounded text-xs">Prevention</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Related Articles Coming Soon -->
+            <div class="bg-gradient-to-r from-primary/5 to-accent/5 rounded-lg p-8 text-center">
+                <h3 class="text-2xl font-heading font-bold text-text mb-4">More Articles Coming Soon</h3>
+                <p class="text-text/80 mb-6 max-w-2xl mx-auto">
+                    We're continually adding new, evidence-based content to help you understand and manage spinal health conditions. Subscribe to stay updated on our latest articles.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/contact" class="btn-primary">
+                        Contact Us for Topic Suggestions
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-16 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-text mb-4">
+                    Explore Topics
+                </h2>
+                <p class="text-lg text-text/80 max-w-2xl mx-auto">
+                    Browse articles by category to find the information most relevant to your health journey
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="card text-center hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">🏃‍♂️</div>
+                    <h3 class="text-xl font-semibold text-text mb-2">Exercise & Fitness</h3>
+                    <p class="text-sm text-text/70 mb-3">Therapeutic exercises and movement strategies</p>
+                    <span class="text-primary text-sm font-semibold">1 Article</span>
+                </div>
+
+                <div class="card text-center hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">🩺</div>
+                    <h3 class="text-xl font-semibold text-text mb-2">Conditions</h3>
+                    <p class="text-sm text-text/70 mb-3">Understanding spinal health conditions</p>
+                    <span class="text-primary text-sm font-semibold">1 Article</span>
+                </div>
+
+                <div class="card text-center hover:shadow-lg transition-shadow opacity-60">
+                    <div class="text-4xl mb-4">💊</div>
+                    <h3 class="text-xl font-semibold text-text mb-2">Treatment</h3>
+                    <p class="text-sm text-text/70 mb-3">Therapy options and pain management</p>
+                    <span class="text-text/50 text-sm">Coming Soon</span>
+                </div>
+
+                <div class="card text-center hover:shadow-lg transition-shadow opacity-60">
+                    <div class="text-4xl mb-4">🧘‍♀️</div>
+                    <h3 class="text-xl font-semibold text-text mb-2">Prevention</h3>
+                    <p class="text-sm text-text/70 mb-3">Lifestyle tips for long-term wellness</p>
+                    <span class="text-text/50 text-sm">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-primary rounded-lg p-8 md:p-12 text-center">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
+                    Need Professional Help?
+                </h2>
+                <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+                    While our blog provides valuable information, nothing replaces personalized care from a qualified healthcare professional. Find trusted practitioners in your area through our directory.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/search" class="btn-accent">
+                        Find a Practitioner
+                    </a>
+                    <a href="/about" class="btn-secondary">
+                        Learn About Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section (Optional Future Feature) -->
+    <section class="py-16 bg-background">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-heading font-bold text-text mb-4">
+                Stay Informed About Spinal Health
+            </h2>
+            <p class="text-lg text-text/80 mb-6">
+                Get expert tips, new articles, and health insights delivered to your inbox
+            </p>
+            <div class="bg-white rounded-lg shadow-md p-6 max-w-xl mx-auto">
+                <p class="text-text/70 text-sm">
+                    Newsletter feature coming soon. In the meantime, <a href="/contact" class="text-primary hover:underline">contact us</a> to stay updated on new content.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-text text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-heading font-bold mb-4">FixMySpine</h3>
+                    <p class="text-white/80">
+                        Connecting Australians with trusted healthcare professionals.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/about" class="text-white/80 hover:text-white">About Us</a></li>
+                        <li><a href="/blog" class="text-white/80 hover:text-white">Blog</a></li>
+                        <li><a href="/contact" class="text-white/80 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">For Practitioners</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/register" class="text-white/80 hover:text-white">Register</a></li>
+                        <li><a href="/login" class="text-white/80 hover:text-white">Login</a></li>
+                        <li><a href="/dashboard" class="text-white/80 hover:text-white">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/terms-of-service" class="text-white/80 hover:text-white">Terms of Service</a></li>
+                        <li><a href="/privacy-policy" class="text-white/80 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/20 mt-8 pt-8 text-center">
+                <p class="text-white/80">&copy; 2025 FixMySpine. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
