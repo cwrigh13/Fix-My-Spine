@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <meta name="description" content="<%= business.business_name %> - <%= business.category_name %> in <%= business.suburb %>, <%= business.state %>. Read patient reviews and book an appointment.">
+    <title><%= typeof title !== 'undefined' ? title : 'Fix My Spine | Find Trusted Health Professionals' %></title>
+    <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia.' %>">
     <meta name="keywords" content="<%= business.category_name %>, <%= business.suburb %>, <%= business.state %>, healthcare, medical, practitioner">
     <link rel="stylesheet" href="/stylesheets/dist.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -87,7 +87,8 @@ router.get('/', async (req, res) => {
 
         console.log('Rendering homepage with data...');
         res.render('public/index', {
-            title: 'Find Trusted Chiropractors & Allied Health Professionals | FixMySpine',
+            title: 'Find Trusted Chiropractors & Allied Health Professionals | Fix My Spine',
+            description: 'Your trusted directory for Chiropractors, Physiotherapists, and more in Australia. Search by location, specialty, and read verified patient reviews.',
             featuredListings,
             categories,
             locations
@@ -157,8 +158,15 @@ router.get('/search', async (req, res) => {
             ORDER BY state ASC, suburb ASC
         `);
         
+        // Construct SEO-optimized title and description for search results
+        const searchTitle = `Search Results${keyword ? ` for "${keyword}"` : ''} | Fix My Spine`;
+        const searchDescription = keyword 
+            ? `Find trusted healthcare professionals for "${keyword}". Read reviews, compare practitioners, and book appointments with verified specialists.`
+            : 'Search our comprehensive directory of healthcare professionals. Find trusted practitioners by specialty, location, and read patient reviews.';
+
         res.render('public/search-results', {
-            title: `Search Results${keyword ? ` for "${keyword}"` : ''} | FixMySpine`,
+            title: searchTitle,
+            description: searchDescription,
             listings,
             categories,
             locations,
@@ -222,8 +230,13 @@ router.get('/category/:slug', async (req, res) => {
             ORDER BY state ASC, suburb ASC
         `);
         
+        // Construct SEO-optimized title and description
+        const seoTitle = `Find the Best ${category.name}s in Australia | Fix My Spine`;
+        const seoDescription = `Browse our comprehensive directory of verified ${category.name}s. Read reviews, compare practitioners, and find the right specialist for your needs.`;
+
         res.render('public/search-results', {
-            title: `Best ${category.name}s in Australia | FixMySpine`,
+            title: seoTitle,
+            description: seoDescription,
             listings,
             categories,
             locations,
@@ -288,8 +301,13 @@ router.get('/location/:suburb', async (req, res) => {
             ORDER BY state ASC, suburb ASC
         `);
         
+        // Construct SEO-optimized title and description
+        const seoTitle = `Top Chiropractors & Physios in ${location.suburb} | Fix My Spine`;
+        const seoDescription = `Discover the top-rated allied health professionals in ${location.suburb}. Search our directory to find trusted practitioners near you.`;
+
         res.render('public/search-results', {
-            title: `Best Health Professionals in ${location.suburb}, ${location.state} | FixMySpine`,
+            title: seoTitle,
+            description: seoDescription,
             listings,
             categories,
             locations,
@@ -357,8 +375,13 @@ router.get('/listing/:id/:slug', async (req, res) => {
         
         console.log(`Reviews found: ${reviews.length}`);
         
+        // Construct SEO-optimized title and description
+        const seoTitle = `${business.business_name} - ${business.category_name} in ${business.suburb}, ${business.state} | Fix My Spine`;
+        const seoDescription = `Find contact details, patient reviews, and services for ${business.business_name}, a trusted ${business.category_name} located in ${business.suburb}. Book an appointment today.`;
+
         res.render('public/listing-detail', {
-            title: `${business.business_name} - ${business.category_name} in ${business.suburb}, ${business.state} | FixMySpine`,
+            title: seoTitle,
+            description: seoDescription,
             business,
             reviews
         });
@@ -374,14 +397,16 @@ router.get('/listing/:id/:slug', async (req, res) => {
 // About page - GET /about
 router.get('/about', (req, res) => {
     res.render('public/about', {
-        title: 'About Us - Our Mission | FixMySpine'
+        title: 'About Us - Our Mission | Fix My Spine',
+        description: 'Learn about FixMySpine\'s mission to connect Australians with trusted allied health professionals. Discover our story from a North Sydney clinic to a nationwide directory.'
     });
 });
 
 // Contact page - GET /contact
 router.get('/contact', (req, res) => {
     res.render('public/contact', {
-        title: 'Contact Us | FixMySpine'
+        title: 'Contact Us | Fix My Spine',
+        description: 'Get in touch with FixMySpine. Contact us for support, inquiries, or to learn more about listing your practice on Australia\'s trusted allied health directory.'
     });
 });
 
@@ -391,7 +416,8 @@ router.get('/pricing', (req, res) => {
     const hasEmailAccess = req.session.pricingEmailAccess || false;
     
     res.render('public/pricing', {
-        title: 'Pricing - List Your Practice | FixMySpine',
+        title: 'Pricing - List Your Practice | Fix My Spine',
+        description: 'List your allied health practice on FixMySpine. Choose from free basic listings or premium features to grow your practice and connect with more patients across Australia.',
         hasEmailAccess: hasEmailAccess,
         email: req.session.pricingEmail || ''
     });
@@ -406,7 +432,8 @@ router.post('/pricing', (req, res) => {
         req.session.pricingEmailAccess = false;
         req.session.pricingEmail = '';
         return res.render('public/pricing', {
-            title: 'Pricing - List Your Practice | FixMySpine',
+            title: 'Pricing - List Your Practice | Fix My Spine',
+            description: 'List your allied health practice on FixMySpine. Choose from free basic listings or premium features to grow your practice and connect with more patients across Australia.',
             hasEmailAccess: false,
             email: ''
         });
@@ -417,7 +444,8 @@ router.post('/pricing', (req, res) => {
     
     if (!email || !emailRegex.test(email)) {
         return res.render('public/pricing', {
-            title: 'Pricing - List Your Practice | FixMySpine',
+            title: 'Pricing - List Your Practice | Fix My Spine',
+            description: 'List your allied health practice on FixMySpine. Choose from free basic listings or premium features to grow your practice and connect with more patients across Australia.',
             hasEmailAccess: false,
             email: email || '',
             error: 'Please enter a valid email address'
@@ -429,7 +457,8 @@ router.post('/pricing', (req, res) => {
     req.session.pricingEmail = email;
     
     res.render('public/pricing', {
-        title: 'Pricing - List Your Practice | FixMySpine',
+        title: 'Pricing - List Your Practice | Fix My Spine',
+        description: 'List your allied health practice on FixMySpine. Choose from free basic listings or premium features to grow your practice and connect with more patients across Australia.',
         hasEmailAccess: true,
         email: email
     });
@@ -438,14 +467,16 @@ router.post('/pricing', (req, res) => {
 // Terms of Service page - GET /terms-of-service
 router.get('/terms-of-service', (req, res) => {
     res.render('public/terms-of-service', {
-        title: 'Terms of Service | FixMySpine'
+        title: 'Terms of Service | Fix My Spine',
+        description: 'Read FixMySpine\'s terms of service. Understand the terms and conditions for using Australia\'s trusted allied health directory.'
     });
 });
 
 // Privacy Policy page - GET /privacy-policy
 router.get('/privacy-policy', (req, res) => {
     res.render('public/privacy-policy', {
-        title: 'Privacy Policy | FixMySpine'
+        title: 'Privacy Policy | Fix My Spine',
+        description: 'Learn how FixMySpine protects your privacy. Read our comprehensive privacy policy for Australia\'s trusted allied health directory.'
     });
 });
 
@@ -453,8 +484,8 @@ router.get('/privacy-policy', (req, res) => {
 // NOTE: Specific routes must come BEFORE general routes in Express
 router.get('/blog/5-exercises-for-lower-back-pain', (req, res) => {
     res.render('public/blog/5-exercises-for-lower-back-pain', {
-        title: '5 Effective Exercises for Lower Back Pain Relief | FixMySpine',
-        metaDescription: 'Discover 5 evidence-based exercises to relieve lower back pain. Expert-recommended stretches and strengthening exercises for lasting relief.',
+        title: '5 Effective Exercises for Lower Back Pain Relief | Fix My Spine',
+        description: 'Discover 5 evidence-based exercises to relieve lower back pain. Expert-recommended stretches and strengthening exercises for lasting relief.',
         publishDate: 'October 1, 2025',
         author: 'FixMySpine Editorial Team'
     });
@@ -463,8 +494,8 @@ router.get('/blog/5-exercises-for-lower-back-pain', (req, res) => {
 // Blog post: What is Sciatica - GET /blog/what-is-sciatica
 router.get('/blog/what-is-sciatica', (req, res) => {
     res.render('public/blog/what-is-sciatica', {
-        title: 'What is Sciatica? Symptoms, Causes & Treatment Options | FixMySpine',
-        metaDescription: 'Learn about sciatica symptoms, causes, and effective treatment options. Expert insights on managing sciatic nerve pain and finding relief.',
+        title: 'What is Sciatica? Symptoms, Causes & Treatment Options | Fix My Spine',
+        description: 'Learn about sciatica symptoms, causes, and effective treatment options. Expert insights on managing sciatic nerve pain and finding relief.',
         publishDate: 'October 1, 2025',
         author: 'FixMySpine Editorial Team'
     });
@@ -474,8 +505,8 @@ router.get('/blog/what-is-sciatica', (req, res) => {
 // NOTE: This general route must come AFTER specific blog post routes
 router.get('/blog', (req, res) => {
     res.render('public/blog/index', {
-        title: 'Health & Wellness Blog | FixMySpine',
-        metaDescription: 'Expert advice on spinal health, back pain relief, and wellness. Read evidence-based articles from healthcare professionals.'
+        title: 'Health & Wellness Blog | Fix My Spine',
+        description: 'Expert advice on spinal health, back pain relief, and wellness. Read evidence-based articles from healthcare professionals.'
     });
 });
 
