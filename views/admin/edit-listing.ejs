@@ -192,8 +192,9 @@
                                 <!-- Website -->
                                 <div class="col-md-6 mb-3">
                                     <label for="website" class="form-label">Website</label>
-                                    <input type="url" class="form-control" id="website" name="website" 
-                                           value="<%= business.website || '' %>" placeholder="https://example.com">
+                                    <input type="text" class="form-control" id="website" name="website" 
+                                           value="<%= business.website || '' %>" placeholder="https://example.com"
+                                           pattern="https?://.+" title="Please enter a valid URL starting with http:// or https://">
                                 </div>
 
                                 <!-- Description -->

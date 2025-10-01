@@ -259,11 +259,13 @@
                     <div class="form-group">
                         <label for="website">Website</label>
                         <input 
-                            type="url" 
+                            type="text" 
                             id="website" 
                             name="website" 
                             value="<%= typeof formData !== 'undefined' && formData.website ? formData.website : '' %>"
                             placeholder="https://www.example.com"
+                            pattern="https?://.+"
+                            title="Please enter a valid URL starting with http:// or https://"
                         >
                     </div>
                 </div>
