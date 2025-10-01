@@ -158,6 +158,30 @@ router.get('/search', async (req, res) => {
             ORDER BY state ASC, suburb ASC
         `);
         
+        // Get category name if category filter is applied
+        let categoryName = null;
+        if (category && category !== '') {
+            const [categoryResult] = await pool.execute(
+                'SELECT name FROM categories WHERE id = ?',
+                [category]
+            );
+            if (categoryResult.length > 0) {
+                categoryName = categoryResult[0].name;
+            }
+        }
+
+        // Get location name if location filter is applied
+        let locationName = null;
+        if (location && location !== '') {
+            const [locationResult] = await pool.execute(
+                'SELECT suburb, state FROM locations WHERE id = ?',
+                [location]
+            );
+            if (locationResult.length > 0) {
+                locationName = `${locationResult[0].suburb}, ${locationResult[0].state}`;
+            }
+        }
+
         // Construct SEO-optimized title and description for search results
         const searchTitle = `Search Results${keyword ? ` for "${keyword}"` : ''} | Fix My Spine`;
         const searchDescription = keyword 
@@ -170,6 +194,8 @@ router.get('/search', async (req, res) => {
             listings,
             categories,
             locations,
+            categoryName,
+            locationName,
             searchParams: { keyword, category, location }
         });
     } catch (error) {
