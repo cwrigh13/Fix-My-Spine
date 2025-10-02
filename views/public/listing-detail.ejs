@@ -27,6 +27,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Google Maps JavaScript API -->
+    <% if (typeof googleMapsApiKey !== 'undefined' && googleMapsApiKey) { %>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&libraries=places&callback=initMap"></script>
+    <% } else { %>
+        <script>
+            console.warn('Google Maps API key not configured');
+            // Fallback function if API key is not available
+            function initMap() {
+                showMapError('Google Maps API key not configured');
+            }
+        </script>
+    <% } %>
+    
     <!-- Schema.org JSON-LD Markup -->
     <script type="application/ld+json">
     {
@@ -447,6 +460,70 @@
                         </div>
                     </div>
                 <% } %>
+
+                <!-- Google Reviews -->
+                <% if (typeof googleReviews !== 'undefined' && googleReviews && googleReviews.length > 0) { %>
+                    <div class="card">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-heading font-bold text-text">Google Reviews</h2>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-sm font-medium text-blue-600">Verified Reviews</span>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <% googleReviews.forEach(review => { %>
+                                <div class="border-b border-border pb-6 last:border-b-0 last:pb-0">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-semibold mr-3">
+                                                <%= review.reviewer_name.charAt(0) %>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-text"><%= review.reviewer_name %></p>
+                                                <div class="rating-stars flex items-center">
+                                                    <% for (let i = 1; i <= 5; i++) { %>
+                                                        <% if (i <= review.rating) { %>
+                                                            <svg class="w-4 h-4 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                                            </svg>
+                                                        <% } else { %>
+                                                            <svg class="w-4 h-4 text-gray-300 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                                            </svg>
+                                                        <% } %>
+                                                    <% } %>
+                                                    <span class="ml-2 text-sm text-muted"><%= review.rating %>/5</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="text-sm text-muted">
+                                            <%= new Date(review.review_date).toLocaleDateString() %>
+                                        </span>
+                                    </div>
+                                    <% if (review.comment) { %>
+                                        <p class="text-text leading-relaxed"><%= review.comment %></p>
+                                    <% } %>
+                                </div>
+                            <% }); %>
+                        </div>
+                        <% if (business.google_review_count && business.google_review_count > googleReviews.length) { %>
+                            <div class="mt-6 pt-4 border-t border-border">
+                                <p class="text-sm text-muted text-center">
+                                    Showing <%= googleReviews.length %> of <%= business.google_review_count %> Google reviews. 
+                                    <a href="https://www.google.com/maps/place/?q=place_id:<%= business.google_place_id %>" 
+                                       target="_blank" 
+                                       rel="noopener noreferrer" 
+                                       class="text-blue-600 hover:text-blue-800 font-medium">
+                                        View all reviews on Google Maps
+                                    </a>
+                                </p>
+                            </div>
+                        <% } %>
+                    </div>
+                <% } %>
             </div>
 
             <!-- Right Column - Sidebar -->
@@ -454,13 +531,16 @@
                 <!-- Map -->
                 <div class="card">
                     <h2 class="text-lg font-heading font-bold text-text mb-4">Location</h2>
-                    <div class="bg-muted/20 rounded-lg h-48 flex items-center justify-center">
-                        <div class="text-center">
-                            <svg class="w-12 h-12 text-muted mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-                            </svg>
-                            <p class="text-muted">Interactive Map</p>
-                            <p class="text-sm text-muted"><%= business.suburb %>, <%= business.state %></p>
+                    <div id="map" class="rounded-lg h-48 w-full" style="min-height: 200px;">
+                        <!-- Fallback content while map loads -->
+                        <div id="map-loading" class="bg-muted/20 rounded-lg h-48 flex items-center justify-center">
+                            <div class="text-center">
+                                <svg class="w-12 h-12 text-muted mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                <p class="text-muted">Loading Map...</p>
+                                <p class="text-sm text-muted"><%= business.suburb %>, <%= business.state %></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -564,5 +644,188 @@
             </div>
         </div>
     </footer>
+
+    <!-- Google Maps Initialization Script -->
+    <script>
+        // Business location data from server
+        const businessData = {
+            name: '<%= business.business_name %>',
+            address: '<%= business.address || "" %>',
+            suburb: '<%= business.suburb %>',
+            state: '<%= business.state %>',
+            postcode: '<%= business.postcode %>',
+            phone: '<%= business.phone || "" %>',
+            website: '<%= business.website || "" %>'
+        };
+
+        // Construct full address for geocoding
+        const fullAddress = businessData.address 
+            ? `${businessData.address}, ${businessData.suburb}, ${businessData.state} ${businessData.postcode}`
+            : `${businessData.suburb}, ${businessData.state} ${businessData.postcode}`;
+
+        let map;
+        let geocoder;
+
+        // Initialize Google Map
+        function initMap() {
+            console.log('initMap() called');
+            console.log('Google Maps API available:', !!window.google);
+            console.log('Google Maps object available:', !!window.google?.maps);
+            
+            // Check if Google Maps API key is available
+            if (!window.google || !window.google.maps) {
+                console.error('Google Maps API not loaded');
+                showMapError('Google Maps API not available');
+                return;
+            }
+            
+            console.log('Google Maps API loaded successfully');
+            
+            // Add error handler for API authentication issues
+            window.gm_authFailure = function() {
+                console.error('Google Maps API authentication failed - check your API key');
+                showMapError('Google Maps authentication failed. Please check your API key configuration.');
+            };
+
+            // Initialize geocoder
+            geocoder = new google.maps.Geocoder();
+
+            // Default center (Australia)
+            const defaultCenter = { lat: -25.2744, lng: 133.7751 };
+
+            // Create map with error handling
+            try {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15,
+                    center: defaultCenter,
+                    mapTypeControl: false,
+                    streetViewControl: true,
+                    fullscreenControl: true,
+                    zoomControl: true,
+                    styles: [
+                        {
+                            featureType: 'poi',
+                            elementType: 'labels',
+                            stylers: [{ visibility: 'on' }]
+                        }
+                    ]
+                });
+            } catch (error) {
+                console.error('Error creating Google Map:', error);
+                showMapError('Unable to load map. Please check your Google Maps API configuration.');
+                return;
+            }
+
+            // Try to geocode the business address
+            console.log('Attempting to geocode address:', fullAddress);
+            geocoder.geocode({ address: fullAddress }, (results, status) => {
+                console.log('Geocoding status:', status);
+                console.log('Geocoding results:', results);
+                
+                if (status === 'OK' && results[0]) {
+                    const location = results[0].geometry.location;
+                    
+                    // Center map on business location
+                    map.setCenter(location);
+                    
+                    // Create custom marker
+                    const marker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        title: businessData.name,
+                        icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            scale: 8,
+                            fillColor: '#14B8A6', // Teal color matching your theme
+                            fillOpacity: 1,
+                            strokeColor: '#FFFFFF',
+                            strokeWeight: 2
+                        }
+                    });
+
+                    // Create info window
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `
+                            <div style="padding: 8px; max-width: 250px;">
+                                <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: bold; color: #1F2937;">
+                                    ${businessData.name}
+                                </h3>
+                                <p style="margin: 0 0 4px 0; font-size: 14px; color: #6B7280;">
+                                    ${fullAddress}
+                                </p>
+                                ${businessData.phone ? `
+                                    <p style="margin: 0 0 4px 0; font-size: 14px; color: #6B7280;">
+                                        📞 <a href="tel:${businessData.phone}" style="color: #14B8A6; text-decoration: none;">
+                                            ${businessData.phone}
+                                        </a>
+                                    </p>
+                                ` : ''}
+                                ${businessData.website ? `
+                                    <p style="margin: 0; font-size: 14px; color: #6B7280;">
+                                        🌐 <a href="${businessData.website}" target="_blank" style="color: #14B8A6; text-decoration: none;">
+                                            Visit Website
+                                        </a>
+                                    </p>
+                                ` : ''}
+                            </div>
+                        `
+                    });
+
+                    // Add click listener to marker
+                    marker.addListener('click', () => {
+                        infoWindow.open(map, marker);
+                    });
+
+                    // Hide loading indicator
+                    const loadingElement = document.getElementById('map-loading');
+                    if (loadingElement) {
+                        loadingElement.style.display = 'none';
+                    }
+
+                } else {
+                    console.error('Geocoding failed:', status);
+                    showMapError('Unable to locate business address');
+                }
+            });
+        }
+
+        // Show map error message
+        function showMapError(message) {
+            const mapContainer = document.getElementById('map');
+            const loadingElement = document.getElementById('map-loading');
+            
+            if (loadingElement) {
+                loadingElement.innerHTML = `
+                    <div class="text-center">
+                        <svg class="w-12 h-12 text-red-400 mx-auto mb-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        <p class="text-red-600 font-medium">${message}</p>
+                        <p class="text-sm text-muted mt-1">${businessData.suburb}, ${businessData.state}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Handle Google Maps API loading errors
+        window.gm_authFailure = function() {
+            console.error('Google Maps API authentication failed - check your API key');
+            showMapError('Google Maps authentication failed - check your API key');
+        };
+        
+        // Additional error handling
+        window.gm_err = function(error) {
+            console.error('Google Maps API error:', error);
+            showMapError('Google Maps API error: ' + error);
+        };
+
+        // Fallback if Google Maps doesn't load
+        setTimeout(() => {
+            if (!map) {
+                console.warn('Google Maps failed to load within timeout');
+                showMapError('Map failed to load');
+            }
+        }, 10000); // 10 second timeout
+    </script>
 </body>
 </html>

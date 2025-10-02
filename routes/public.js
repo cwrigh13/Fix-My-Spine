@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../config/database');
+const GoogleMapsService = require('../services/googleMapsService');
 
 // Homepage route - GET /
 router.get('/', async (req, res) => {
@@ -376,6 +377,8 @@ router.get('/listing/:id/:slug', async (req, res) => {
         
         const business = businessRows[0];
         console.log(`Found business: ${business.business_name}`);
+        console.log(`Google Place ID: ${business.google_place_id || 'Not set'}`);
+        console.log(`Google Rating: ${business.google_rating || 'Not set'}`);
         
         // Get all approved reviews for this business
         const reviewsResult = await pool.execute(`
@@ -391,6 +394,21 @@ router.get('/listing/:id/:slug', async (req, res) => {
         
         console.log(`Reviews found: ${reviews.length}`);
         
+        // Fetch Google reviews if available
+        let googleReviews = [];
+        try {
+            if (business.google_place_id) {
+                const googleMapsService = new GoogleMapsService();
+                googleReviews = await googleMapsService.getGoogleReviews(id, 5);
+                console.log(`Google reviews found: ${googleReviews.length}`);
+            } else {
+                console.log('No Google Place ID found for this business');
+            }
+        } catch (error) {
+            console.error('Error fetching Google reviews:', error.message);
+            googleReviews = [];
+        }
+        
         // Construct SEO-optimized title and description
         const seoTitle = `${business.business_name} - ${business.category_name} in ${business.suburb}, ${business.state} | Fix My Spine`;
         const seoDescription = `Find contact details, patient reviews, and services for ${business.business_name}, a trusted ${business.category_name} located in ${business.suburb}. Book an appointment today.`;
@@ -400,7 +418,9 @@ router.get('/listing/:id/:slug', async (req, res) => {
             description: seoDescription,
             canonicalUrl: `https://fixmyspine.com.au/listing/${id}/${slug}`,
             business,
-            reviews
+            reviews,
+            googleReviews,
+            googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY
         });
     } catch (error) {
         console.error('Error fetching listing details:', error);

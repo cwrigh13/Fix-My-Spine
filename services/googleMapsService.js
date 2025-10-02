@@ -118,7 +118,7 @@ class GoogleMapsService {
   }
 
   /**
-   * Update business with Google Maps rating data
+   * Update business with Google Maps rating data and store individual reviews
    * @param {number} businessId - Database business ID
    * @param {string} placeId - Google Place ID
    * @param {Object} placeData - Place data from Google API
@@ -128,6 +128,7 @@ class GoogleMapsService {
     try {
       const connection = await pool.getConnection();
       
+      // Update business with rating data
       await connection.execute(`
         UPDATE businesses 
         SET google_place_id = ?, 
@@ -137,6 +138,11 @@ class GoogleMapsService {
         WHERE id = ?
       `, [placeId, placeData.rating, placeData.reviewCount, businessId]);
 
+      // Store individual reviews if available
+      if (placeData.reviews && placeData.reviews.length > 0) {
+        await this.storeGoogleReviews(connection, businessId, placeData.reviews);
+      }
+
       connection.release();
       
       console.log(`✅ Updated business ${businessId} with Google rating: ${placeData.rating} (${placeData.reviewCount} reviews)`);
@@ -144,6 +150,47 @@ class GoogleMapsService {
     } catch (error) {
       console.error(`Error updating business ${businessId} with Google rating:`, error.message);
       return false;
+    }
+  }
+
+  /**
+   * Store Google reviews in the database
+   * @param {Object} connection - Database connection
+   * @param {number} businessId - Business ID
+   * @param {Array} reviews - Array of Google reviews
+   * @returns {Promise<void>}
+   */
+  async storeGoogleReviews(connection, businessId, reviews) {
+    try {
+      // Clear existing reviews for this business to avoid duplicates
+      await connection.execute(`
+        DELETE FROM google_reviews WHERE business_id = ?
+      `, [businessId]);
+
+      // Insert new reviews
+      for (const review of reviews) {
+        try {
+          await connection.execute(`
+            INSERT INTO google_reviews 
+            (business_id, google_review_id, reviewer_name, rating, comment, review_date)
+            VALUES (?, ?, ?, ?, ?, ?)
+          `, [
+            businessId,
+            review.author_name || 'Anonymous',
+            review.author_name || 'Anonymous',
+            review.rating || 0,
+            review.text || '',
+            review.time ? new Date(review.time * 1000) : new Date()
+          ]);
+        } catch (insertError) {
+          // Skip duplicate reviews or other insert errors
+          console.log(`Skipping review for business ${businessId}: ${insertError.message}`);
+        }
+      }
+
+      console.log(`✅ Stored ${reviews.length} Google reviews for business ${businessId}`);
+    } catch (error) {
+      console.error(`Error storing Google reviews for business ${businessId}:`, error.message);
     }
   }
 
@@ -327,6 +374,33 @@ class GoogleMapsService {
   normalizePhone(phone) {
     if (!phone) return '';
     return phone.replace(/[\s\-\(\)\+]/g, '').replace(/^61/, '0');
+  }
+
+  /**
+   * Get Google reviews for a specific business
+   * @param {number} businessId - Business ID
+   * @param {number} limit - Maximum number of reviews to return (default: 5)
+   * @returns {Promise<Array>} Array of Google reviews
+   */
+  async getGoogleReviews(businessId, limit = 5) {
+    try {
+      const connection = await pool.getConnection();
+      
+      const [reviews] = await connection.execute(`
+        SELECT reviewer_name, rating, comment, review_date, created_at
+        FROM google_reviews 
+        WHERE business_id = ?
+        ORDER BY review_date DESC, created_at DESC
+        LIMIT ${parseInt(limit)}
+      `, [businessId]);
+
+      connection.release();
+      
+      return reviews;
+    } catch (error) {
+      console.error(`Error fetching Google reviews for business ${businessId}:`, error.message);
+      return [];
+    }
   }
 
   /**
