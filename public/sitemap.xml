@@ -27,7 +27,7 @@
   </url>
   <url>
     <loc>https://fixmyspine.com.au/blog</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2025-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -684,19 +684,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fixmyspine.com.au/listing/73/sydney-spine-sports-clinic</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fixmyspine.com.au/listing/82/canberra-city-chiropractic</loc>
-    <lastmod>2025-10-01</lastmod>
+    <loc>https://fixmyspine.com.au/listing/104/clinic-27</loc>
+    <lastmod>2025-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://fixmyspine.com.au/listing/74/willoughby-physiotherapy-chiropractic</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fixmyspine.com.au/listing/73/sydney-spine-sports-clinic</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -744,55 +744,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fixmyspine.com.au/listing/51/fortitude-valley-chiropractic</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fixmyspine.com.au/listing/65/canberra-city-chiropractic</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fixmyspine.com.au/listing/63/unley-chiropractic-centre</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fixmyspine.com.au/listing/62/north-adelaide-physiotherapy</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fixmyspine.com.au/listing/61/adelaide-city-chiropractic</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fixmyspine.com.au/listing/60/claremont-chiropractic</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fixmyspine.com.au/listing/59/leederville-physiotherapy</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fixmyspine.com.au/listing/58/subiaco-chiropractic-centre</loc>
-    <lastmod>2025-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://fixmyspine.com.au/listing/57/north-perth-physiotherapy</loc>
+    <loc>https://fixmyspine.com.au/listing/82/canberra-city-chiropractic</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -870,13 +822,61 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://fixmyspine.com.au/listing/51/fortitude-valley-chiropractic</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://fixmyspine.com.au/listing/64/glenelg-physiotherapy</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fixmyspine.com.au/listing/43/fitzroy-chiropractic-wellness</loc>
+    <loc>https://fixmyspine.com.au/listing/63/unley-chiropractic-centre</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fixmyspine.com.au/listing/62/north-adelaide-physiotherapy</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fixmyspine.com.au/listing/61/adelaide-city-chiropractic</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fixmyspine.com.au/listing/60/claremont-chiropractic</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fixmyspine.com.au/listing/59/leederville-physiotherapy</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fixmyspine.com.au/listing/58/subiaco-chiropractic-centre</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fixmyspine.com.au/listing/57/north-perth-physiotherapy</loc>
+    <lastmod>2025-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fixmyspine.com.au/listing/65/canberra-city-chiropractic</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1026,8 +1026,8 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://fixmyspine.com.au/listing/21/sydney-spine-care-clinic</loc>
-    <lastmod>2025-09-30</lastmod>
+    <loc>https://fixmyspine.com.au/listing/43/fitzroy-chiropractic-wellness</loc>
+    <lastmod>2025-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1039,6 +1039,12 @@
   </url>
   <url>
     <loc>https://fixmyspine.com.au/listing/23/brisbane-back-pain-clinic</loc>
+    <lastmod>2025-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fixmyspine.com.au/listing/21/sydney-spine-care-clinic</loc>
     <lastmod>2025-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

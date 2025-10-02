@@ -53,7 +53,7 @@
         <% if (business.avg_rating && business.review_count > 0) { %>
         "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "<%= business.avg_rating.toFixed(1) %>",
+            "ratingValue": "<%= parseFloat(business.avg_rating).toFixed(1) %>",
             "reviewCount": "<%= business.review_count %>",
             "bestRating": "5",
             "worstRating": "1"
@@ -249,7 +249,7 @@
                                         const ratingSource = business.google_rating ? 'Google' : 'Patient';
                                         %>
                                         
-                                        <% if (displayRating && displayReviewCount > 0) { %>
+                                        <% if (displayRating && displayReviewCount > 0 && !isNaN(parseFloat(displayRating))) { %>
                                             <div class="rating-stars mb-1">
                                                 <% for (let i = 1; i <= 5; i++) { %>
                                                     <% if (i <= Math.round(displayRating)) { %>
@@ -263,7 +263,7 @@
                                                     <% } %>
                                                 <% } %>
                                                 <span class="ml-2 text-lg font-medium text-text">
-                                                    <%= displayRating.toFixed(1) %> (<%= displayReviewCount %> reviews)
+                                                    <%= parseFloat(displayRating).toFixed(1) %> (<%= displayReviewCount %> reviews)
                                                 </span>
                                             </div>
                                             
@@ -289,7 +289,7 @@
                                             <!-- Show both ratings if available -->
                                             <% if (business.google_rating && business.avg_rating) { %>
                                                 <div class="additional-rating mt-2 text-sm text-muted">
-                                                    Also rated <%= business.avg_rating.toFixed(1) %> by patients (<%= business.review_count %> reviews)
+                                                    Also rated <%= parseFloat(business.avg_rating).toFixed(1) %> by patients (<%= business.review_count %> reviews)
                                                 </div>
                                             <% } %>
                                         <% } else { %>

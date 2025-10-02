@@ -14,9 +14,12 @@
     "seed": "node seed.js",
     "seed:honest": "node seed_honest.js",
     "sitemap": "node scripts/generate-sitemap.js",
-    "sitemap:verbose": "node scripts/generate-sitemap.js --verbose"
+    "sitemap:verbose": "node scripts/generate-sitemap.js --verbose",
+    "google-ratings": "node scripts/update-google-ratings.js",
+    "google-ratings:test": "node scripts/update-google-ratings.js --limit 5 --dry-run"
   },
   "dependencies": {
+    "axios": "^1.12.2",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -35,8 +38,8 @@
     "@tailwindcss/cli": "^4.1.13",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.19",
-    "jest": "^30.2.0",
     "cheerio": "^1.0.0",
+    "jest": "^30.2.0",
     "supertest": "^7.1.4",
     "tailwindcss": "^4.1.13"
   }

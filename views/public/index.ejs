@@ -273,8 +273,13 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <% featuredListings.forEach(function(listing) { %>
-                    <% const avgRating = Number(listing.avg_rating || 0).toFixed(1); %>
-                    <% const reviewCount = Number(listing.review_count || 0); %>
+                    <% 
+                    // Prioritize Google rating over internal rating
+                    const displayRating = listing.google_rating || listing.avg_rating;
+                    const displayReviewCount = listing.google_review_count || listing.review_count;
+                    const avgRating = displayRating ? parseFloat(displayRating).toFixed(1) : '0.0';
+                    const reviewCount = Number(displayReviewCount || 0);
+                    %>
                     <% const slug = (listing.business_name || '').toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-'); %>
                     <a href="/listing/<%= listing.id %>/<%= slug %>" class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 p-6">
                         <div class="flex items-start justify-between">

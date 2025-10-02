@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
             const result = await pool.execute(`
                 SELECT b.*, c.name as category_name, c.slug as category_slug, 
                        l.suburb, l.state, l.postcode,
+                       b.google_rating, b.google_review_count, b.google_last_updated,
                        AVG(r.rating) as avg_rating,
                        COUNT(r.id) as review_count
                 FROM businesses b
@@ -89,19 +90,19 @@ router.get('/search', async (req, res) => {
         let searchLng = null;
         let locationName = null;
         
-        // If postcode is provided, look up its coordinates
+        // If postcode is provided, look up its location
         if (postcode && postcode.trim() && /^\d{4}$/.test(postcode.trim())) {
             const [locationResult] = await pool.execute(
-                `SELECT suburb, state, latitude, longitude 
+                `SELECT suburb, state, postcode 
                  FROM locations 
-                 WHERE postcode = ? AND latitude IS NOT NULL AND longitude IS NOT NULL
+                 WHERE postcode = ?
                  LIMIT 1`,
                 [postcode.trim()]
             );
             
             if (locationResult.length > 0) {
-                searchLat = locationResult[0].latitude;
-                searchLng = locationResult[0].longitude;
+                // Since we don't have latitude/longitude, we'll skip distance-based search
+                // but still set the location name for display
                 locationName = `${locationResult[0].suburb}, ${locationResult[0].state}`;
             }
         }
@@ -110,19 +111,11 @@ router.get('/search', async (req, res) => {
         let sql = `
             SELECT b.*, c.name as category_name, c.slug as category_slug,
                    l.suburb, l.state, l.postcode,
-                   l.latitude, l.longitude,
+                   b.google_rating, b.google_review_count, b.google_last_updated,
                    AVG(r.rating) as avg_rating,
                    COUNT(r.id) as review_count`;
         
-        // Add distance calculation if we have search coordinates
-        if (searchLat !== null && searchLng !== null) {
-            sql += `,
-                   (6371 * acos(
-                       cos(radians(?)) * cos(radians(l.latitude)) * 
-                       cos(radians(l.longitude) - radians(?)) + 
-                       sin(radians(?)) * sin(radians(l.latitude))
-                   )) AS distance_km`;
-        }
+        // Note: Distance calculation removed since latitude/longitude columns don't exist
         
         sql += `
             FROM businesses b
@@ -132,11 +125,6 @@ router.get('/search', async (req, res) => {
             WHERE b.is_approved = TRUE`;
         
         const params = [];
-        
-        // Add distance parameters if applicable
-        if (searchLat !== null && searchLng !== null) {
-            params.push(searchLat, searchLng, searchLat);
-        }
         
         // Add keyword search
         if (keyword && keyword.trim()) {
@@ -154,12 +142,8 @@ router.get('/search', async (req, res) => {
         // Group by business
         sql += ` GROUP BY b.id`;
         
-        // Order by proximity if we have coordinates, otherwise by premium tier and name
-        if (searchLat !== null && searchLng !== null) {
-            sql += ` ORDER BY (b.listing_tier = 'premium') DESC, distance_km ASC`;
-        } else {
-            sql += ` ORDER BY (b.listing_tier = 'premium') DESC, b.business_name ASC`;
-        }
+        // Order by premium tier and name
+        sql += ` ORDER BY (b.listing_tier = 'premium') DESC, b.business_name ASC`;
         
         const [listings] = await pool.execute(sql, params);
         
@@ -246,6 +230,7 @@ router.get('/category/:slug', async (req, res) => {
         const [listings] = await pool.execute(`
             SELECT b.*, c.name as category_name, c.slug as category_slug,
                    l.suburb, l.state, l.postcode,
+                   b.google_rating, b.google_review_count, b.google_last_updated,
                    AVG(r.rating) as avg_rating,
                    COUNT(r.id) as review_count
             FROM businesses b
@@ -311,6 +296,7 @@ router.get('/location/:suburb', async (req, res) => {
         const [listings] = await pool.execute(`
             SELECT b.*, c.name as category_name, c.slug as category_slug,
                    l.suburb, l.state, l.postcode,
+                   b.google_rating, b.google_review_count, b.google_last_updated,
                    AVG(r.rating) as avg_rating,
                    COUNT(r.id) as review_count
             FROM businesses b
@@ -363,6 +349,7 @@ router.get('/listing/:id/:slug', async (req, res) => {
         const businessResult = await pool.execute(`
             SELECT b.*, c.name as category_name, c.slug as category_slug,
                    l.suburb, l.state, l.postcode,
+                   b.google_rating, b.google_review_count, b.google_last_updated,
                    AVG(r.rating) as avg_rating,
                    COUNT(r.id) as review_count
             FROM businesses b
