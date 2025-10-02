@@ -9,7 +9,7 @@ const router = express.Router();
 // GET /admin/login - Render the admin login form
 router.get('/login', (req, res) => {
     // If user is already logged in as admin, redirect to dashboard
-    if (req.session && req.session.isAdmin) {
+    if (req.session && req.session.userId && req.session.isAdmin) {
         return res.redirect('/admin/dashboard');
     }
     
@@ -38,39 +38,36 @@ router.post('/login', async (req, res) => {
         // Find user by email and check if they are admin
         const query = 'SELECT id, name, email, password FROM users WHERE email = ? AND is_admin = TRUE';
         
-        pool.execute(query, [email], async (err, results) => {
-            if (err) {
-                console.error('Database error:', err);
-                req.session.loginError = 'An error occurred. Please try again.';
-                return res.redirect('/admin/login');
-            }
-            
-            if (results.length === 0) {
-                req.session.loginError = 'Invalid email or password';
-                return res.redirect('/admin/login');
-            }
-            
-            const user = results[0];
-            
-            // Compare the provided password with the hashed password
-            const isPasswordValid = await bcrypt.compare(password, user.password);
-            
-            if (!isPasswordValid) {
-                req.session.loginError = 'Invalid email or password';
-                return res.redirect('/admin/login');
-            }
-            
-            // Set admin session
-            req.session.isAdmin = true;
-            req.session.adminUser = {
-                id: user.id,
-                name: user.name,
-                email: user.email
-            };
-            
-            // Redirect to admin dashboard
-            res.redirect('/admin/dashboard');
-        });
+        const [results] = await pool.execute(query, [email]);
+        
+        if (results.length === 0) {
+            req.session.loginError = 'Invalid email or password';
+            return res.redirect('/admin/login');
+        }
+        
+        const user = results[0];
+        
+        // Compare the provided password with the hashed password
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        
+        if (!isPasswordValid) {
+            req.session.loginError = 'Invalid email or password';
+            return res.redirect('/admin/login');
+        }
+        
+        // Set admin session - ensure consistency with middleware expectations
+        req.session.userId = user.id;
+        req.session.userName = user.name;
+        req.session.userEmail = user.email;
+        req.session.isAdmin = true;
+        req.session.adminUser = {
+            id: user.id,
+            name: user.name,
+            email: user.email
+        };
+        
+        // Redirect to admin dashboard
+        res.redirect('/admin/dashboard');
         
     } catch (error) {
         console.error('Login error:', error);
