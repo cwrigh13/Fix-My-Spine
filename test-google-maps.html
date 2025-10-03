@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #map { height: 400px; width: 100%; border: 1px solid #ccc; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    </style>
+</head>
+<body>
+    <h1>Google Maps API Test</h1>
+    
+    <div id="status" class="status info">
+        Testing Google Maps API...
+    </div>
+    
+    <div id="map"></div>
+    
+    <div id="console-output">
+        <h3>Console Output:</h3>
+        <pre id="console-log"></pre>
+    </div>
+
+    <!-- Replace YOUR_API_KEY with your actual API key -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdov3fgJAvqWBNx8GCUoc2PtnEe9cp_fc&callback=initMap"></script>
+    
+    <script>
+        let map;
+        const statusDiv = document.getElementById('status');
+        const consoleLog = document.getElementById('console-log');
+        
+        function log(message) {
+            console.log(message);
+            consoleLog.textContent += message + '\n';
+        }
+        
+        function updateStatus(message, type = 'info') {
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+        }
+        
+        function initMap() {
+            log('initMap() called');
+            
+            try {
+                if (!window.google || !window.google.maps) {
+                    throw new Error('Google Maps API not loaded');
+                }
+                
+                log('Google Maps API loaded successfully');
+                updateStatus('✅ Google Maps API loaded successfully!', 'success');
+                
+                // Test geocoding with Sydney address
+                const geocoder = new google.maps.Geocoder();
+                const testAddress = 'Suite 1, Level 1, 44 Bridge Street, Sydney NSW 2000';
+                
+                log(`Testing geocoding with address: ${testAddress}`);
+                
+                geocoder.geocode({ address: testAddress }, (results, status) => {
+                    log(`Geocoding status: ${status}`);
+                    
+                    if (status === 'OK' && results[0]) {
+                        const location = results[0].geometry.location;
+                        log(`Geocoding successful: ${location.lat()}, ${location.lng()}`);
+                        
+                        // Create map
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 15,
+                            center: location,
+                            mapTypeControl: false,
+                            streetViewControl: true,
+                            fullscreenControl: true
+                        });
+                        
+                        // Add marker
+                        const marker = new google.maps.Marker({
+                            position: location,
+                            map: map,
+                            title: 'Test Location'
+                        });
+                        
+                        updateStatus('✅ Map loaded and geocoding successful!', 'success');
+                        log('Map and marker created successfully');
+                        
+                    } else {
+                        log(`Geocoding failed: ${status}`);
+                        updateStatus(`❌ Geocoding failed: ${status}`, 'error');
+                        
+                        // Show default map anyway
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 10,
+                            center: { lat: -33.8688, lng: 151.2093 }, // Sydney
+                            mapTypeControl: false
+                        });
+                    }
+                });
+                
+            } catch (error) {
+                log(`Error: ${error.message}`);
+                updateStatus(`❌ Error: ${error.message}`, 'error');
+            }
+        }
+        
+        // Handle API loading errors
+        window.gm_authFailure = function() {
+            log('Google Maps API authentication failed');
+            updateStatus('❌ Google Maps API authentication failed - check your API key', 'error');
+        };
+        
+        // Timeout fallback
+        setTimeout(() => {
+            if (!map) {
+                log('Map failed to load within 10 seconds');
+                updateStatus('❌ Map failed to load - check API key and network connection', 'error');
+            }
+        }, 10000);
+        
+        // Log initial state
+        log('Page loaded, waiting for Google Maps API...');
+    </script>
+</body>
+</html>
