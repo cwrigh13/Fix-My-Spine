@@ -4,313 +4,273 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <style>
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .form-header {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        
-        .form-title {
-            color: #2c3e50;
-            margin: 0 0 10px 0;
-        }
-        
-        .form-subtitle {
-            color: #7f8c8d;
-            margin: 0;
-        }
-        
-        .back-link {
-            color: #3498db;
-            text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-        
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        
-        .form-card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        
-        .required {
-            color: #e74c3c;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-        
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
-        .error-message {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .submit-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e0e0e0;
-        }
-        
-        .btn-submit {
-            background-color: #27ae60;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .btn-submit:hover {
-            background-color: #229954;
-        }
-        
-        .btn-cancel {
-            background-color: #95a5a6;
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        
-        .btn-cancel:hover {
-            background-color: #7f8c8d;
-        }
-        
-        .help-text {
-            font-size: 12px;
-            color: #7f8c8d;
-            margin-top: 5px;
-        }
-        
-        .tier-info {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 4px;
-            margin-top: 10px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .tier-info h4 {
-            margin: 0 0 10px 0;
-            color: #2c3e50;
-        }
-        
-        .tier-info ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-        
-        .tier-info li {
-            margin-bottom: 5px;
-            color: #555;
-        }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/dist.css?v=7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="form-container">
-        <a href="/dashboard" class="back-link">← Back to Dashboard</a>
-        
-        <div class="form-header">
-            <h1 class="form-title">Submit New Listing</h1>
-            <p class="form-subtitle">Add your business to our directory</p>
-        </div>
-        
-        <% if (typeof error !== 'undefined' && error) { %>
-            <div class="error-message">
-                <%= error %>
+<body class="bg-background">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 w-full">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-heading font-bold text-primary">
+                        FixMySpine
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/about" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="/blog/" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                        <a href="/contact" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <% if (typeof user !== 'undefined' && user) { %>
+                            <a href="/dashboard" class="text-primary font-semibold px-3 py-2 rounded-md text-sm">Dashboard</a>
+                            <% if (user.isAdmin) { %>
+                                <a href="/admin/dashboard" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Admin</a>
+                            <% } %>
+                            <a href="/logout" class="btn-secondary">Logout</a>
+                        <% } else { %>
+                            <a href="/login" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                            <a href="/register" class="btn-primary">List Your Practice</a>
+                        <% } %>
+                    </div>
+                </div>
             </div>
-        <% } %>
-        
-        <div class="form-card">
-            <form method="POST" action="/dashboard/submit">
-                <div class="form-group">
-                    <label for="business_name">Business Name <span class="required">*</span></label>
-                    <input 
-                        type="text" 
-                        id="business_name" 
-                        name="business_name" 
-                        value="<%= typeof formData !== 'undefined' && formData.business_name ? formData.business_name : '' %>"
-                        required
-                    >
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-16 min-h-screen">
+        <div class="max-w-3xl mx-auto px-3 sm:px-4 lg:px-6 w-full">
+            <a href="/dashboard" class="inline-flex items-center text-primary hover:text-primary/80 mb-6 text-sm font-medium">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Dashboard
+            </a>
+            
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-4xl font-heading font-bold text-text mb-2">Submit New Listing</h1>
+                <p class="text-muted">Add your business to our directory</p>
+            </div>
+            
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="bg-red-50 border-l-4 border-red-500 text-red-800 p-4 mb-6 rounded">
+                    <%= error %>
                 </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="category_id">Category <span class="required">*</span></label>
-                        <select id="category_id" name="category_id" required>
-                            <option value="">Select a category</option>
-                            <% categories.forEach(function(category) { %>
-                                <option 
-                                    value="<%= category.id %>"
-                                    <%= (typeof formData !== 'undefined' && formData.category_id == category.id) ? 'selected' : '' %>
-                                >
-                                    <%= category.name %>
-                                </option>
-                            <% }); %>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="location_id">Location <span class="required">*</span></label>
-                        <select id="location_id" name="location_id" required>
-                            <option value="">Select a location</option>
-                            <% locations.forEach(function(location) { %>
-                                <option 
-                                    value="<%= location.id %>"
-                                    <%= (typeof formData !== 'undefined' && formData.location_id == location.id) ? 'selected' : '' %>
-                                >
-                                    <%= location.suburb %>, <%= location.state %> <%= location.postcode %>
-                                </option>
-                            <% }); %>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input 
-                        type="text" 
-                        id="address" 
-                        name="address" 
-                        value="<%= typeof formData !== 'undefined' && formData.address ? formData.address : '' %>"
-                        placeholder="Street address"
-                    >
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input 
-                            type="tel" 
-                            id="phone" 
-                            name="phone" 
-                            value="<%= typeof formData !== 'undefined' && formData.phone ? formData.phone : '' %>"
-                            placeholder="(02) 1234 5678"
-                        >
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="website">Website</label>
+            <% } %>
+            
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <form method="POST" action="/dashboard/submit" class="space-y-6">
+                    <div>
+                        <label for="business_name" class="block text-sm font-semibold text-text mb-2">
+                            Business Name <span class="text-red-600">*</span>
+                        </label>
                         <input 
                             type="text" 
-                            id="website" 
-                            name="website" 
-                            value="<%= typeof formData !== 'undefined' && formData.website ? formData.website : '' %>"
-                            placeholder="https://www.example.com"
-                            pattern="https?://.+"
-                            title="Please enter a valid URL starting with http:// or https://"
+                            id="business_name" 
+                            name="business_name" 
+                            value="<%= typeof formData !== 'undefined' && formData.business_name ? formData.business_name : '' %>"
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
                         >
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="description">Business Description</label>
-                    <textarea 
-                        id="description" 
-                        name="description" 
-                        placeholder="Describe your business, services, and what makes you unique..."
-                    ><%= typeof formData !== 'undefined' && formData.description ? formData.description : '' %></textarea>
-                    <div class="help-text">Tell potential customers about your business and services</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="listing_tier">Listing Tier</label>
-                    <select id="listing_tier" name="listing_tier">
-                        <option value="free" <%= (typeof formData !== 'undefined' && formData.listing_tier === 'free') || (typeof formData === 'undefined') ? 'selected' : '' %>>Free Listing</option>
-                        <option value="premium" <%= (typeof formData !== 'undefined' && formData.listing_tier === 'premium') ? 'selected' : '' %>>Premium Listing</option>
-                    </select>
                     
-                    <div class="tier-info">
-                        <h4>Free Listing</h4>
-                        <ul>
-                            <li>Basic business information</li>
-                            <li>Contact details</li>
-                            <li>Standard search visibility</li>
-                        </ul>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="category_id" class="block text-sm font-semibold text-text mb-2">
+                                Category <span class="text-red-600">*</span>
+                            </label>
+                            <select 
+                                id="category_id" 
+                                name="category_id" 
+                                required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                            >
+                                <option value="">Select a category</option>
+                                <% categories.forEach(function(category) { %>
+                                    <option 
+                                        value="<%= category.id %>"
+                                        <%= (typeof formData !== 'undefined' && formData.category_id == category.id) ? 'selected' : '' %>
+                                    >
+                                        <%= category.name %>
+                                    </option>
+                                <% }); %>
+                            </select>
+                        </div>
                         
-                        <h4>Premium Listing</h4>
-                        <ul>
-                            <li>All free listing features</li>
-                            <li>Enhanced visibility in search results</li>
-                            <li>Featured placement</li>
-                            <li>Priority customer support</li>
-                        </ul>
+                        <div>
+                            <label for="location_id" class="block text-sm font-semibold text-text mb-2">
+                                Location <span class="text-red-600">*</span>
+                            </label>
+                            <select 
+                                id="location_id" 
+                                name="location_id" 
+                                required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                            >
+                                <option value="">Select a location</option>
+                                <% locations.forEach(function(location) { %>
+                                    <option 
+                                        value="<%= location.id %>"
+                                        <%= (typeof formData !== 'undefined' && formData.location_id == location.id) ? 'selected' : '' %>
+                                    >
+                                        <%= location.suburb %>, <%= location.state %> <%= location.postcode %>
+                                    </option>
+                                <% }); %>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="submit-buttons">
-                    <button type="submit" class="btn-submit">Submit Listing</button>
-                    <a href="/dashboard" class="btn-cancel">Cancel</a>
-                </div>
-            </form>
+                    
+                    <div>
+                        <label for="address" class="block text-sm font-semibold text-text mb-2">
+                            Address
+                        </label>
+                        <input 
+                            type="text" 
+                            id="address" 
+                            name="address" 
+                            value="<%= typeof formData !== 'undefined' && formData.address ? formData.address : '' %>"
+                            placeholder="Street address"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                        >
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold text-text mb-2">
+                                Phone Number
+                            </label>
+                            <input 
+                                type="tel" 
+                                id="phone" 
+                                name="phone" 
+                                value="<%= typeof formData !== 'undefined' && formData.phone ? formData.phone : '' %>"
+                                placeholder="(02) 1234 5678"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="website" class="block text-sm font-semibold text-text mb-2">
+                                Website
+                            </label>
+                            <input 
+                                type="text" 
+                                id="website" 
+                                name="website" 
+                                value="<%= typeof formData !== 'undefined' && formData.website ? formData.website : '' %>"
+                                placeholder="https://www.example.com"
+                                pattern="https?://.+"
+                                title="Please enter a valid URL starting with http:// or https://"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                            >
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="description" class="block text-sm font-semibold text-text mb-2">
+                            Business Description
+                        </label>
+                        <textarea 
+                            id="description" 
+                            name="description" 
+                            rows="5"
+                            placeholder="Describe your business, services, and what makes you unique..."
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition resize-vertical"
+                        ><%= typeof formData !== 'undefined' && formData.description ? formData.description : '' %></textarea>
+                        <p class="text-sm text-muted mt-1">Tell potential customers about your business and services</p>
+                    </div>
+                    
+                    <div>
+                        <label for="listing_tier" class="block text-sm font-semibold text-text mb-2">
+                            Listing Tier
+                        </label>
+                        <select 
+                            id="listing_tier" 
+                            name="listing_tier"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                        >
+                            <option value="free" <%= (typeof formData !== 'undefined' && formData.listing_tier === 'free') || (typeof formData === 'undefined') ? 'selected' : '' %>>Free Listing</option>
+                            <option value="premium" <%= (typeof formData !== 'undefined' && formData.listing_tier === 'premium') ? 'selected' : '' %>>Premium Listing</option>
+                        </select>
+                        
+                        <div class="mt-4 p-4 bg-secondary rounded-lg border-l-4 border-primary">
+                            <div class="mb-4">
+                                <h4 class="font-semibold text-text mb-2">Free Listing</h4>
+                                <ul class="space-y-1 text-sm text-muted">
+                                    <li>• Basic business information</li>
+                                    <li>• Contact details</li>
+                                    <li>• Standard search visibility</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-semibold text-text mb-2">Premium Listing</h4>
+                                <ul class="space-y-1 text-sm text-muted">
+                                    <li>• All free listing features</li>
+                                    <li>• Enhanced visibility in search results</li>
+                                    <li>• Featured placement</li>
+                                    <li>• Priority customer support</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 pt-4 border-t border-gray-200">
+                        <button type="submit" class="btn-accent">
+                            Submit Listing
+                        </button>
+                        <a href="/dashboard" class="btn-secondary">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-text text-white py-12">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <p class="text-xl font-heading font-bold mb-4">FixMySpine</p>
+                    <p class="text-white/80">
+                        Connecting Australians with trusted healthcare professionals.
+                    </p>
+                </div>
+                <div>
+                    <p class="font-semibold mb-4">Company</p>
+                    <ul class="space-y-2">
+                        <li><a href="/about" class="text-white/80 hover:text-white">About Us</a></li>
+                        <li><a href="/contact" class="text-white/80 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold mb-4">For Practitioners</p>
+                    <ul class="space-y-2">
+                        <li><a href="/register" class="text-white/80 hover:text-white">Register</a></li>
+                        <li><a href="/login" class="text-white/80 hover:text-white">Login</a></li>
+                        <li><a href="/dashboard" class="text-white/80 hover:text-white">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold mb-4">Legal</p>
+                    <ul class="space-y-2">
+                        <li><a href="/terms-of-service" class="text-white/80 hover:text-white">Terms of Service</a></li>
+                        <li><a href="/privacy-policy" class="text-white/80 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/20 mt-8 pt-8 text-center">
+                <p class="text-white/80">&copy; 2024 FixMySpine. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -4,439 +4,371 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <style>
-        .dashboard-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        
-        .dashboard-title {
-            color: #2c3e50;
-            margin: 0;
-        }
-        
-        .submit-btn {
-            background-color: #27ae60;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        
-        .submit-btn:hover {
-            background-color: #229954;
-        }
-        
-        .welcome-message {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .success-message {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .listings-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .listings-table th {
-            background-color: #34495e;
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: bold;
-        }
-        
-        .listings-table td {
-            padding: 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .listings-table tr:hover {
-            background-color: #f8f9fa;
-        }
-        
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        
-        .status-pending {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        
-        .status-approved {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        
-        .status-cancelled {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn-edit {
-            background-color: #3498db;
-            color: white;
-            padding: 6px 12px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 12px;
-            transition: background-color 0.3s;
-        }
-        
-        .btn-edit:hover {
-            background-color: #2980b9;
-        }
-        
-        .btn-delete {
-            background-color: #e74c3c;
-            color: white;
-            padding: 6px 12px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 12px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .btn-delete:hover {
-            background-color: #c0392b;
-        }
-        
-        .no-listings {
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .no-listings h3 {
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-        
-        .listing-tier {
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 12px;
-            background-color: #ecf0f1;
-            color: #2c3e50;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-        
-        .tier-premium {
-            background-color: #f39c12;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/dist.css?v=7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="dashboard-container">
-        <div class="dashboard-header">
-            <h1 class="dashboard-title">Business Dashboard</h1>
-            <div style="display: flex; gap: 10px;">
-                <a href="/dashboard/billing" class="submit-btn" style="background-color: #3498db;">Manage Billing</a>
-                <a href="/dashboard/submit" class="submit-btn">Submit New Listing</a>
-            </div>
-        </div>
-        
-        <div class="welcome-message">
-            <h2 class="h3">Welcome back, <%= user.name %>!</h2>
-            <p>Manage your business listings below. You can submit new listings, edit existing ones, or delete them as needed.</p>
-        </div>
-        
-        <% if (typeof successMessage !== 'undefined' && successMessage) { %>
-            <div class="success-message">
-                <%= successMessage %>
-            </div>
-        <% } %>
-        
-        <% if (listings && listings.length > 0) { %>
-            <table class="listings-table">
-                <thead>
-                    <tr>
-                        <th>Business Name</th>
-                        <th>Category</th>
-                        <th>Location</th>
-                        <th>Tier</th>
-                        <th>Subscription</th>
-                        <th>Status</th>
-                        <th>Created</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% listings.forEach(function(listing) { %>
-                        <tr>
-                            <td>
-                                <strong><%= listing.business_name %></strong>
-                                <% if (listing.address) { %>
-                                    <br><small style="color: #7f8c8d;"><%= listing.address %></small>
-                                <% } %>
-                            </td>
-                            <td><%= listing.category_name %></td>
-                            <td><%= listing.suburb %>, <%= listing.state %> <%= listing.postcode %></td>
-                            <td>
-                                <span class="listing-tier <%= listing.listing_tier === 'premium' ? 'tier-premium' : '' %>">
-                                    <%= listing.listing_tier %>
-                                </span>
-                            </td>
-                            <td>
-                                <% if (listing.subscription_status) { %>
-                                    <span class="status-badge <%= listing.subscription_status === 'active' ? 'status-approved' : (listing.subscription_status === 'past_due' ? 'status-pending' : 'status-cancelled') %>">
-                                        <%= listing.subscription_status.replace('_', ' ') %>
-                                    </span>
-                                    <% if (listing.subscription_ends_at) { %>
-                                        <br><small style="color: #7f8c8d;">
-                                            Expires: <%= new Date(listing.subscription_ends_at).toLocaleDateString() %>
-                                        </small>
-                                    <% } %>
-                                <% } else { %>
-                                    <span style="color: #7f8c8d; font-size: 12px;">No subscription</span>
-                                <% } %>
-                            </td>
-                            <td>
-                                <span class="status-badge <%= listing.is_approved ? 'status-approved' : 'status-pending' %>">
-                                    <%= listing.is_approved ? 'Approved' : 'Pending' %>
-                                </span>
-                            </td>
-                            <td><%= new Date(listing.created_at).toLocaleDateString() %></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <a href="/dashboard/listings/<%= listing.id %>/edit" class="btn-edit">Edit</a>
-                                    <button class="btn-delete" onclick="confirmDelete(<%= listing.id %>, '<%= listing.business_name %>')">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-        <% } else { %>
-            <div class="no-listings">
-                <h2 class="h3">No Listings Yet</h2>
-                <p>You haven't submitted any business listings yet.</p>
-                <p><a href="/dashboard/submit" class="submit-btn" style="display: inline-block; margin-top: 15px;">Submit Your First Listing</a></p>
-            </div>
-        <% } %>
-        
-        <!-- Pricing Information Section -->
-        <div style="margin-bottom: 30px;">
-            <h2 class="h3" style="color: #2c3e50; margin-bottom: 20px;">Listing Plans & Pricing</h2>
-            <p style="color: #7f8c8d; margin-bottom: 20px;">Choose the plan that's right for your practice. Upgrade anytime to unlock premium features and reach more patients.</p>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                
-                <!-- Basic Plan Card -->
-                <div style="background: white; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 2px solid #e0e0e0;">
-                    <div style="margin-bottom: 20px;">
-                        <h3 style="font-size: 24px; font-weight: bold; color: #2c3e50; margin-bottom: 10px;">Basic Listing</h3>
-                        <div style="margin-bottom: 15px;">
-                            <span style="font-size: 36px; font-weight: bold; color: #27ae60;">Free</span>
-                            <span style="color: #7f8c8d; margin-left: 8px;">Forever</span>
-                        </div>
-                        <p style="color: #7f8c8d;">Perfect for getting started and testing the platform</p>
-                    </div>
-
-                    <ul style="list-style: none; padding: 0; margin-bottom: 20px; color: #2c3e50;">
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #27ae60; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span>Basic business profile with name and location</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #27ae60; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span>Contact information display</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #27ae60; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span>Category and specialty tags</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #27ae60; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span>Brief description (up to 250 characters)</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #27ae60; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span>Patient reviews and ratings</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #95a5a6; margin-right: 10px; font-weight: bold;">✗</span>
-                            <span style="color: #95a5a6;">Standard placement in search results</span>
-                        </li>
-                    </ul>
-
-                    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; border-left: 4px solid #27ae60;">
-                        <p style="margin: 0; font-size: 14px; color: #2c3e50;"><strong>Current Plan:</strong> Free listings are great for getting started and maintaining an online presence.</p>
-                    </div>
-                </div>
-
-                <!-- Premium Plan Card -->
-                <div style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); border-radius: 8px; padding: 30px; box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3); position: relative;">
-                    <div style="position: absolute; top: 0; right: 0; background-color: #f39c12; color: white; padding: 6px 16px; border-radius: 0 8px 0 8px; font-size: 12px; font-weight: bold;">
-                        MOST POPULAR
-                    </div>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <h3 style="font-size: 24px; font-weight: bold; color: white; margin-bottom: 10px;">Premium Annual Listing</h3>
-                        <div style="margin-bottom: 5px;">
-                            <span style="font-size: 36px; font-weight: bold; color: white;">$499</span>
-                            <span style="color: rgba(255,255,255,0.9); margin-left: 8px;">per year</span>
-                        </div>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 13px; margin-bottom: 10px;">That's just $1.37 per day to grow your practice</p>
-                        <p style="color: rgba(255,255,255,0.9);">Maximum visibility and all the features you need to stand out</p>
-                    </div>
-
-                    <ul style="list-style: none; padding: 0; margin-bottom: 20px; color: white;">
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #f39c12; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span style="font-weight: 600;">Everything in Basic, PLUS:</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #f39c12; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span><strong>Priority placement</strong> at the top of search results</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #f39c12; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span><strong>Photo gallery</strong> (up to 10 images)</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #f39c12; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span><strong>Extended description</strong> (unlimited characters)</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #f39c12; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span><strong>Direct website link</strong> to drive traffic to your site</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #f39c12; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span><strong>Social media links</strong> integration</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #f39c12; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span><strong>Featured badge</strong> on your profile</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #f39c12; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span><strong>Business hours</strong> display</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #f39c12; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span><strong>Performance analytics</strong> and insights</span>
-                        </li>
-                        <li style="padding: 8px 0; display: flex; align-items: start;">
-                            <span style="color: #f39c12; margin-right: 10px; font-weight: bold;">✓</span>
-                            <span><strong>Priority support</strong></span>
-                        </li>
-                    </ul>
-
-                    <a href="/dashboard/billing" style="display: block; background-color: #f39c12; color: white; text-align: center; padding: 14px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: background-color 0.3s;">
-                        Upgrade to Premium
+<body class="bg-background">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 w-full">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-heading font-bold text-primary">
+                        FixMySpine
                     </a>
-                    
-                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);">
-                        <p style="margin: 0; text-align: center; color: rgba(255,255,255,0.8); font-size: 13px;">
-                            <strong>30-Day Money-Back Guarantee</strong> • Cancel Anytime
-                        </p>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/about" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="/blog/" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Blog</a>
+                        <a href="/contact" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <% if (typeof user !== 'undefined' && user) { %>
+                            <a href="/dashboard" class="text-primary font-semibold px-3 py-2 rounded-md text-sm">Dashboard</a>
+                            <% if (user.isAdmin) { %>
+                                <a href="/admin/dashboard" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Admin</a>
+                            <% } %>
+                            <a href="/logout" class="btn-secondary">Logout</a>
+                        <% } else { %>
+                            <a href="/login" class="text-text hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                            <a href="/register" class="btn-primary">List Your Practice</a>
+                        <% } %>
                     </div>
                 </div>
             </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-16 min-h-screen">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 w-full">
+            <!-- Header -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-heading font-bold text-text mb-2">Business Dashboard</h1>
+                    <p class="text-muted">Welcome back, <%= user.name %>! Manage your business listings below.</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="/dashboard/billing" class="btn-primary">Manage Billing</a>
+                    <a href="/dashboard/submit" class="btn-accent">Submit New Listing</a>
+                </div>
+            </div>
             
-            <!-- Upgrade Benefits Banner -->
-            <div style="margin-top: 20px; background: linear-gradient(90deg, #27ae60 0%, #229954 100%); border-radius: 8px; padding: 20px; color: white;">
-                <div style="display: flex; align-items: center; justify-content: space-between;">
-                    <div style="flex: 1;">
-                        <h3 style="margin: 0 0 8px 0; font-size: 20px; font-weight: bold;">Premium listings get 5-7x more profile views!</h3>
-                        <p style="margin: 0; color: rgba(255,255,255,0.9);">Stand out from the competition with priority placement and enhanced features. No lock-in contracts.</p>
+            <% if (typeof successMessage !== 'undefined' && successMessage) { %>
+                <div class="bg-green-50 border-l-4 border-green-500 text-green-800 p-4 mb-6 rounded">
+                    <%= successMessage %>
+                </div>
+            <% } %>
+            
+            <!-- Listings Table or Empty State -->
+            <% if (listings && listings.length > 0) { %>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-text text-white">
+                                <tr>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Business Name</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Category</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Location</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Tier</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Subscription</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Status</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Created</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <% listings.forEach(function(listing) { %>
+                                    <tr class="hover:bg-secondary transition-colors">
+                                        <td class="px-6 py-4">
+                                            <div class="font-semibold text-text"><%= listing.business_name %></div>
+                                            <% if (listing.address) { %>
+                                                <div class="text-sm text-muted mt-1"><%= listing.address %></div>
+                                            <% } %>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-text"><%= listing.category_name %></td>
+                                        <td class="px-6 py-4 text-sm text-text"><%= listing.suburb %>, <%= listing.state %> <%= listing.postcode %></td>
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase <%= listing.listing_tier === 'premium' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-700' %>">
+                                                <%= listing.listing_tier %>
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <% if (listing.subscription_status) { %>
+                                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase <%= listing.subscription_status === 'active' ? 'bg-green-100 text-green-800' : (listing.subscription_status === 'past_due' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') %>">
+                                                    <%= listing.subscription_status.replace('_', ' ') %>
+                                                </span>
+                                                <% if (listing.subscription_ends_at) { %>
+                                                    <div class="text-xs text-muted mt-1">
+                                                        Expires: <%= new Date(listing.subscription_ends_at).toLocaleDateString() %>
+                                                    </div>
+                                                <% } %>
+                                            <% } else { %>
+                                                <span class="text-xs text-muted">No subscription</span>
+                                            <% } %>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase <%= listing.is_approved ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' %>">
+                                                <%= listing.is_approved ? 'Approved' : 'Pending' %>
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm text-text"><%= new Date(listing.created_at).toLocaleDateString() %></td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex gap-2">
+                                                <a href="/dashboard/listings/<%= listing.id %>/edit" class="text-primary hover:text-primary/80 text-sm font-medium underline">Edit</a>
+                                                <button type="button" onclick="confirmDelete(<%= listing.id %>, '<%= listing.business_name.replace(/'/g, "\\'") %>')" class="text-red-600 hover:text-red-800 text-sm font-medium underline bg-transparent border-0 cursor-pointer">Delete</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
                     </div>
-                    <div style="margin-left: 20px;">
-                        <a href="/dashboard/billing" style="display: inline-block; background-color: white; color: #27ae60; padding: 12px 24px; border-radius: 5px; text-decoration: none; font-weight: bold; white-space: nowrap;">
+                </div>
+            <% } else { %>
+                <div class="bg-white rounded-lg shadow-md p-12 text-center">
+                    <h2 class="text-2xl font-heading font-bold text-text mb-4">No Listings Yet</h2>
+                    <p class="text-muted mb-6">You haven't submitted any business listings yet.</p>
+                    <a href="/dashboard/submit" class="btn-primary inline-block">Submit Your First Listing</a>
+                </div>
+            <% } %>
+            
+            <!-- Pricing Information Section -->
+            <section class="mt-12">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-heading font-bold text-text mb-3">
+                        Listing Plans & Pricing
+                    </h2>
+                    <p class="text-muted max-w-2xl mx-auto">
+                        Choose the plan that's right for your practice. Upgrade anytime to unlock premium features and reach more patients.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Basic Plan Card -->
+                    <div class="bg-white rounded-lg shadow-md p-8 border-2 border-gray-200">
+                        <h3 class="text-2xl font-heading font-bold text-text mb-4">Basic Listing</h3>
+                        <div class="mb-6">
+                            <span class="text-4xl font-bold text-accent">Free</span>
+                            <span class="text-muted ml-2">Forever</span>
+                        </div>
+                        <p class="text-muted mb-6">Perfect for getting started and testing the platform</p>
+                        
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-text">Basic business profile with name and location</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-text">Contact information display</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-text">Category and specialty tags</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-text">Brief description (up to 250 characters)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-accent mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-text">Patient reviews and ratings</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="bg-secondary p-4 rounded border-l-4 border-accent">
+                            <p class="text-sm text-text"><strong>Current Plan:</strong> Free listings are great for getting started and maintaining an online presence.</p>
+                        </div>
+                    </div>
+
+                    <!-- Premium Plan Card -->
+                    <div class="bg-gradient-to-br from-primary to-primary/90 rounded-lg shadow-lg p-8 relative text-white">
+                        <div class="absolute top-0 right-0 bg-yellow-500 text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-xs font-bold">
+                            MOST POPULAR
+                        </div>
+                        
+                        <h3 class="text-2xl font-heading font-bold mb-4">Premium Annual Listing</h3>
+                        <div class="mb-2">
+                            <span class="text-4xl font-bold">$499</span>
+                            <span class="ml-2">per year</span>
+                        </div>
+                        <p class="text-sm mb-2 opacity-90">That's just $1.37 per day to grow your practice</p>
+                        <p class="mb-6 opacity-95">Maximum visibility and all the features you need to stand out</p>
+                        
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="font-semibold">Everything in Basic, PLUS:</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Priority placement</strong> at the top of search results</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Photo gallery</strong> (up to 10 images)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Extended description</strong> (unlimited characters)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Direct website link</strong> to drive traffic to your site</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Social media links</strong> integration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Featured badge</strong> on your profile</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Business hours</strong> display</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Performance analytics</strong> and insights</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Priority support</strong></span>
+                            </li>
+                        </ul>
+                        
+                        <a href="/dashboard/billing" class="block bg-yellow-500 hover:bg-yellow-600 text-white text-center py-3 rounded-lg font-bold transition-colors mb-4">
+                            Upgrade to Premium
+                        </a>
+                        
+                        <div class="border-t border-white/20 pt-4 text-center">
+                            <p class="text-sm opacity-90">
+                                <strong>30-Day Money-Back Guarantee</strong> • Cancel Anytime
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Upgrade Benefits Banner -->
+                <div class="bg-gradient-to-r from-accent to-accent/90 rounded-lg p-6 mb-8 text-white">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-heading font-bold mb-2">Premium listings get 5-7x more profile views!</h3>
+                            <p class="opacity-95">Stand out from the competition with priority placement and enhanced features. No lock-in contracts.</p>
+                        </div>
+                        <a href="/dashboard/billing" class="btn-secondary whitespace-nowrap">
                             Upgrade to Premium
                         </a>
                     </div>
                 </div>
-            </div>
-            
-            <!-- FAQ Section -->
-            <div style="margin-top: 30px;">
-                <h3 style="color: #2c3e50; margin-bottom: 15px; font-size: 20px; font-weight: bold;">Frequently Asked Questions</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        <h4 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 16px;">How do I upgrade?</h4>
-                        <p style="color: #7f8c8d; margin: 0; font-size: 14px;">You can upgrade anytime from your billing page. Your upgrade takes effect immediately, and you'll only be charged for the remaining period if you're mid-billing cycle.</p>
-                    </div>
-                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        <h4 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 16px;">Is there a contract?</h4>
-                        <p style="color: #7f8c8d; margin: 0; font-size: 14px;">No lock-in contracts! Premium is billed annually, but you can cancel at any time. Your premium features remain active until the end of your paid period.</p>
-                    </div>
-                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        <h4 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 16px;">What payment methods are accepted?</h4>
-                        <p style="color: #7f8c8d; margin: 0; font-size: 14px;">We accept all major credit cards (Visa, Mastercard, American Express) and bank transfers. All payments are processed securely through Stripe.</p>
-                    </div>
-                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        <h4 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 16px;">Multiple locations discount?</h4>
-                        <p style="color: #7f8c8d; margin: 0; font-size: 14px;">Yes! If you operate multiple clinics, please <a href="/contact" style="color: #3498db; text-decoration: underline;">contact us</a> for custom pricing options tailored to your needs.</p>
+                
+                <!-- FAQ Section -->
+                <div>
+                    <h3 class="text-xl font-heading font-bold text-text mb-6">Frequently Asked Questions</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h4 class="font-semibold text-text mb-2">How do I upgrade?</h4>
+                            <p class="text-sm text-muted">You can upgrade anytime from your billing page. Your upgrade takes effect immediately, and you'll only be charged for the remaining period if you're mid-billing cycle.</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h4 class="font-semibold text-text mb-2">Is there a contract?</h4>
+                            <p class="text-sm text-muted">No lock-in contracts! Premium is billed annually, but you can cancel at any time. Your premium features remain active until the end of your paid period.</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h4 class="font-semibold text-text mb-2">What payment methods are accepted?</h4>
+                            <p class="text-sm text-muted">We accept all major credit cards (Visa, Mastercard, American Express) and bank transfers. All payments are processed securely through Stripe.</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h4 class="font-semibold text-text mb-2">Multiple locations discount?</h4>
+                            <p class="text-sm text-muted">Yes! If you operate multiple clinics, please <a href="/contact" class="text-primary underline">contact us</a> for custom pricing options tailored to your needs.</p>
+                        </div>
                     </div>
                 </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-text text-white py-12">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <p class="text-xl font-heading font-bold mb-4">FixMySpine</p>
+                    <p class="text-white/80">
+                        Connecting Australians with trusted healthcare professionals.
+                    </p>
+                </div>
+                <div>
+                    <p class="font-semibold mb-4">Company</p>
+                    <ul class="space-y-2">
+                        <li><a href="/about" class="text-white/80 hover:text-white">About Us</a></li>
+                        <li><a href="/contact" class="text-white/80 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold mb-4">For Practitioners</p>
+                    <ul class="space-y-2">
+                        <li><a href="/register" class="text-white/80 hover:text-white">Register</a></li>
+                        <li><a href="/login" class="text-white/80 hover:text-white">Login</a></li>
+                        <li><a href="/dashboard" class="text-white/80 hover:text-white">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold mb-4">Legal</p>
+                    <ul class="space-y-2">
+                        <li><a href="/terms-of-service" class="text-white/80 hover:text-white">Terms of Service</a></li>
+                        <li><a href="/privacy-policy" class="text-white/80 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/20 mt-8 pt-8 text-center">
+                <p class="text-white/80">&copy; 2024 FixMySpine. All rights reserved.</p>
             </div>
         </div>
-    </div>
+    </footer>
     
     <script>
         function confirmDelete(listingId, businessName) {
             if (confirm('Are you sure you want to delete "' + businessName + '"? This action cannot be undone.')) {
-                // Create a form to submit the delete request
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = '/dashboard/listings/' + listingId + '/delete';
-                
-                // Add CSRF token if needed (you might want to add this)
-                // const csrfInput = document.createElement('input');
-                // csrfInput.type = 'hidden';
-                // csrfInput.name = '_csrf';
-                // csrfInput.value = 'CSRF_TOKEN_HERE';
-                // form.appendChild(csrfInput);
-                
                 document.body.appendChild(form);
                 form.submit();
             }
