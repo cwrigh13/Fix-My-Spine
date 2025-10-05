@@ -94,15 +94,57 @@
                         <% } %>
                     </div>
                 </div>
-                
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-text hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-        
+
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
+                <a href="/" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="/about" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="/blog/" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="/contact" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <a href="/dashboard" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+                    <% if (user.isAdmin) { %>
+                        <a href="/admin/dashboard" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Admin</a>
+                    <% } %>
+                    <a href="/logout" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Logout</a>
+                <% } else { %>
+                    <a href="/login" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Login</a>
+                    <a href="/register" class="bg-primary text-white hover:bg-primary/90 block px-3 py-2 rounded-md text-base font-medium">List Your Practice</a>
+                <% } %>
+            </div>
+        </div>
     </nav>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
     
 
     <!-- Article Header -->
-    <article class="pt-24 pb-16">
+    <article class="pt-32 pb-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Breadcrumbs -->
             <nav class="mb-8">
@@ -130,10 +172,20 @@
             </header>
 
             <!-- Featured Notice -->
-            <div class="bg-accent/10 border-l-4 border-accent p-6 mb-10 rounded-r-lg">
-                <p class="text-text">
-                    <strong>Medical Disclaimer:</strong> This article is for informational purposes only and should not replace professional medical advice. If you're experiencing severe or persistent back pain, please consult with a healthcare professional before starting any exercise program.
-                </p>
+            <div class="bg-yellow-50 border-2 border-yellow-500 rounded-lg p-6 mb-10 shadow-md">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-lg font-semibold text-yellow-900 mb-2">Medical Disclaimer</h3>
+                        <p class="text-yellow-800">
+                            This article is for informational purposes only and should not replace professional medical advice. If you're experiencing severe or persistent back pain, please consult with a healthcare professional before starting any exercise program.
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <!-- Article Content -->
@@ -203,9 +255,9 @@
                     <div class="card mb-10">
                         <h3 class="text-2xl font-heading font-bold text-primary mb-4">1. Cat-Cow Stretch (Marjaryasana-Bitilasana)</h3>
                         
-                        <div class="bg-accent/5 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-text/70 mb-2"><strong>Target Areas:</strong> Entire spine, core muscles, shoulders</p>
-                            <p class="text-sm text-text/70"><strong>Difficulty:</strong> Beginner</p>
+                        <div class="border-2 border-black rounded-lg px-5 py-6 mb-4">
+                            <p class="text-sm text-text mb-2 pl-6 mt-4"><strong>Target Areas:</strong> Entire spine, core muscles, shoulders</p>
+                            <p class="text-sm text-text pl-6 mb-4"><strong>Difficulty:</strong> Beginner</p>
                         </div>
 
                         <p class="text-lg text-text mb-4">
@@ -226,13 +278,25 @@
                             Perform 10-15 repetitions, moving slowly and smoothly. The entire sequence should take about 2-3 minutes.
                         </p>
 
-                        <div class="bg-primary/5 border-l-4 border-primary p-4 rounded-r">
-                            <h5 class="font-semibold text-text mb-2">Pro Tips:</h5>
-                            <ul class="space-y-2 text-text">
-                                <li>• Move slowly and deliberately—this isn't a race</li>
-                                <li>• Keep your breathing smooth and coordinated with movement</li>
-                                <li>• Avoid forcing the movement; let it happen naturally</li>
-                                <li>• If you have knee pain, place a folded towel under your knees for cushioning</li>
+                        <div class="bg-blue-50 border-2 border-blue-300 px-5 py-6 rounded-lg">
+                            <h5 class="font-semibold text-blue-900 mb-4 pl-6 mt-4">Pro Tips:</h5>
+                            <ul class="space-y-3 text-blue-900 pl-6 mb-4">
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Move slowly and deliberately—this isn't a race</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Keep your breathing smooth and coordinated with movement</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Avoid forcing the movement; let it happen naturally</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>If you have knee pain, place a folded towel under your knees for cushioning</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -241,9 +305,9 @@
                     <div class="card mb-10">
                         <h3 class="text-2xl font-heading font-bold text-primary mb-4">2. Bird Dog Exercise</h3>
                         
-                        <div class="bg-accent/5 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-text/70 mb-2"><strong>Target Areas:</strong> Core muscles, lower back, glutes, shoulders</p>
-                            <p class="text-sm text-text/70"><strong>Difficulty:</strong> Beginner to Intermediate</p>
+                        <div class="border-2 border-black rounded-lg px-5 py-6 mb-4">
+                            <p class="text-sm text-text mb-2 pl-6 mt-4"><strong>Target Areas:</strong> Core muscles, lower back, glutes, shoulders</p>
+                            <p class="text-sm text-text pl-6 mb-4"><strong>Difficulty:</strong> Beginner to Intermediate</p>
                         </div>
 
                         <p class="text-lg text-text mb-4">
@@ -265,14 +329,29 @@
                             Perform 3 sets of 10 repetitions on each side (20 total reps per set). Rest 30 seconds between sets.
                         </p>
 
-                        <div class="bg-primary/5 border-l-4 border-primary p-4 rounded-r">
-                            <h5 class="font-semibold text-text mb-2">Pro Tips:</h5>
-                            <ul class="space-y-2 text-text">
-                                <li>• Focus on keeping your hips level and square to the floor—avoid rotating</li>
-                                <li>• Don't arch your lower back; maintain a neutral spine throughout</li>
-                                <li>• Start with just arm movements or leg movements if the full exercise is too challenging</li>
-                                <li>• Imagine balancing a glass of water on your lower back to help maintain stability</li>
-                                <li>• Keep your extended arm and leg in line with your torso, not reaching higher</li>
+                        <div class="bg-blue-50 border-2 border-blue-300 px-5 py-6 rounded-lg">
+                            <h5 class="font-semibold text-blue-900 mb-4 pl-6 mt-4">Pro Tips:</h5>
+                            <ul class="space-y-3 text-blue-900 pl-6 mb-4">
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Focus on keeping your hips level and square to the floor—avoid rotating</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Don't arch your lower back; maintain a neutral spine throughout</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Start with just arm movements or leg movements if the full exercise is too challenging</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Imagine balancing a glass of water on your lower back to help maintain stability</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Keep your extended arm and leg in line with your torso, not reaching higher</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -281,9 +360,9 @@
                     <div class="card mb-10">
                         <h3 class="text-2xl font-heading font-bold text-primary mb-4">3. Pelvic Tilts</h3>
                         
-                        <div class="bg-accent/5 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-text/70 mb-2"><strong>Target Areas:</strong> Lower back, abdominal muscles, pelvic floor</p>
-                            <p class="text-sm text-text/70"><strong>Difficulty:</strong> Beginner</p>
+                        <div class="border-2 border-black rounded-lg px-5 py-6 mb-4">
+                            <p class="text-sm text-text mb-2 pl-6 mt-4"><strong>Target Areas:</strong> Lower back, abdominal muscles, pelvic floor</p>
+                            <p class="text-sm text-text pl-6 mb-4"><strong>Difficulty:</strong> Beginner</p>
                         </div>
 
                         <p class="text-lg text-text mb-4">
@@ -306,14 +385,29 @@
                             Perform 15-20 repetitions, moving slowly between positions. The exercise should take about 3-4 minutes.
                         </p>
 
-                        <div class="bg-primary/5 border-l-4 border-primary p-4 rounded-r">
-                            <h5 class="font-semibold text-text mb-2">Pro Tips:</h5>
-                            <ul class="space-y-2 text-text">
-                                <li>• Keep the movement small and controlled—you're not doing sit-ups</li>
-                                <li>• Focus on using your abdominal muscles, not pushing with your legs</li>
-                                <li>• Keep your upper body and shoulders relaxed throughout</li>
-                                <li>• This is an excellent exercise to perform first thing in the morning to loosen a stiff back</li>
-                                <li>• Can be performed on your bed if getting down to the floor is difficult</li>
+                        <div class="bg-blue-50 border-2 border-blue-300 px-5 py-6 rounded-lg">
+                            <h5 class="font-semibold text-blue-900 mb-4 pl-6 mt-4">Pro Tips:</h5>
+                            <ul class="space-y-3 text-blue-900 pl-6 mb-4">
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Keep the movement small and controlled—you're not doing sit-ups</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Focus on using your abdominal muscles, not pushing with your legs</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Keep your upper body and shoulders relaxed throughout</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>This is an excellent exercise to perform first thing in the morning to loosen a stiff back</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Can be performed on your bed if getting down to the floor is difficult</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -322,9 +416,9 @@
                     <div class="card mb-10">
                         <h3 class="text-2xl font-heading font-bold text-primary mb-4">4. Knee to Chest Stretch</h3>
                         
-                        <div class="bg-accent/5 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-text/70 mb-2"><strong>Target Areas:</strong> Lower back, glutes, hip flexors</p>
-                            <p class="text-sm text-text/70"><strong>Difficulty:</strong> Beginner</p>
+                        <div class="border-2 border-black rounded-lg px-5 py-6 mb-4">
+                            <p class="text-sm text-text mb-2 pl-6 mt-4"><strong>Target Areas:</strong> Lower back, glutes, hip flexors</p>
+                            <p class="text-sm text-text pl-6 mb-4"><strong>Difficulty:</strong> Beginner</p>
                         </div>
 
                         <p class="text-lg text-text mb-4">
@@ -347,15 +441,33 @@
                             Perform 2-3 repetitions on each leg, holding each stretch for 20-30 seconds. Include 2-3 double knee to chest stretches.
                         </p>
 
-                        <div class="bg-primary/5 border-l-4 border-primary p-4 rounded-r">
-                            <h5 class="font-semibold text-text mb-2">Pro Tips:</h5>
-                            <ul class="space-y-2 text-text">
-                                <li>• Never force or bounce the stretch—use gentle, steady pressure</li>
-                                <li>• Keep your head and shoulders relaxed on the floor</li>
-                                <li>• If you feel any sharp pain, reduce the intensity or skip this exercise</li>
-                                <li>• For the extended leg, actively press it into the floor to increase the stretch</li>
-                                <li>• This stretch can be performed in bed before getting up in the morning</li>
-                                <li>• Place a small pillow under your head if you find it more comfortable</li>
+                        <div class="bg-blue-50 border-2 border-blue-300 px-5 py-6 rounded-lg">
+                            <h5 class="font-semibold text-blue-900 mb-4 pl-6 mt-4">Pro Tips:</h5>
+                            <ul class="space-y-3 text-blue-900 pl-6 mb-4">
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Never force or bounce the stretch—use gentle, steady pressure</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Keep your head and shoulders relaxed on the floor</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>If you feel any sharp pain, reduce the intensity or skip this exercise</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>For the extended leg, actively press it into the floor to increase the stretch</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>This stretch can be performed in bed before getting up in the morning</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Place a small pillow under your head if you find it more comfortable</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -364,9 +476,9 @@
                     <div class="card mb-10">
                         <h3 class="text-2xl font-heading font-bold text-primary mb-4">5. Bridge Exercise (Glute Bridge)</h3>
                         
-                        <div class="bg-accent/5 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-text/70 mb-2"><strong>Target Areas:</strong> Glutes, hamstrings, lower back, core</p>
-                            <p class="text-sm text-text/70"><strong>Difficulty:</strong> Beginner to Intermediate</p>
+                        <div class="border-2 border-black rounded-lg px-5 py-6 mb-4">
+                            <p class="text-sm text-text mb-2 pl-6 mt-4"><strong>Target Areas:</strong> Glutes, hamstrings, lower back, core</p>
+                            <p class="text-sm text-text pl-6 mb-4"><strong>Difficulty:</strong> Beginner to Intermediate</p>
                         </div>
 
                         <p class="text-lg text-text mb-4">
@@ -388,15 +500,33 @@
                             Perform 3 sets of 12-15 repetitions. Rest 30-60 seconds between sets.
                         </p>
 
-                        <div class="bg-primary/5 border-l-4 border-primary p-4 rounded-r">
-                            <h5 class="font-semibold text-text mb-2">Pro Tips:</h5>
-                            <ul class="space-y-2 text-text">
-                                <li>• Focus on lifting with your glutes and hamstrings, not by arching your lower back</li>
-                                <li>• Keep your knees in line with your feet—don't let them collapse inward</li>
-                                <li>• Avoid overextending at the top; your body should form a straight line, not an arch</li>
-                                <li>• Press your arms and shoulders firmly into the floor for stability</li>
-                                <li>• To increase difficulty, try holding the top position for 10-30 seconds, or perform single-leg bridges</li>
-                                <li>• Breathe out as you lift, breathe in as you lower</li>
+                        <div class="bg-blue-50 border-2 border-blue-300 px-5 py-6 rounded-lg">
+                            <h5 class="font-semibold text-blue-900 mb-4 pl-6 mt-4">Pro Tips:</h5>
+                            <ul class="space-y-3 text-blue-900 pl-6 mb-4">
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Focus on lifting with your glutes and hamstrings, not by arching your lower back</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Keep your knees in line with your feet—don't let them collapse inward</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Avoid overextending at the top; your body should form a straight line, not an arch</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Press your arms and shoulders firmly into the floor for stability</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>To increase difficulty, try holding the top position for 10-30 seconds, or perform single-leg bridges</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-blue-600 mr-3 flex-shrink-0">•</span>
+                                    <span>Breathe out as you lift, breathe in as you lower</span>
+                                </li>
                             </ul>
                         </div>
                     </div>

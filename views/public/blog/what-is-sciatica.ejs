@@ -95,15 +95,57 @@
                         <% } %>
                     </div>
                 </div>
-                
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-text hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-        
+
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
+                <a href="/" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="/about" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="/blog/" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Blog</a>
+                <a href="/contact" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <a href="/dashboard" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+                    <% if (user.isAdmin) { %>
+                        <a href="/admin/dashboard" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Admin</a>
+                    <% } %>
+                    <a href="/logout" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Logout</a>
+                <% } else { %>
+                    <a href="/login" class="text-text hover:text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Login</a>
+                    <a href="/register" class="bg-primary text-white hover:bg-primary/90 block px-3 py-2 rounded-md text-base font-medium">List Your Practice</a>
+                <% } %>
+            </div>
+        </div>
     </nav>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
     
 
     <!-- Article Header -->
-    <article class="pt-24 pb-16">
+    <article class="pt-32 pb-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Breadcrumbs -->
             <nav class="mb-8">
@@ -131,10 +173,20 @@
             </header>
 
             <!-- Featured Notice -->
-            <div class="bg-accent/10 border-l-4 border-accent p-6 mb-10 rounded-r-lg">
-                <p class="text-text">
-                    <strong>Medical Disclaimer:</strong> This article provides general information about sciatica and should not replace professional medical diagnosis or treatment. Always consult with a qualified healthcare professional for proper assessment and personalized treatment recommendations.
-                </p>
+            <div class="bg-yellow-50 border-2 border-yellow-500 rounded-lg p-6 mb-10 shadow-md">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-lg font-semibold text-yellow-900 mb-2">Medical Disclaimer</h3>
+                        <p class="text-yellow-800">
+                            This article provides general information about sciatica and should not replace professional medical diagnosis or treatment. Always consult with a qualified healthcare professional for proper assessment and personalized treatment recommendations.
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <!-- Article Content -->
@@ -175,10 +227,19 @@
                         When something irritates, inflames, or compresses the sciatic nerve, it can cause pain and other neurological symptoms that radiate along the nerve's pathway. This is what we call <em>sciatica</em> or <em>sciatic neuralgia</em>.
                     </p>
 
-                    <div class="bg-primary/5 border-l-4 border-primary p-6 mb-6 rounded-r-lg">
-                        <p class="text-text">
-                            <strong>Key Point:</strong> Sciatica is a symptom, not a disease. The underlying cause of sciatic nerve irritation needs to be identified and addressed for effective treatment.
-                        </p>
+                    <div class="bg-blue-50 border-2 border-blue-300 p-5 rounded-lg mb-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mr-3">
+                                <svg class="h-5 w-5 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-blue-900">
+                                    <strong class="text-blue-900">Key Point:</strong> Sciatica is a symptom, not a disease. The underlying cause of sciatic nerve irritation needs to be identified and addressed for effective treatment.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -668,10 +729,19 @@
                         </div>
                     </div>
 
-                    <div class="bg-primary/5 border-l-4 border-primary p-6 mb-6 rounded-r-lg">
-                        <p class="text-text">
-                            <strong>Key Point:</strong> While most people recover within weeks, some residual symptoms or occasional flare-ups are common. The goal is functional improvement and pain management rather than necessarily achieving 100% pain-free status.
-                        </p>
+                    <div class="bg-blue-50 border-2 border-blue-300 p-5 rounded-lg mb-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mr-3">
+                                <svg class="h-5 w-5 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-blue-900">
+                                    <strong class="text-blue-900">Key Point:</strong> While most people recover within weeks, some residual symptoms or occasional flare-ups are common. The goal is functional improvement and pain management rather than necessarily achieving 100% pain-free status.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
