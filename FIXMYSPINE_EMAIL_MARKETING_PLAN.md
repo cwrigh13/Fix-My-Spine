@@ -165,7 +165,7 @@ Your practice appears at the top of search results when patients search for [Cat
 • Featured badge for credibility
 
 **Performance Analytics**
-Track how many patients view your profile, where they're coming from, and optimize your listing for better results.
+Track how many patients view your profile, where they're coming from, and optimise your listing for better results.
 
 **Special Introductory Offer**
 For the next 7 days, we're offering 20% off your first year of premium listing.
@@ -518,7 +518,7 @@ Footer: Standard compliance footer
 - [ ] Begin long-term nurture setup
 
 ### Phase 4: Optimization (Ongoing)
-- [ ] Analyze results and optimize
+- [ ] Analyse results and optimise
 - [ ] Refine segments and messaging
 - [ ] Launch long-term nurture campaigns
 - [ ] Scale successful tactics

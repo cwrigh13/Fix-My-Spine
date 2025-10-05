@@ -255,7 +255,7 @@ For 100 businesses:
 
 ### Custom Rating Display
 
-You can customize the rating display by modifying `views/public/listing-detail.ejs`:
+You can customise the rating display by modifying `views/public/listing-detail.ejs`:
 
 ```ejs
 <!-- Custom rating logic -->
@@ -287,6 +287,6 @@ After successful setup:
 1. **Monitor ratings** through the admin interface
 2. **Set up automated updates** via cron job
 3. **Consider premium features** like review text display
-4. **Optimize for SEO** with structured data markup
+4. **Optimise for SEO** with structured data markup
 
 The Google Maps integration will significantly enhance your directory's credibility by showing real, verified ratings from Google Maps users!

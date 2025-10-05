@@ -95,7 +95,7 @@ The `helpers/database.js` file provides utilities for:
 
 The test suite aims for comprehensive coverage of:
 - All admin routes and middleware
-- Authentication and authorization
+- Authentication and authorisation
 - Database operations
 - Error handling
 - Form validation

@@ -10,7 +10,7 @@ The sitemap system automatically generates and maintains a `sitemap.xml` file th
 
 - **Automatic Updates**: Sitemap regenerates when new listings are added or approved
 - **Comprehensive Coverage**: Includes static pages, categories, locations, and business listings
-- **SEO Optimized**: Proper XML formatting with priorities and change frequencies
+- **SEO Optimised**: Proper XML formatting with priorities and change frequencies
 - **Manual Control**: Scripts for manual generation and testing
 - **Error Handling**: Graceful handling of database errors and edge cases
 
@@ -166,7 +166,7 @@ The system handles various error scenarios:
 
 - **Batched Updates**: Multiple rapid changes are batched with a 30-second delay
 - **Queued Processing**: Prevents concurrent sitemap generation
-- **Efficient Queries**: Uses optimized database queries for content fetching
+- **Efficient Queries**: Uses optimised database queries for content fetching
 - **Cached Generation**: Serves existing sitemap when available
 
 ## SEO Benefits

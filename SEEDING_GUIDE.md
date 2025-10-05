@@ -184,7 +184,7 @@ The seeder includes businesses from:
 
 ### Professional Descriptions
 Each business includes a professional description highlighting:
-- Specialized services offered
+- Specialised services offered
 - Target patient demographics
 - Unique selling points
 - Geographic location benefits

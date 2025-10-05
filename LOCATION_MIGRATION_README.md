@@ -89,7 +89,7 @@ Population data is based on the Australian Bureau of Statistics (ABS) 2021 Censu
 
 ## Benefits
 
-1. **Personalized Results**: Users get practitioners sorted by actual proximity to their location
+1. **Personalised Results**: Users get practitioners sorted by actual proximity to their location
 2. **Better UX**: Simple postcode entry instead of scrolling through long dropdowns
 3. **Transparent Distance**: Users see exactly how far each practitioner is
 4. **Flexible Search**: Works with any valid Australian postcode in the database

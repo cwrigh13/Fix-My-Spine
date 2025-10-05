@@ -14,7 +14,7 @@ This document outlines the comprehensive public-facing features implemented for 
 - **Individual Listing Pages (GET /listing/:id/:slug)**: Detailed practitioner profiles with reviews
 
 #### Database Integration
-- Optimized SQL queries with proper JOINs for categories and locations
+- Optimised SQL queries with proper JOINs for categories and locations
 - Premium listings prioritized over free listings
 - Review aggregation for ratings display
 - Error handling for missing data
@@ -112,7 +112,7 @@ This document outlines the comprehensive public-facing features implemented for 
 ## 🛠 Technical Implementation
 
 ### Database Queries
-- Optimized SQL with proper indexing considerations
+- Optimised SQL with proper indexing considerations
 - JOIN operations for related data (categories, locations, reviews)
 - Error handling and graceful degradation
 - Parameterized queries for security
@@ -134,7 +134,7 @@ This document outlines the comprehensive public-facing features implemented for 
 ### Mobile-First Approach
 - Responsive grid layouts
 - Touch-friendly buttons and forms
-- Optimized typography for mobile screens
+- Optimised typography for mobile screens
 - Collapsible navigation menu
 
 ### Breakpoints
@@ -188,7 +188,7 @@ This document outlines the comprehensive public-facing features implemented for 
 - **Mobile-Friendly**: Responsive design for mobile search
 
 ### User Experience
-- **Fast Loading**: Optimized images and CSS
+- **Fast Loading**: Optimised images and CSS
 - **Clear Navigation**: Intuitive site structure
 - **Trust Signals**: Professional design and reviews
 - **Call-to-Actions**: Clear next steps for users
@@ -216,7 +216,7 @@ This document outlines the comprehensive public-facing features implemented for 
 - **Advanced Search**: Filters for ratings, distance, availability
 - **User Accounts**: Patient accounts for booking and reviews
 - **Payment Integration**: Online booking and payment processing
-- **Analytics**: User behavior tracking and insights
+- **Analytics**: User behaviour tracking and insights
 - **Mobile App**: Native mobile application
 - **API**: RESTful API for third-party integrations
 

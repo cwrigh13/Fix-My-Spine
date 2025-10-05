@@ -85,7 +85,7 @@ The full test data setup includes:
 - Chiropractor, Physiotherapist, Osteopath
 - Massage Therapist, Acupuncturist, Podiatrist
 - Sports Medicine, Rehabilitation Specialist
-- Pain Management, Wellness Center
+- Pain Management, Wellness Centre
 
 ### Locations
 - Major Australian cities (Sydney, Melbourne, Brisbane, Perth, Adelaide, etc.)

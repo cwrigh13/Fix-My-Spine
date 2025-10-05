@@ -167,7 +167,7 @@ router.get('/search', async (req, res) => {
             }
         }
 
-        // Construct SEO-optimized title and description for search results
+        // Construct SEO-optimised title and description for search results
         let searchTitle = 'Search Results';
         if (postcode && locationName) {
             searchTitle = `Practitioners near ${locationName} (${postcode})`;
@@ -250,7 +250,7 @@ router.get('/category/:slug', async (req, res) => {
             ORDER BY name ASC
         `);
         
-        // Construct SEO-optimized title and description
+        // Construct SEO-optimised title and description
         const seoTitle = `Find the Best ${category.name}s in Australia | Fix My Spine`;
         const seoDescription = `Browse our comprehensive directory of verified ${category.name}s. Read reviews, compare practitioners, and find the right specialist for your needs.`;
 
@@ -316,7 +316,7 @@ router.get('/location/:suburb', async (req, res) => {
             ORDER BY name ASC
         `);
         
-        // Construct SEO-optimized title and description
+        // Construct SEO-optimised title and description
         const seoTitle = `Top Chiropractors & Physios in ${location.suburb} | Fix My Spine`;
         const seoDescription = `Discover the top-rated allied health professionals in ${location.suburb}. Search our directory to find trusted practitioners near you.`;
 
@@ -409,7 +409,7 @@ router.get('/listing/:id/:slug', async (req, res) => {
             googleReviews = [];
         }
         
-        // Construct SEO-optimized title and description
+        // Construct SEO-optimised title and description
         const seoTitle = `${business.business_name} - ${business.category_name} in ${business.suburb}, ${business.state} | Fix My Spine`;
         const seoDescription = `Find contact details, patient reviews, and services for ${business.business_name}, a trusted ${business.category_name} located in ${business.suburb}. Book an appointment today.`;
 

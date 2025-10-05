@@ -232,7 +232,7 @@ Time:        2.456 s
 
 The test suite aims for comprehensive coverage including:
 - ✅ All admin routes
-- ✅ Authentication and authorization
+- ✅ Authentication and authorisation
 - ✅ Database operations
 - ✅ Form validation
 - ✅ Error handling

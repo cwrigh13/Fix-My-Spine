@@ -42,7 +42,7 @@ This checklist covers comprehensive testing of the FixMySpine healthcare profess
   - Try registering with an existing email
   - Expected: "An account with this email already exists" error message
 
-### Form Behavior Tests
+### Form Behaviour Tests
 - [ ] **Form data persistence on error**
   - Submit invalid data, verify name and email fields retain values
 - [ ] **Success message display**
@@ -77,7 +77,7 @@ This checklist covers comprehensive testing of the FixMySpine healthcare profess
   - Password: `wrongpassword`
   - Expected: "Invalid email or password" error message
 
-### Form Behavior Tests
+### Form Behaviour Tests
 - [ ] **Email field persistence**
   - Submit invalid login, verify email field retains value
 - [ ] **Registration success message**
@@ -108,7 +108,7 @@ This checklist covers comprehensive testing of the FixMySpine healthcare profess
   - Website: `invalid-url` or `ftp://example.com`
   - Expected: Browser validation error or form rejection
 
-### Form Behavior Tests
+### Form Behaviour Tests
 - [ ] **Form data persistence on error**
   - Submit invalid data, verify all fields retain values
 - [ ] **Dropdown population**
@@ -181,7 +181,7 @@ This checklist covers comprehensive testing of the FixMySpine healthcare profess
   - Buttons are accessible
 
 ### Tablet Testing (768px - 1024px)
-- [ ] **Navigation behavior**
+- [ ] **Navigation behaviour**
   - Menu adapts appropriately
   - Grid layouts adjust correctly
 
@@ -200,7 +200,7 @@ This checklist covers comprehensive testing of the FixMySpine healthcare profess
 ## 6. JavaScript Functionality Testing
 
 ### Search Bar Interactions
-- [ ] **Modern search field behavior**
+- [ ] **Modern search field behaviour**
   - Click on search field focuses input
   - Input click doesn't trigger field click
   - Text input adds `has-value` class when typing
@@ -332,7 +332,7 @@ This checklist covers comprehensive testing of the FixMySpine healthcare profess
   - Search results load efficiently
   - Dashboard loads promptly
 - [ ] **Resource optimization**
-  - Images are optimized
+  - Images are optimised
   - CSS/JS are minified
   - Database queries are efficient
 
@@ -371,7 +371,7 @@ This checklist covers comprehensive testing of the FixMySpine healthcare profess
   - Proper logout handling
 - [ ] **Admin access controls**
   - Admin routes protected
-  - Proper authorization checks
+  - Proper authorisation checks
 
 ---
 
@@ -416,7 +416,7 @@ Postcode: 3000
 - **Mobile Devices**: Test on actual devices when possible
 - **Network Conditions**: Test with slow connections
 - **Accessibility**: Check with screen readers and keyboard navigation
-- **Cross-browser**: Verify consistent behavior across browsers
+- **Cross-browser**: Verify consistent behaviour across browsers
 
 ## Completion Checklist
 

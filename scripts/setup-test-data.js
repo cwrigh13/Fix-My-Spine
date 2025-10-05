@@ -57,7 +57,7 @@ async function setupTestData() {
             'Sports Medicine',
             'Rehabilitation Specialist',
             'Pain Management',
-            'Wellness Center'
+            'Wellness Centre'
         ];
 
         for (const category of categories) {
@@ -184,7 +184,7 @@ async function setupTestData() {
                 address: '123 George Street, Sydney NSW 2000',
                 phone: '(02) 9123 4567',
                 website: 'https://sydneyspinecare.com.au',
-                description: 'Professional chiropractic care for all ages. Specializing in back pain, neck pain, and sports injuries. State-of-the-art equipment and personalized treatment plans.',
+                description: 'Professional chiropractic care for all ages. Specialising in back pain, neck pain, and sports injuries. State-of-the-art equipment and personalised treatment plans.',
                 listing_tier: 'premium',
                 is_approved: true,
                 category_name: 'Chiropractor',
@@ -199,7 +199,7 @@ async function setupTestData() {
                 description: 'Comprehensive wellness services including physiotherapy, massage therapy, and acupuncture. Helping you achieve optimal health and wellbeing.',
                 listing_tier: 'free',
                 is_approved: false,
-                category_name: 'Wellness Center',
+                category_name: 'Wellness Centre',
                 location_suburb: 'Melbourne CBD',
                 user_name: 'Michael Chen'
             },
@@ -208,7 +208,7 @@ async function setupTestData() {
                 address: '789 Queen Street, Brisbane QLD 4000',
                 phone: '(07) 3123 4567',
                 website: 'https://brisbanebackpain.com.au',
-                description: 'Specialized treatment for chronic back pain and spinal conditions. Our experienced team uses the latest techniques to provide effective pain relief.',
+                description: 'Specialised treatment for chronic back pain and spinal conditions. Our experienced team uses the latest techniques to provide effective pain relief.',
                 listing_tier: 'premium',
                 is_approved: true,
                 category_name: 'Pain Management',
@@ -232,7 +232,7 @@ async function setupTestData() {
                 address: '654 Rundle Mall, Adelaide SA 5000',
                 phone: '(08) 8123 4567',
                 website: 'https://adelaidesportsmed.com.au',
-                description: 'Specialized sports medicine and rehabilitation services. Helping athletes and active individuals recover from injuries and improve performance.',
+                description: 'Specialised sports medicine and rehabilitation services. Helping athletes and active individuals recover from injuries and improve performance.',
                 listing_tier: 'premium',
                 is_approved: false,
                 category_name: 'Sports Medicine',

@@ -1,4 +1,4 @@
-// Modern search bar interactive behavior
+// Modern search bar interactive behaviour
 document.addEventListener('DOMContentLoaded', function() {
     const searchFields = document.querySelectorAll('.modern-search-field');
     

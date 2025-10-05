@@ -1,0 +1,122 @@
+# FixMySpine Project Rules
+
+## Language & Spelling
+
+**IMPORTANT: This project uses Australian English exclusively for all user-facing content.**
+
+### Australian English Spelling Standards
+
+Always use Australian English spelling conventions:
+
+- **-ise endings**: Use `-ise` not `-ize`
+  - ✅ `specialise`, `personalise`, `recognise`, `organise`, `analyse`, `optimise`, `minimise`, `customise`
+  - ❌ `specialize`, `personalize`, `recognize`, `organize`, `analyze`, optimize`, `minimize`, `customize`
+
+- **-our endings**: Use `-our` not `-or`
+  - ✅ `colour`, `favour`, `behaviour`, `honour`, `labour`, `neighbour`
+  - ❌ `color`, `favor`, `behavior`, `honor`, `labor`, `neighbor`
+
+- **-re endings**: Use `-re` not `-er`
+  - ✅ `centre`, `theatre`, `metre`, `litre`, `fibre`
+  - ❌ `center`, `theater`, `meter`, `liter`, `fiber`
+
+- **-ce endings**: Use `-ce` not `-se` for nouns
+  - ✅ `licence` (noun), `practise` (verb), `defence`, `offence`
+  - ❌ `license` (noun), `practice` (verb), `defense`, `offense`
+
+- **-tion endings**: Use `-sion` where appropriate
+  - ✅ `organisation`, `authorisation`, `realisation`, `mobilisation`
+  - ❌ `organization`, `authorization`, `realization`, `mobilization`
+
+- **Double L**: Use double consonants
+  - ✅ `travelled`, `travelling`, `traveller`, `cancelled`, `labelled`, `modelled`
+  - ❌ `traveled`, `traveling`, `traveler`, `canceled`, `labeled`, `modeled`
+
+- **Other Australian preferences**:
+  - ✅ `grey`, `jewellery`, `catalogue`, `dialogue`, `fulfil`, `enrol`, `skilful`
+  - ❌ `gray`, `jewelry`, `catalog`, `dialog`, `fulfill`, `enroll`, `skillful`
+
+### Exceptions (American English Allowed)
+
+The following technical contexts may retain American English spelling:
+
+1. **Code & Technical Terms**:
+   - CSS class names (e.g., `text-center`, `items-center`) - Tailwind CSS standard
+   - JavaScript functions (e.g., `initialize`, `normalize`) - Programming conventions
+   - npm package names and dependencies
+   - Database column names and code identifiers
+
+2. **Third-Party Standards**:
+   - Schema.org markup (e.g., `"@type": "Organization"`)
+   - API specifications
+   - Library/framework documentation
+
+3. **File Types**:
+   - Configuration files (package.json, etc.)
+   - Technical documentation that follows international standards
+
+### Where to Apply Australian English
+
+✅ **Always use Australian English in:**
+- All EJS view templates (user-facing content)
+- Blog posts and articles
+- Marketing copy and email templates
+- Legal documents (Terms, Privacy Policy)
+- User interface text and labels
+- Form field labels and help text
+- Error messages and notifications
+- Meta descriptions and SEO content
+- Documentation intended for users/practitioners
+- Seed data descriptions
+- Comments in view files
+
+## Project Context
+
+FixMySpine is an Australian healthcare directory connecting patients with allied health professionals across Australia. The site must reflect Australian language, culture, and professional standards throughout.
+
+### Target Audience
+- Primary: Australian patients seeking healthcare
+- Secondary: Australian healthcare practitioners
+- Geographic focus: Australia-wide
+
+### Tone & Voice
+- Professional yet approachable
+- Clear and trustworthy
+- Australian terminology for healthcare and business
+
+## Development Standards
+
+### Code Style
+- Use meaningful variable and function names
+- Write clear comments for complex logic
+- Follow existing patterns in the codebase
+
+### Accessibility
+- Ensure all interactive elements are keyboard accessible
+- Provide appropriate ARIA labels
+- Maintain good colour contrast ratios
+- Test with screen readers where applicable
+
+### SEO Requirements
+- Include proper meta tags on all public pages
+- Use semantic HTML structure
+- Implement structured data (Schema.org)
+- Optimise for Australian search terms
+
+## Testing Requirements
+
+- Test all user-facing features thoroughly
+- Verify mobile responsiveness
+- Check cross-browser compatibility
+- Validate forms with edge cases
+- Test with Australian postcodes and addresses
+
+## Important Notes
+
+- Always use Australian date formats (DD/MM/YYYY)
+- Use Australian currency (AUD) with proper formatting
+- Reference Australian business regulations and standards
+- Use metric measurements (kilometres, kilograms, etc.)
+- Australian phone number formats: (0X) XXXX XXXX or 04XX XXX XXX
+- Australian postcodes: 4 digits (XXXX)
+

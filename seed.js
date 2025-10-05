@@ -53,7 +53,7 @@ const realBusinesses = [
     address: "41 Penshurst Street, Willoughby NSW 2068",
     phone: "(02) 9967 4445",
     website: "https://willoughbyphysiochiro.com.au",
-    description: "Personalized physiotherapy and chiropractic services for all ages.",
+    description: "Personalised physiotherapy and chiropractic services for all ages.",
     category: "Physiotherapist",
     location: { suburb: "Willoughby", postcode: "2068", state: "NSW" }
   },
@@ -98,7 +98,7 @@ const realBusinesses = [
     address: "Level 2/115 Sailors Bay Road, Northbridge NSW 2063",
     phone: "(02) 9958 8986",
     website: "https://sportsfocusphysio.com.au",
-    description: "Specialized sports physiotherapy and rehabilitation services.",
+    description: "Specialised sports physiotherapy and rehabilitation services.",
     category: "Physiotherapist",
     location: { suburb: "Northbridge", postcode: "2063", state: "NSW" }
   },
@@ -226,7 +226,7 @@ const realBusinesses = [
     address: "246 Chapel St, Prahran VIC 3181",
     phone: "(03) 9510 7777",
     website: "https://prahranphysio.com.au",
-    description: "Specialized physiotherapy services on Chapel Street.",
+    description: "Specialised physiotherapy services on Chapel Street.",
     category: "Physiotherapist",
     location: { suburb: "Prahran", postcode: "3181", state: "VIC" }
   },
